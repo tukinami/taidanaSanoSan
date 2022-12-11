@@ -1,0 +1,7 @@
+charset,Shift_JIS
+name,‘Ó‘Ä‚È²–ì‚³‚ñ
+type,ghost
+
+directory,taidanaSanoSan
+balloon.directory,lazy_cats_blue_stone
+

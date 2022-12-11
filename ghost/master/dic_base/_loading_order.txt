@@ -1,0 +1,5 @@
+dic, yaya_base_function.dic     // 関数群
+dic, yaya_base_string.dic       // 文字列リソース
+dic, yaya_base_variable.dic     // 変数と関連関数
+dic, yaya_base_status.dic       // 内部ステータス
+dic, yaya_base_word.dic         // 単語

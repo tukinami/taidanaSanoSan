@@ -1,0 +1,7 @@
+charset,Shift_JIS
+name,master
+type,shell
+
+directory,master
+accept,²–ìˆÉD
+

@@ -1,0 +1,443 @@
+#globaldefine @@l %(AdaptScript_markerTag)
+#globaldefine @@_CB %(AdaptScript_contitueUseBalloon)
+#globaldefine @@_nn %(AdaptScript_newline_disabled)
+#globaldefine @@font_height_short %(AdaptScript_font_size_small)
+#globaldefine @@font_height_default %(AdaptScript_font_size_default)
+#globaldefine @@font_bold_default %(AdaptScript_font_bold_default)
+#globaldefine @@font_bold %(AdaptScript_font_bold)
+
+// ===================================================================
+// 選択肢関連
+// ===================================================================
+On_balloon_tooltip {
+    if ISFUNC("BalloonTooltip_%(reference[1])") {
+        EVAL("BalloonTooltip_%(reference[1])")
+    }
+    else {
+        if RE_MATCH(reference[1], '(http|https)://.+') {
+            "%(reference[1])"
+        }
+    }
+}
+
+// -------------------------------------------------------------------
+// 互換性
+// -------------------------------------------------------------------
+/*
+  互換性を判断して文字列を返す
+  @param string - 推奨する文字列
+  @param string - 環境下でない場合の文字列
+  @param string - 実行できる環境。(SSP, embryo ...)
+*/
+AdaptScript {
+    if _argc < 3 {
+        return
+    }
+    _flg = 0
+
+    for _i = 2; _i < _argc ; _i ++  {
+        if basewarenameex == _argv[_i] {
+            _flg = 1
+            break
+        }
+        else {
+            _flg = 0
+        }
+    }
+
+    if _flg == 1 {
+        TOSTR(_argv[0])
+    }
+    else {
+        TOSTR(_argv[1])
+    }
+}
+
+/* リストマークのないバルーンでも疑似的にリストにする */
+AdaptScript_markerTag {
+    if basewarenameex == 'SSP' || basewarenameex == 'embryo' {
+        '\![*]'
+    }
+    else {
+        '◇'
+    }
+}
+
+/* バルーンを続けて使用する */
+AdaptScript_contitueUseBalloon {
+    AdaptScript('\C','', 'SSP')
+}
+/* 自動改行OFF */
+AdaptScript_newline_disabled {
+    AdaptScript('\_n', '', 'SSP', 'embryo')
+}
+
+/* SSP以外では有効でないfのSakuraScript */
+AdaptScript_font_size_small {
+    AdaptScript('\f[height,-3]', '（','SSP','Ikagaka')
+}
+AdaptScript_font_size_default {
+    AdaptScript('\f[height,default]','）','SSP','Ikagaka')
+}
+AdaptScript_font_bold {
+    AdaptScript('\f[bold,1]','','SSP','Ikagaka')
+}
+AdaptScript_font_bold_default {
+    AdaptScript('\f[bold,default]','','SSP','Ikagaka')
+}
+
+// -------------------------------------------------------------------
+// 選択肢
+// -------------------------------------------------------------------
+/*
+  一行全体を埋めた選択肢アイテムを生成する。
+  @param string 選択肢アイテムのラベル
+  @param string 選択肢アイテムのパラメータ
+  @return string 選択肢アイテムのスクリプト
+*/
+FillLine_choice_full {
+    _name = _argv[0]
+    _param = _argv[1]
+    "\q[%(SHIORI3FW.MakeJustText(_name,balloon_line_max)),%(_param)]\n"
+    return
+}
+/*
+  一行の半分を埋めた選択肢アイテムを生成する。
+  @param string 選択肢アイテムのラベル
+  @param string 選択肢アイテムのパラメータ
+  @param (string) 横付けする選択肢アイテムのラベル(option)
+  @param (string) 横付けする選択肢アイテムのパラメータ(option)
+  @return string 選択肢アイテムのスクリプト
+*/
+FillLine_choice_half {
+    _balloon_line_half = TOINT(balloon_line_max / 2) - 1
+    _str   = ''
+    _name  = _argv[0]
+    _param = _argv[1]
+    _str  += "\q[%(SHIORI3FW.MakeJustText(_name,_balloon_line_half)),%(_param)]"
+
+    if _argc == 4 {
+        _str    += ' '
+        _name_2  = _argv[2]
+        _param_2 = _argv[3]
+        _str    += "\q[%(SHIORI3FW.MakeJustText(_name_2,_balloon_line_half)),%(_param_2)]"
+    }
+    _str += '\n'
+    _str
+    return
+}
+
+// -------------------------------------------------------------------
+// リストアイテム
+// -------------------------------------------------------------------
+/*
+  一行全体を埋めたリストアイテムを生成する。
+  @param string リストアイテムのラベル
+  @param string リストアイテムのパラメータ
+  @return string リストアイテムのスクリプト
+*/
+FillLine_list_full {
+    _str = FillLine_choice_full(_argv)
+    _str = "@@l" + _str
+    _str
+    return
+}
+/*
+  一行の半分を埋めたリストアイテムを生成する。
+  @param string リストアイテムのラベル
+  @param string リストアイテムのパラメータ
+  @param (string) 横付けするリストアイテムのラベル(option)
+  @param (string) 横付けするリストアイテムのパラメータ(option)
+  @return string リストアイテムのスクリプト
+*/
+FillLine_list_half {
+    _str   = FillLine_choice_half(_argv)
+    _str = REPLACE(_str,'\q',"@@l\q")
+    _str
+    return
+}
+
+// ===================================================================
+// 文字列に変換
+// ===================================================================
+/*
+   ブール値をOn,OFF に
+*/
+Bool.toOnOffStr {
+    if TOINT(_argv[0]) > 0 {
+        'ON'
+    }
+    else {
+        'OFF'
+    }
+}
+
+/*
+  秒表記の整数を日本語に
+  @param int 変換したい時間。秒単位
+  @return string 変換後文字列。(H時間)(M分)S秒
+*/
+Time_sec_toString {
+    _org = TOINT(_argv[0])
+    _str = ''
+
+    _hour = _org / 3600
+    _org -= _hour * 3600
+    _min  = _org / 60
+    _sec  = _org % 60
+
+    if 0 < _hour {
+        _str += _hour + '時間'
+    }
+    if 0 < _min {
+        _str += _min + '分'
+    }
+    if 0 < _sec || (_hour <= 0 && _min <= 0) {
+        _str += _sec + '秒'
+    }
+    _str
+    return
+}
+
+/* 曜日 */
+Time_week_toString {
+    ('日','月','火','水','木','金','土')[weekday];
+}
+/* 季節 */
+Time_month_toSeason {
+    ('冬_','冬','冬','春','春','春','夏','夏','夏','秋','秋','秋','冬')[month];
+}
+
+/* 時間区分 */
+Time_hour_toSlot {
+    if hour <= 3 {
+        '深夜'
+    }
+    elseif hour <= 5 {
+        '早朝'
+    }
+    elseif hour <= 9 {
+        '朝'
+    }
+    elseif hour <= 14 {
+        '昼'
+    }
+    elseif hour <= 18 {
+        '夕方'
+    }
+    elseif hour <= 22 {
+        '夜'
+    }
+    else {
+        '深夜'
+    }
+}
+
+// ===================================================================
+// Paging
+// ===================================================================
+/*
+  ページング開始時に呼ばれる。用意されたグローバル変数群を初期化。
+  ページング開始。
+  @param string header : ヘッダ文章
+  @param string footer : フッタ文章
+  @param int range_page : 1ページに表示する項目数
+  @param int range_index : 目次で現在のものの前後に表示するページ数
+  @param int 開始する項目番号(0始まり)
+  @param string... body : 項目本体
+  @return string ページングされた本文の最初のページ。
+*/
+Paging_begin {
+    // グローバル変数群初期化
+    paging_header = SHIORI3FW.EscapeDangerousTags(_argv[0])
+    paging_footer = SHIORI3FW.EscapeDangerousTags(_argv[1])
+    paging_range_page  = TOINT(_argv[2])
+    paging_range_index = TOINT(_argv[3])
+
+    void Paging_init_body(_argv[5,_argc-1])
+
+    // paging_page_listに、全ページの開始番号リストを作成
+    void Paging_init_page_list
+
+    // 引数よりpaging_page_pointerを計算
+    paging_page_pointer = TOINT(_argv[4]) / paging_range_page
+
+    // ページングスクリプトを作成して返す
+    Paging_generate
+    return
+}
+
+/*
+  ページングする本文をグローバル変数paging_bodyに適用する。
+  @param string... or [string ary] ページング対象を本文
+*/
+Paging_init_body : void {
+    paging_body = (IARRAY)
+    foreach _argv; _i {
+        paging_body ,= SHIORI3FW.EscapeDangerousTags(_i)
+    }
+}
+/*
+  グローバル変数paging_body,paging_range_pageから
+  ページ開始時に最初に置かれる項目の一覧を作成する
+*/
+Paging_init_page_list : void {
+    paging_page_list = (IARRAY)
+    for _i = 0; _i < ARRAYSIZE(paging_body); _i += paging_range_page {
+        paging_page_list ,= _i
+    }
+}
+// -------------------------------------------------------------------
+/*
+  用意されたグローバル変数を基にページングされた本文を生成する。
+  @return string ページングされた文字列
+*/
+Paging_generate {
+    // 返り値用変数
+    _str = ''
+    // 表示するリストの用意
+    _body = Paging_generate_body
+    // 目次用スクリプトの用意
+    _index = Paging_generate_indexes
+    // 返り値の作成
+    _str += '\c\h\b[2]\_q'
+    _str += paging_header + '\n\n[half]'
+    _str += _body + '\n'
+    _str += _index + '\n\n[half]'
+    _str += paging_footer + '\n\_q'
+    _str
+    return
+}
+/*
+  用意されたグローバル変数を基に表示するリストを生成する。
+  @return string 本文文字列
+*/
+Paging_generate_body {
+    // 返り値用変数
+    _str = ''
+    // 一時変数
+    _pointer = paging_page_list[paging_page_pointer]
+    _size = ARRAYSIZE(paging_body)
+
+    // paging_page_list[paging_page_pointer]より、paging_range_page
+    // 分項目を取り出し
+    // リスト表示用に整形して返り値へ
+    // TODO: 一応空白埋めしたけど、必要か?
+    for _i = _pointer; _i < _pointer + paging_range_page; _i ++ {
+        if _i < _size {
+            _str += "@@l" + paging_body[_i] + '\n'
+        }
+        else {
+            _str += '\n'
+        }
+    }
+    _str
+    return
+}
+/*
+  用意されたグローバル変数を基に表示する目次を生成する。
+  @return string 目次用の文字列
+*/
+Paging_generate_indexes {
+    // < n n 'n' n n >
+    // 返り値用変数
+    _str = ''
+
+    // <
+    // paging_page_pointerが0以下なら、文字列。
+    // でなければpaging_page_pointer-1でスクリプト作成
+    if paging_page_pointer <= 0 {
+        _str += '＜'
+    }
+    else {
+        _str += Paging_generate_index_element_script('＜',paging_page_pointer-1)
+    }
+    _str += ' '
+
+    // 本体
+    _str += Paging_generate_index_elements+ ' '
+
+    // >
+    // paging_page_pointer+1がarraysize(paging_page_list)未満なら
+    // paging_page_pointer+1でスクリプト作成。
+    // でなければ文字列。
+    if paging_page_pointer + 1 < ARRAYSIZE(paging_page_list) {
+        _str += Paging_generate_index_element_script('＞',paging_page_pointer+1)
+    }
+    else {
+        _str += '＞'
+    }
+    _str
+    return
+}
+/*
+  用意されたグローバル変数を基に目次の本体スクリプトのリストを作成する。
+  @return string 目次スクリプト
+*/
+Paging_generate_index_elements{
+    // 表示するページの配列を用意。paging_page_pointer+1を入れる。
+    _str = TOSTR(paging_page_pointer+1)
+    // paging_page_listより、ページ数を記録
+    _list_size = ARRAYSIZE(paging_page_list)
+    // paging_page_pointerより、前後のページを記録
+    _pre = paging_page_pointer - 1
+    _post = paging_page_pointer + 1
+
+    for _i = 0; _i < paging_range_index; _i ++ {
+        if _pre >= 0 {
+            _str = Paging_generate_index_element_script(_pre+1,_pre) + ' '+ _str
+            _pre --
+        }
+        elseif _post < _list_size {
+            _str += ' ' + Paging_generate_index_element_script(_post+1,_post)
+            _post ++
+        }
+
+        if _post < _list_size {
+            _str += ' ' + Paging_generate_index_element_script(_post+1,_post)
+            _post ++
+        }
+        elseif _pre >= 0 {
+            _str = Paging_generate_index_element_script(_pre+1,_pre) + ' ' + _str
+            _pre --
+        }
+    }
+    _str
+    return
+}
+/*
+  目次のスクリプトを生成(q[*title*,On_Paging_index_on_choice_selected,ref0])
+  @param string タイトル。
+  @param string ref0にあたるパラメータ。ページ番号。
+  @return string 生成されたスクリプト
+*/
+Paging_generate_index_element_script {
+    _str = ''
+    _tag_pre = "@@font_bold\q["
+    _tag_post = "]@@font_bold_default"
+    _func = 'On_Paging_index_on_choice_selected'
+
+    _str += _tag_pre
+    _str += CHR(34) + _argv[0] + CHR(34) + ','
+    _str += _func + ','
+    _str += TOINT(_argv[1])
+    _str += _tag_post
+
+    _str
+    return
+}
+/*
+  目次のスクリプトが実行された時発生。
+  @reference0 ページ番号
+*/
+On_Paging_index_on_choice_selected {
+    // paging_page_pointerを更新
+    paging_page_pointer = TOINT(reference[0])
+    --
+    // バルーン再利用
+    "@@_CB"
+    --
+    // Paging_generateを呼ぶ。
+    Paging_generate
+    return
+}

@@ -1,0 +1,37 @@
+charset,Shift_JIS
+type,shell
+name,master-s
+id,master-s
+
+craftman,tukinami seika
+craftmanw,åéîg ê¥âŒ
+craftmanurl,https://github.com/tukinami/taidanaSanoSan
+
+sakura.balloon.offsetx,0
+sakura.balloon.offsety,-150
+kero.balloon.offsetx,0
+kero.balloon.offsety,-10
+
+menu.background.bitmap.filename,background.png
+menu.foreground.bitmap.filename,foreground.png
+menu.sidebar.bitmap.filename,sidebar.png
+
+menu.background.alignment,lefttop
+menu.foreground.alignment,lefttop
+menu.sidebar.alignment,top
+
+menu.background.font.color.r,68
+menu.background.font.color.g,76
+menu.background.font.color.b,74
+
+menu.foreground.font.color.r,254
+menu.foreground.font.color.g,254
+menu.foreground.font.color.b,254
+
+menu.separator.color.r,64
+menu.separator.color.g,89
+menu.separator.color.b,128
+
+menu.disable.font.color.r,180
+menu.disable.font.color.g,180
+menu.disable.font.color.b,180

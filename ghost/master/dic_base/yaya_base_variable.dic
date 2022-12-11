@@ -1,0 +1,90 @@
+// ===================================================================
+// variables
+// ===================================================================
+// 時報の有無
+On_V.timesignal {
+    timesignal
+}
+
+// plugin menu をメニューから呼び出したか
+On_V.call_from_menu {
+    call_from_menu
+}
+
+// バルーンの行の最大値
+On_V.balloon_line_max {
+    balloon_line_max
+}
+
+// 起動回数
+On_V.boot_times {
+    boot_times
+}
+
+// \h
+// -------------------------------------------------------------------
+// 満腹度
+On_V.p0_s_fullness {
+    p0_s_fullness
+}
+
+// 誇り
+On_V.p0_s_pride {
+    p0_s_pride
+}
+
+// ===================================================================
+// 初期化
+// ===================================================================
+On_InitVar {
+    _vars = GETFUNCLIST("On_InitVar.")
+
+    foreach _vars; _v {
+        EVAL(_v)
+    }
+    return
+}
+// 個別
+// -------------------------------------------------------------------
+On_InitVar.username {
+    username =  "ユーザー"
+}
+
+On_InitVar.timesignal {
+    timesignal = 1
+}
+
+On_InitVar.boot_times {
+    boot_times = 0
+}
+
+On_InitVar.balloon_line_max {
+    balloon_line_max = 46
+}
+
+On_InitVar.call_from_menu {
+    call_from_menu = 0
+}
+
+On_InitVar.p0_s_fullness {
+    On_Status.fullness.p0.reset
+}
+
+On_InitVar.p0_s_pride {
+    p0_s_pride = 0
+}
+
+// ===================================================================
+// 終了時消去
+// ===================================================================
+On_U.eraseVar : void {
+    ERASEVAR('communicate_ghost')
+    ERASEVAR('call_from_menu')
+    ERASEVAR('paging_header')
+    ERASEVAR('paging_footer')
+    ERASEVAR('paging_body')
+    ERASEVAR('paging_range_page')
+    ERASEVAR('paging_range_index')
+    ERASEVAR('paging_page_pointer')
+    ERASEVAR('paging_page_list')
+}

@@ -1,0 +1,146 @@
+// ===================================================================
+// SwissArmyKnife (十徳ナイフ)
+// ===================================================================
+OnSwissArmyKnifeMenu {
+    if _argc > 0 && _argv[0] == 'noplugin' {
+        '\h\s[4]十徳ナイフプラグインは無いようだ。\n\e'
+        return
+    }
+
+    '\h\s[0]十徳ナイフプラグインのメニューだ。\n\n'
+    --
+    '\_q'
+    --
+    SHIORI3FW.RegisterTempVar('samenu_text', 'samenu_id')
+
+    samenu_text = IARRAY
+    samenu_id   = IARRAY
+
+    _s    = ''
+    _data = IARRAY
+
+    foreach reference ; _ref {
+        _data = SPLIT(_ref, ',' ,2)
+        _id   = SPLIT(_data[1], ',')
+
+        samenu_text ,= _data[0]
+        samenu_id   ,= _id[0]
+
+        if _data[1] != 'cancel' {
+            _s += FillLine_list_full(_data[0], _data[1])
+        }
+    }
+    SHIORI3FW.EscapeDangerousTags(_s)
+    --
+    '\n'
+    --
+    if call_from_menu > 0 {
+        FillLine_list_full('メインメニュー','On_Menu_0')
+    }
+    --
+    FillLine_list_full('閉じる','CLOSE_NOTALK')
+    --
+    '\_q'
+    call_from_menu = 0
+}
+
+OnSwissArmyKnifeExecute {
+    case reference[0] {
+        when 'empty_recycle_bin' {
+            if TOINT(reference[1]) > 0 {
+                On_Plugin.SWISSARMY.empty_recycle_bin.exist(TOINT(reference[1]), TOINT(reference[2]))
+            }
+            else {
+                '\h\s[6]ごみ箱には何もなかった。\n'
+            }
+        }
+        when 'delete_tmpfile' {
+            _num = TOINT(reference[1])
+            On_Status.pride.p0.increase(1)
+            '\h\s[0]一時ファイルを削除した。\w9\n'
+            --
+            "%(_num)個のファイルが存在していた。\n"
+        }
+    }
+    --
+    '\n'
+    --
+    FillLine_list_half('メインメニュー', 'On_Menu_0', 'プラグインメニュー', 'On_Menu_0_plugin' )
+    --
+    FillLine_list_full('閉じる', 'CLOSE_NOTALK')
+}
+
+On_Plugin.SWISSARMY.empty_recycle_bin.exist {
+    _num = TOINT(_argv[0])
+    _kb  = TOINT(_argv[1])
+    On_Status.pride.p0.increase(1)
+
+    {
+        "\u\s[10]\h\s[6]ごみ箱を空にした。\w9\n\s[0]%(_num)個のファイル、%(_kb) KB を削除した。"
+        --
+        '\w9\w9\u空にしたって、\w5一体どうしたの？\w9\w9\h\n\n大きなごみ箱に移したんだよ。\w9\s[6]\nごみの回収は、\w5ここでは毎週月木金曜日。\w9\s[0]\nその時まとめて捨てる。\w9\w9\u\n\nなるほど。\e'
+        '\w9\w9\u\s[10]スッキリ。\e'
+        '\w9\w9\u\s[10]面倒でも不燃物とかの分別はしっかりしなさいよ。\w9\w9\h\s[7]\n\nデータにそれはないだろ！\e'
+        if _kb > 51200 {
+            // 50MB越え
+            '\w9\s[4]\n…\w5…\w5。\w9\w9\uどうしたの？\w9\w9\h\s[3]\n\nちょっと、\w5重くて腰が…\w5…\w5。\w9\w9\u\s[11]\n\n日頃の運動不足が…\w5…\w5！\e'
+        }
+    }
+    {
+        "\h\s[0]\u\s[11]私の妖術で%(username)のごみは跡形もなく消し飛んだわ！"
+        --
+        '\w9\w9\h\s[3]消し…\w5…\w5…\w5\s[2]え？\e'
+        '\w9\w9\h\s[3]パソコンってごみ箱空にしても、\w5色々すると復元できるって、\w5姉が言ってたけど。\w9\w9\u\s[10]\n\n細かいことは気にしない。\e'
+    }
+}
+
+// ===================================================================
+// スタンプ帳
+// ===================================================================
+On_Plugin_stamp_begin {
+    SHIORI3FW.RegisterTempVar('stamp_info_is_exist')
+
+    "\![raiseplugin,379E0DA0-131C-11DD-E1AC-90009E101CFE,OnStampInfoCall]"
+    --
+    "\![raise,On_Plugin_stamp_menu]"
+}
+
+OnStampInfo : void {
+    stamp_info_is_exist = reference[1]
+}
+
+On_Plugin_stamp_menu {
+    if stamp_info_is_exist == 0 {
+        FillLine_list_full("スタンプを押す", "On_Plugin_stamp_push")
+    }
+    --
+    FillLine_list_full("スタンプメニュー", "On_Plugin_stamp_menu_exec")
+    --
+    '\n'
+    --
+    FillLine_list_half('メインメニュー', 'On_Menu_0', 'プラグインメニュー', 'On_Menu_0_plugin' )
+    --
+    FillLine_list_full('閉じる', 'CLOSE_NOTALK')
+}
+
+On_Plugin_stamp_push {
+    '\u\s[10]\h\s[3]ん～スタンプか、\w5何を送ろうか…\w5…\w5。\w9\s[5]\nあ、\w5これなんか良いんじゃないか？\w9\n前に作った肉じゃがの画像！\w9\w9\uスタンプ違いな気がするけど、\w5まぁ、\w5いいでしょう。\w9\w9\h\n\nはい、\w5どうぞ。\w9\w9'
+    --
+    "\![raiseplugin,379E0DA0-131C-11DD-E1AC-90009E101CFE,OnStampAdd,/
+ghost/master/stamp.png,/
+伊織の肉じゃがスタンプ,/
+伊織が調理した肉じゃがを写したスタンプ。おいしそうにできている。/
+]"
+    --
+    "\n\n"
+    --
+    FillLine_list_full("スタンプメニュー", "On_Plugin_stamp_menu_exec")
+    --
+    FillLine_list_half('メインメニュー', 'On_Menu_0', 'プラグインメニュー', 'On_Menu_0_plugin' )
+    --
+    FillLine_list_full('閉じる', 'CLOSE_NOTALK')
+}
+
+On_Plugin_stamp_menu_exec {
+    '\![raiseplugin,379E0DA0-131C-11DD-E1AC-90009E101CFE,OnMenuExec]'
+}

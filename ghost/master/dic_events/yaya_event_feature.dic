@@ -1,0 +1,624 @@
+// ===================================================================
+// OnInstall**
+// ===================================================================
+OnInstallBegin {
+    '\h\s[6]アーカイブをインストール中。'
+    "\h\s[0]\u\s[10]あら、\w5何かしら。\w9\w9\h新しい%(Word_uka_archive)かな。\w9それとも%(Word_uka_archive)か。\w9\w9\u\s[16]\n\n開けてみてのお楽しみ。"
+}
+
+OnInstallComplete {
+    // 識別子: ** with xx を分割・整形
+    _ids = SPLIT(reference[0], 'with')
+    _ids = (_ids[0],SPLIT(_ids[1], ','))
+    _ref_id = JOIN(_ids, CHR(1))
+    // 名前
+    _ref_name = reference[1]
+    // 名前が複数ある場合
+    if STRLEN(reference[2]) > 0 {
+        _ref_name = "%(reference[1])%(CHR(1))%(reference[2])"
+    }
+
+    "\![raise,OnInstallCompleteEx,%(_ref_id),%(_ref_name)]"
+}
+
+OnInstallCompleteEx {
+    _ids = SPLIT(reference[0], CHR(1))
+    _names = SPLIT(reference[1], CHR(1))
+    _ids_len = ARRAYSIZE(_ids)
+    _names_len = ARRAYSIZE(_names)
+    _len = 0
+
+    _installs_str = ''
+    _suffix_str = ''
+    _last_id = ''
+    _last_name = ''
+    _ghost_count = 0
+
+    // 短い方に合せる。
+    if _ids_len < _names_len {
+        _len = _ids_len
+    } else {
+        _len = _names_len
+    }
+
+    // TODO:
+    // とりあえずゴーストとバルーンのみ切り替え。
+    for _i = 0; _i < _len; _i++ {
+        _suffix_str = ''
+
+        case _ids[_i] {
+            when 'shell' {
+                _installs_str += 'シェル'
+            }
+            when 'ghost' {
+                _installs_str += 'ゴースト'
+                _suffix_str += InstallComplete_change_and_call(_ids[_i], _names[_i])
+                _last_id = _ids[_i]
+                _last_name = _names[_i]
+                _ghost_count ++
+            }
+            when 'balloon' {
+                _installs_str += 'バルーン'
+                _suffix_str = InstallComplete_change_and_call(_ids[_i], _names[_i])
+                if STRLEN(_last_name) == 0 {
+                    _last_id = _ids[_i]
+                    _last_name = _names[_i]
+                }
+            }
+            when 'plugin' {
+                _installs_str += 'プラグイン'
+            }
+            when 'headline' {
+                _installs_str += 'ヘッドライン'
+            }
+            when 'supplement' {
+                _installs_str += 'サプリメント'
+            }
+            when 'calender skin' {
+                _installs_str += 'カレンダースキン'
+            }
+            when 'calender plugin' {
+                _installs_str += 'カレンダープラグイン'
+            }
+            when 'package' {
+                _installs_str += 'パッケージ'
+            }
+            others {
+                _installs_str += _ids[_i]
+            }
+        }
+        if STRLEN(_names[_i]) > 0 {
+            _installs_str += " - " + _names[_i]
+        }
+        _installs_str += _suffix_str + "\n"
+    }
+
+    _string_change = ''
+    _string_call = ''
+
+    if STRLEN(_last_name) > 0 {
+        _string_change = FillLine_list_full('切り替える', "OnInstallComplete_change,%(_last_id),%(_last_name)")
+        if _ghost_count && (basewarename == 'SSP') {
+            _string_call = FillLine_list_full('呼び出す', "OnInstallComplete_call,ghost,%(_last_name)")
+        }
+    }
+
+    "\h\_q%(_installs_str)\_q"
+    --
+    "\u\s[10]\h\s[0]インストールが完了した。\n\n"
+    --
+    _string_change
+    --
+    _string_call
+    --
+    FillLine_list_full('閉じる', 'CLOSE_NOTALK')
+}
+
+InstallComplete_change_and_call {
+    _id = _argv[0]
+    _name = _argv[1]
+
+    if basewarename == 'SSP' {
+        " (\q[切替,OnInstallComplete_change,%(_id),%(_name)]"
+        --
+        if _id == 'ghost' {
+            " \q[呼出,OnInstallComplete_call,ghost,%(_name)]"
+        }
+        --
+        ')'
+    } else {
+        ''
+    }
+}
+
+OnInstallComplete_change {
+    if basewarename != 'SSP' {
+        "\![change,%(reference[0]),lastinstalled]"
+    }
+    else {
+        "\![change,%(reference[0]),%(reference[1])]"
+    }
+}
+
+OnInstallComplete_call {
+    // "\![call,%(reference[0]),lastinstalled]"
+    "\![call,%(reference[0]),%(reference[1])]"
+}
+
+OnInstallFailure {
+    if reference[0] == 'artificial' {
+        '\u\s[10]\h\s[0]インストールを中止。'
+    }
+    else {
+        _s = ''
+        On_Status.pride.p0.decrease(1)
+        case reference[0] {
+            when 'unlha32' {
+                _s = 'unlha32のロードが失敗した'
+            }
+            when 'extraction' {
+                _s = '解凍に失敗した'
+            }
+            when 'invalid type' {
+                _s = 'install.txtにエラーがある'
+            }
+            others {
+                _s = '非対応の形式である'
+            }
+        }
+        "\h\s[4]インストールに失敗した。\n\w9\s[0]%(_s)ことが原因のようだ。"
+    }
+}
+
+OnInstallRefuse {
+    _name = SHIORI3FW.EscapeDangerousTags(reference[0])
+
+    "\h\s[6]悪いけど、\w5これは、\w5「%(_name)」\w5という人宛のものだ。\w9\n"
+    --
+    if SHIORI3FW.IsGhostExist(reference[0]) > 0 {
+        "\h\s[0]そこに立ってるから、\w5送ってみてくれ。"
+    }
+    elseif ASEARCH(reference[0], SHIORI3FW.SakuraNameList) != -1 && basewarename == 'SSP' {
+        "\h\s[0]呼んでみるか？\n\n\_q"
+        --
+        FillLine_list_full('呼ぶ', "OnInstallRefuse_ghostcall,%(_name)")
+        --
+        FillLine_list_full('呼ばない', 'CLOSE_NOTALK')
+    }
+    else {
+        "\s[0]「%(_name)」\w9という名前に心当たりがあるなら、\w5そこをあたってくれ。\n\n"
+        --
+        FillLine_list_full('閉じる', 'CLOSE_NOTALK')
+    }
+}
+
+OnInstallRefuse_ghostcall {
+    "\![call,ghost,%(reference[0])]"
+}
+
+// SSPのみ
+OnInstallReroute {
+    "\u\s[10]\h\s[6]%(reference[0])さんへパス。"
+    "\h\s[0]\u\s[10]妖術！\w9物体転移の術！\w9\w9\h\s[3]%(reference[0])さんに渡しただけだろ…\w5…\w5。"
+}
+
+// ===================================================================
+// OnURLDrop**
+// ===================================================================
+OnURLDropping {
+    _s = SHIORI3FW.EscapeAllTags(reference[0])
+    "\u\s[10]\h\s[6]\_q%(_s)\w9\nのダウンロード中。"
+}
+
+OnURLDropFailure {
+    _s = SHIORI3FW.EscapeAllTags(reference[0])
+    On_Status.pride.p0.decrease(1)
+
+    if reference[1] == 'artificial' {
+        "\h\s[3]ダウンロードを中止した。"
+    }
+    elseif reference[1] == 'timeout' {
+        "\h\s[4]%(_s)は、\w5時間がかかり過ぎて、ダウンロードできなかった……。"
+    }
+    else {
+        "\h\s[4]%(_s)のダウンロードに失敗した……。"
+    }
+}
+
+OnURLDropped {
+    On_Status.pride.p0.increase(1)
+    _s = SHIORI3FW.EscapeAllTags(reference[0])
+    _t = SHIORI3FW.EscapeAllTags(reference[1])
+    "\h\s[0]「%(_s)」に「%(_t)」をダウンロードした。"
+}
+
+// ===================================================================
+// OnFileDrop
+// ===================================================================
+
+// ===================================================================
+// OnUpdateDataCreating
+// ===================================================================
+OnUpdatedataCreating {
+    "\h\s[6]アップデートデータファイルを作成中。"
+}
+OnUpdatedataCreated {
+    On_Status.pride.p0.increase(1)
+    "\h\s[0]アップデートデータファイルの作成完了。"
+}
+
+OnNarCreating {
+    _object = SHIORI3FW.EscapeDangerousTags(reference[0])
+    _file   = SHIORI3FW.EscapeDangerousTags(reference[1])
+
+    "\h\s[6]\_q「%(_object)」\_qの.narファイル、\n\_q「%(_file)」\_q\w9を作成中。"
+}
+OnNarCreated {
+    _object = SHIORI3FW.EscapeDangerousTags(reference[0])
+    _file   = SHIORI3FW.EscapeDangerousTags(reference[1])
+    On_Status.pride.p0.increase(1)
+
+    "\h\s[0]\_q「%(_object)」\_qの.narファイル、\n\_q「%(_file)」\_q\w9の作成完了。"
+}
+
+// ===================================================================
+// OnSNTP** (時刻合わせ)
+// ===================================================================
+OnSNTPBegin {
+    "\h\s[6]サーバーで正確な時刻を確認中。"
+    "\h\s[0]\u\s[10]妖気を辿って正確な時間を算出しています…\w5…\w5。\w9\w9\h\s[7]デタラメ言うな、\w5デタラメを！"
+}
+
+OnSNTPCompare {
+    _server = SHIORI3FW.EscapeAllTags(reference[1])
+    _local  = SHIORI3FW.EscapeAllTags(reference[2])
+    _def    = TOINT(reference[3])
+    On_Status.pride.p0.increase(1)
+
+    "\_qサーバー: %(_server)\nパソコン: %(_local)\n\n\_q"
+    --
+    "\h\s[0]%(_s)サーバーへの接続が完了。\w9\n"
+    --
+    "\s[0]サーバーとこちらの時刻のずれは、\w5\n%(_def)秒。\w9\w9"
+    --
+    "\6"
+}
+
+OnSNTPCorrect {
+    '\h\s[0]時刻合わせが完了した。'
+    --
+    '\n\n'
+    --
+    FillLine_list_full('メインメニュー','On_Menu_0')
+    --
+    FillLine_list_full('閉じる','On_Menu_0_close')
+}
+
+
+OnSNTPFailure {
+    _server = SHIORI3FW.EscapeDangerousTags(reference[0])
+    On_Status.pride.p0.decrease(1)
+
+    "\h\s[4]……時刻合わせに失敗した…\w9…\w9。\w9\n"
+    --
+    "\s[3]%(_server)との接続が、\w5うまくいってないのかもしれない……。"
+    --
+    '\n\n'
+    --
+    FillLine_list_full('もう一回','On_Menu_0_func_timeAdjust')
+    --
+    FillLine_list_full('メインメニュー','On_Menu_0')
+    --
+    FillLine_list_full('閉じる','On_Menu_0_close')
+}
+
+// ===================================================================
+// OnBIFF (メールチェック)
+// ===================================================================
+
+OnBIFFBegin {
+    _account = SHIORI3FW.EscapeDangerousTags(reference[2])
+
+    "\h\s[6]%(_account)のメールを確認中。"
+    --
+    ''
+    '\w9\w9\u\s[10]お手紙お手紙〜♪'
+}
+
+OnBIFFComplete {
+    _num = TOINT(reference[0])
+    _def = TOINT(reference[3])
+    _account =SHIORI3FW.EscapeDangerousTags(reference[2])
+
+    if _num == 0 {
+        // メール無
+        "\h\s[0]%(_account)を確認したが、\nメールは来ていないようだ。\n\n"
+        --
+        BIFF_close
+    }
+    elseif _def == 0 {
+        // 新着メール無 既存は有
+        void On_Status.pride.p0.increase(1)
+        _header = "\h\s[0]%(_account)を確認した。\n"
+        _header += "新着メールはなかったが、既存のメールが%(_num)件ある。"
+        _footer = BIFF_close
+
+        BIFF_makeList(_header, _footer, reference[4])
+    }
+    else {
+        // 新着メール有
+        if basewarenameex != 'SSP' {
+            void On_Status.pride.p0.increase(1)
+            _header = "\u\s[10]\h\s[0]%(_account)を確認した。\n"
+            _header += "%(_num)件のメールが届いている。内、%(_def)件が新着だ。"
+            if _def < 0 {
+                _header += "\_q\h\s[0]\n…\w5…\w5\w9\s[4]マ、\w5 %(_def)件…\w5…\w5？\w9\w9"
+                _header += "\u気にしない、\w5気にしない。\w9\w9"
+                _header += "\h\s[3]\n\nいいのか、\w5それで。\w9\_q"
+            }
+            _footer = BIFF_close
+            BIFF_makeList(_header, _footer, reference[4])
+        }
+    }
+}
+
+OnBIFF2Complete {
+    void On_Status.pride.p0.increase(1)
+    _num = TOINT(reference[0])
+    _def = TOINT(reference[3])
+    _account = SHIORI3FW.EscapeDangerousTags(reference[2])
+    _header = "\u\s[10]\0\s[0]%(_account)を確認した。\n"
+    _header += "%(_num)件、%(_def)件の新着メールが届いている。"
+
+    if _def < 0 {
+        _header += "\_q\h\s[0]\n…\w5…\w5\w9\s[2] %(_def)件！？\w9\w9"
+        _header += "\uまぁ、\w5いいじゃない。\w9\w9"
+        _header += "\h\s[3]\n\nいいのかなぁ。\w9\_q"
+    }
+    _footer = BIFF_close
+    BIFF_makeList(_header, _footer, reference[4])
+}
+
+BIFF_makeList {
+    _header = SHIORI3FW.EscapeDangerousTags(_argv[0])
+    _footer = SHIORI3FW.EscapeDangerousTags(_argv[1])
+    _body   = SHIORI3FW.EscapeDangerousTags(_argv[2])
+
+    _item = (IARRAY)
+    _froms = (IARRAY)
+    _subs = (IARRAY)
+
+    if RE_GREP(_body, "(?<=From: )([^%(CHR(0x01))]+)(?=%(CHR(0x01)))") > 0 {
+        _froms = RE_GETSTR()
+    }
+
+    if RE_GREP(_body, "(?<=Subject: )([^%(CHR(0x01))]+)(?=%(CHR(0x01)))") > 0 {
+        _subs = RE_GETSTR()
+    }
+
+    for _i = 0; _i < ARRAYSIZE(_froms); _i ++ {
+        _itemstr = '';
+        _from = _froms[_i]
+        _sub = _subs[_i]
+
+        _itemstr += "@@_nn@@font_bold" + _from + "@@font_bold_default@@_nn\n"
+        _itemstr += "@@_nn  " + _sub + "@@_nn"
+        _item = (_item, (_itemstr))
+    }
+
+    Paging_begin(_header, _footer, 9, 2, 0, _item)
+}
+
+BIFF_openMailer {
+    "\![open,mailer]"
+}
+
+BIFF_close {
+    FillLine_list_full('メーラーを開く', 'BIFF_openMailer')
+    --
+    FillLine_list_full('メインメニュー', 'On_Menu_0')
+    --
+    FillLine_list_full('閉じる', 'CLOSE_NOTALK')
+}
+
+OnBIFFFailure {
+    _account = SHIORI3FW.EscapeDangerousTags(reference[2])
+    On_Status.pride.p0.decrease(1)
+
+    "\h\s[3]%(_account)でのメールの確認に失敗した。\w9\n"
+    --
+    case reference[0] {
+        when "defect" {
+            "\h\s[0]設定を確認してみてくれ。\n"
+        }
+        when "kick" {
+            "\h\s[0]IDかパスワードを確認してみてくれ\n"
+        }
+        when "timeout" {
+            "\h\s[6]混雑しているか、\n"
+            --
+            "\w9\s[3]もしくはサーバーの設定に誤りがあるかだ。\n"
+        }
+        others {
+            _s = SHIORI3FW.EscapeDangerousTags(reference[0])
+            "\h\s[0]%(_s)が原因のようだ。\n"
+        }
+    }
+    --
+    '\n'
+    --
+    FillLine_list_full('メインメニュー', 'On_Menu_0')
+    --
+    FillLine_list_full('閉じる', 'On_Menu_0_close')
+}
+
+
+// ===================================================================
+// OnHeadlinesense**
+// ===================================================================
+OnHeadlinesenseBegin {
+    _name = SHIORI3FW.EscapeDangerousTags(reference[0])
+    "\h\s[6]%(_name)のヘッドラインを取得中だ。"
+}
+
+OnHeadlinesense.OnFind {
+    _name = SHIORI3FW.EscapeDangerousTags(reference[0])
+    _url  = SHIORI3FW.EscapeDangerousTags(reference[1])
+    _body = SHIORI3FW.EscapeDangerousTags(reference[3])
+    On_Status.pride.p0.increase(1)
+    "\_q\h\b[2]\s[0]%(_name)のヘッドラインだ。\n\n"
+    --
+    "%(_body)"
+    --
+    "\n\n\_q"
+    --
+    FillLine_list_full('ブラウザで開く', _url)
+    --
+    FillLine_list_full('メインメニュー', 'On_Menu_0')
+    --
+    FillLine_list_full('閉じる', 'CLOSE_NOTALK')
+}
+
+OnHeadlinesenseComplete {
+    "\h\s[3]更新されていなかったようだ…\w5…\w5。\n"
+    --
+    '\n'
+    --
+    FillLine_list_full('メインメニュー', 'On_Menu_0')
+    --
+    FillLine_list_full('閉じる', 'On_Menu_0_close')
+}
+
+OnHeadlinesenseFailure {
+    On_Status.pride.p0.decrease(1)
+    "\h\s[3]ヘッドラインの習得に失敗した。\w9\n"
+    --
+    if reference[0] == "can't download" {
+        OnHeadlinesenseFailure_onDownload
+    }
+    elseif reference[0] == "can't analyze" {
+        OnHeadlinesenseFailure_onAnalyze
+    }
+    else {
+        _s = SHIORI3FW.EscapeDangerousTags(reference[0])
+        "%(_s)...だそうだ。\n"
+    }
+    --
+    FillLine_list_full('メインメニュー', 'On_Menu_0')
+    --
+    FillLine_list_full('閉じる', 'On_Menu_0_close')
+}
+OnHeadlinesenseFailure_onDownload {
+    "\hヘッドラインのファイルがダウンロードできなかった……。\n"
+}
+OnHeadlinesenseFailure_onAnalyze {
+    "\hファイルが解析できなかった……。\n"
+}
+
+
+// ===================================================================
+// OnRSS**
+// ===================================================================
+OnRSSBegin {
+    _name = SHIORI3FW.EscapeDangerousTags(reference[0])
+    "\h\s[0]\_q%(_name)\nRSSを取得中だ。\_q\n"
+}
+
+OnRSSComplete {
+    _n = ARRAYSIZE(reference)
+    if _n <= 2 {
+        "\h\s[0]更新は無いようだ。\n"
+    }
+    else {
+        _name = SHIORI3FW.EscapeDangerousTags(reference[0])
+        _url  = SHIORI3FW.EscapeDangerousTags(reference[1])
+        On_Status.pride.p0.increase(1)
+        "\h\b[2]\s[0]\_q%(_name)のRSSだ。\n\n[half]"
+        --
+        OnRSSComplete_list(reference[2, ARRAYSIZE(reference) - 1])
+        --
+        '\n\h'
+        --
+        FillLine_list_full('サイトを開く', _url)
+        --
+        FillLine_list_full('メインメニュー', 'On_Menu_0')
+        --
+        FillLine_list_full('閉じる', 'CLOSE_NOTALK')
+    }
+}
+
+OnRSSComplete_list {
+    _len  = _argc
+    _list = _argv
+    _str  = ''
+
+    for _i = 0; _i < _len; _i ++ {
+        _item = SPLIT(_list[_i], CHR(0x01))
+
+        if STRLEN(_item[2]) {
+            _datestr = ''
+            _date    = SPLIT(_item[2], ',')
+            _date[0] = TOINT(_date[0]) % 100
+
+            for _j = 0; _j < ARRAYSIZE(_date); _j ++ {
+                _date[_j] = TOINT(_date[_j])
+            }
+
+            _datestr = STRFORM("[$02d/$02d/$02d]", _date[0], _date[1], _date[2])
+            _item[0] = _datestr + _item[0]
+        }
+
+        _str += "@@l\_a[%(_item[1])]"
+        _str += _item[0]
+        _str += "\_a\n"
+    }
+    SHIORI3FW.EscapeDangerousTags(_str)
+}
+
+OnRSSFailure {
+    _cause = SHIORI3FW.EscapeDangerousTags(reference[0])
+    On_Status.pride.p0.decrease(1)
+    "\h\s[0]RSSの取得に失敗した……。\w9\n原因は「%(_cause)」だ。\n"
+    --
+    '\n'
+    --
+    FillLine_list_full('メインメニュー', 'On_Menu_0')
+    --
+    FillLine_list_full('閉じる', 'On_Menu_0_close')
+}
+
+// ===================================================================
+// OnSchedule**
+// ===================================================================
+OnScheduleRead {
+    _type     = SHIORI3FW.EscapeDangerousTags(reference[0])
+    _caption  = SHIORI3FW.EscapeDangerousTags(reference[1])
+    _subtitle = SHIORI3FW.EscapeDangerousTags(reference[2])
+    _script   = SHIORI3FW.EscapeDangerousTags(reference[3])
+    "\h\s[0]\n%(_type)：%(_caption)\n"
+    --
+    if STRLEN(reference[2]) > 0 {
+        "@@l%(_subtitle)\n"
+    }
+    --
+    if STRLEN(reference[3]) > 0 {
+        "%(_script)\n"
+    }
+}
+
+OnSchedule5MinutesToGo {
+    _type     = SHIORI3FW.EscapeDangerousTags(reference[0])
+    _caption  = SHIORI3FW.EscapeDangerousTags(reference[1])
+    _subtitle = SHIORI3FW.EscapeDangerousTags(reference[2])
+    _script   = SHIORI3FW.EscapeDangerousTags(reference[3])
+
+    "\h\s[0]スケジュール5分前だ。\n%(_type)：%(_caption)\n"
+    --
+    if STRLEN("%(reference[2])") > 0 {
+        "@@l%(_subtitle)\n"
+    }
+    --
+    if STRLEN("%(reference[3])") > 0 {
+        "%(_script)\n"
+    }
+}

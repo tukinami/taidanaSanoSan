@@ -1,0 +1,3 @@
+dic, yaya_aitalk.dic            // トーク処理
+dic, yaya_aitalk_default.dic    // トーク: 汎用
+dic, yaya_aitalk_date.dic       // トーク: 日付参照

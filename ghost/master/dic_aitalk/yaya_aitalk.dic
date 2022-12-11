@@ -1,0 +1,62 @@
+RandomTalk
+{
+    Surface_reset
+    --
+    TOSTR(EVAL(CHR(0x22)+RandomTalkEx()+CHR(0x22)))
+}
+
+//------------------------------------------------------------------------------
+//ランダムトーク本体：この中にランダムトークを記載してください
+//ここのみ常に ' ' で括って書いてください。
+//上のRandomTalkの中身で%( )を展開していますので、" "を使わなくてもOKです。
+//高速化対策
+//------------------------------------------------------------------------------
+RandomTalkEx : nonoverlap {
+    _talk_array = IARRAY
+
+    _hunger = On_Status.fullness.p0.judge
+
+    // 空腹が酷い場合は有無を言わさず食事
+    if _hunger < -2 {
+        _talk_array ,= Talk_eat
+        parallel _talk_array
+        return
+    }
+
+    _talk_array = RandomTalkExSub
+    // 食事トーク
+    _talk_array ,= Talk_eat
+
+    parallel _talk_array
+}
+
+RandomTalkExSub : array {
+    _talk_array = IARRAY
+
+    // 日付トーク
+    _season = Time_month_toSeason
+    if ISFUNC("Talk_season_%(_season)") {
+        _talk_array ,= EVAL("Talk_season_%(_season)")
+    }
+    if ISFUNC("Talk_month_%(month)") {
+        _talk_array ,= EVAL("Talk_month_%(month)")
+    }
+    if ISFUNC("Talk_date_%(month)_%(day)") {
+        _talk_array ,= EVAL("Talk_date_%(month)_%(day)")
+    }
+
+    // 時間帯トーク
+    _timeSlot = Time_hour_toSlot
+    if ISFUNC("Talk_timeSlot_%(_timeSlot)") {
+        _talk_array ,= EVAL("Talk_timeSlot_%(_timeSlot)")
+    }
+
+    // 通常トーク
+    _talk_array ,= Talk_default
+    // ワード使用トーク。これだけ配列ではない。
+    _talk_array = (_talk_array, Talk_usingWord)
+    // チェイントーク
+    _talk_array ,= Talk_chain
+
+    _talk_array
+}

@@ -1,0 +1,4 @@
+charset,Shift_JIS
+name,‘Ó‘Ä‚È”L‚ÌÂ‚¢Î
+type,balloon
+directory,lazy_cats_blue_stone

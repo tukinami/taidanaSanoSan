@@ -1,0 +1,2 @@
+dic, yaya_plugin.dic            // プラグイン
+dic, yaya_menu.dic              // メニュー

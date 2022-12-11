@@ -1,0 +1,35 @@
+// ghost
+// --------------------------------------------------
+// savedata
+ghost/master/yaya_variable.cfg,nonar,noupdate
+ghost/master/profile/,nonar,noupdate
+ghost/master/ssp_shiori_log.txt,nonar,noupdate
+ghost/master/yaya_ssp_debug.log,nonar,noupdate
+ghost/master/var/,nonar,noupdate
+
+// tools
+ghost/master/tama.exe,nonar,noupdate
+ghost/master/tama.txt,nonar,noupdate
+ghost/master/cmd_shiori_tester.exe,nonar,noupdate
+ghost/master/.memo/,nonar,noupdate
+
+// for debug
+ghost/master/yaya_debug.dic,nonar,noupdate
+
+
+// shell
+// --------------------------------------------------
+// savedata
+shell/master/profile/,nonar,noupdate
+shell/master-s/profile/,nonar,noupdate
+
+// balloon
+// --------------------------------------------------
+lazy_cats_blue_stone/,noupdate
+// savedata
+lazy_cats_blue_stone/profile/,nonar,noupdate
+
+
+.gitignore,nonar,noupdate
+.git/,nonar,noupdate
+.github/,nonar,noupdate

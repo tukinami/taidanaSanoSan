@@ -1,0 +1,14 @@
+name,‘Ó‘Ä‚È²–ì‚³‚ñ
+id,taidanaSanoSan
+type,ghost
+craftman,tukinami seika
+craftmanw,Œ”g ´‰Î
+craftmanurl,https://github.com/tukinami/taidanaSanoSan
+
+sakura.name,²–ìˆÉD
+kero.name,‚«‚Ê
+
+shiori,yaya.dll
+readme,readme.txt
+
+sstp.alwaystranslate,1
