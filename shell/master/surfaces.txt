@@ -299,6 +299,46 @@ animation0.pattern3,overlay,98,80,0,0
 animation0.pattern4,overlay,-1,80,0,0
 }
 
+// ç¢ÇËäÁ
+surface34
+{
+element0,base,surface0000.png,0,0
+element1,overlay,eye-smile.png,0,0
+element2,overlay,eyeblow-sad.png,0,0
+element3,overlay,mouth-normal.png,0,0
+
+collision0,110,24,235,94,Head
+collision1,123,195,227,262,Chest
+collision2,200,373,263,453,Hand
+}
+
+// ñûñ ÇÃèŒÇ›
+surface35
+{
+element0,base,surface0000.png,0,0
+element1,overlay,eye-smile.png,0,0
+element2,overlay,eyeblow-funny.png,0,0
+element3,overlay,mouth-smile.png,0,0
+
+collision0,110,24,235,94,Head
+collision1,123,195,227,262,Chest
+collision2,200,373,263,453,Hand
+}
+
+// è∆ÇÍèŒÇ¢
+surface36
+{
+element0,base,surface0000.png,0,0
+element1,overlay,eye-smile.png,0,0
+element2,overlay,eyeblow-sad.png,0,0
+element3,overlay,mouth-smile.png,0,0
+element4,overlay,shy.png,0,0
+
+collision0,110,24,235,94,Head
+collision1,123,195,227,262,Chest
+collision2,200,373,263,453,Hand
+}
+
 // ===================================================================
 // sakura parts
 // ===================================================================
@@ -361,7 +401,7 @@ element0,base,eye-normal.png,0,0
 }
 
 // ===================================================================
-// sakura parts
+// kero parts
 // ===================================================================
 // ñ⁄
 // -------------------------------------------------------------------
