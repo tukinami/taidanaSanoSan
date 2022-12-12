@@ -100,7 +100,7 @@ OnRecommendsiteChoice {
 
     case _url {
         // recommend
-        when 'http://nighde.soragoto.net/' {
+        when 'https://github.com/tukinami/taidanaSanoSan' {
             '\u\s[10]\h\s[0]俺たちの配布場所だ。\w9\w9\u…\w5……\w5\s[11]「俺たちの配布場所」って、\w5凄い台詞…\w5…\w5！！\w9\w9\h\s[3]\n\n…\w5…\w5しかたがない、\w5他にいいようがないだろ。'
         }
         // portal
