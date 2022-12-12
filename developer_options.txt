@@ -33,3 +33,4 @@ lazy_cats_blue_stone/profile/,nonar,noupdate
 .gitignore,nonar,noupdate
 .git/,nonar,noupdate
 .github/,nonar,noupdate
+md5buildignore.txt,nonar,noupdate
