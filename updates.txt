@@ -63,7 +63,7 @@ file,lazy_cats_blue_stone/online3.pngbf002406b5669f1b0de0448d75777abfsize=188
 file,lazy_cats_blue_stone/readme.txtafcbe4ed9c42843df0d1a46ff53d904esize=241date=2012-12-21T00:00:00
 file,lazy_cats_blue_stone/sstp.png8ea60752108445bd013581eabc4e1cafsize=154date=2012-12-21T00:00:00
 file,lazy_cats_blue_stone/thumbnail.png9b55dcc00e10b7ea67278d6e08932cf5size=5979date=2012-12-21T00:00:00
-file,readme.txta885e1550d6e2a5a2e390d0e746d483fsize=2203date=2012-12-21T00:00:00
+file,readme.txt9bef0e56ffe5924ac8d3dd1e7363f866size=2205date=2012-12-21T00:00:00
 file,shell/master-s/background.png22f0ae734d9985478368aca900ec8653size=9148date=2012-12-21T00:00:00
 file,shell/master-s/descript.txt0ee08df19aba2c29c02c175a1bba87a5size=894date=2012-12-21T00:00:00
 file,shell/master-s/foreground.pngbafadd686c888b968656bd974d153bf9size=10733date=2012-12-21T00:00:00
