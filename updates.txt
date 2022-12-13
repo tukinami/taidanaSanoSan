@@ -14,7 +14,7 @@ file,ghost/master/dic_etc/_loading_order.txtd144d9007b8bcffdda41a227b42c7b55si
 file,ghost/master/dic_etc/yaya_menu.dic1b9fe116f71f392989040f9ff3a4426fsize=17711date=2012-12-21T00:00:00
 file,ghost/master/dic_etc/yaya_plugin.dic29130464dfc44157de14f0b58b7c4628size=5260date=2012-12-21T00:00:00
 file,ghost/master/dic_events/_loading_order.txt50fe996b2fca940dbae7d41a1a674f3asize=438date=2012-12-21T00:00:00
-file,ghost/master/dic_events/yaya_event_bootend.dic545bc8024e0d9397f23adeebbd7f7a0bsize=12024date=2012-12-21T00:00:00
+file,ghost/master/dic_events/yaya_event_bootend.dicad49b8227c44d63bf2c99d6f1f42f9b0size=12020date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_change.dic8e624dced864530ba0f4e57e9c8f8a80size=4534date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_communicate.dic00d14b24dea61cf45d1f702939d214c8size=5599date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_etc.dic821a509655010e3baae52df695e907a8size=15565date=2012-12-21T00:00:00
