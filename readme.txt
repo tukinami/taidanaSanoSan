@@ -19,7 +19,7 @@
 でのDM、リプライでの受付となります。
 
 バグ報告については
-GitHubのIssue(https://github.com/tukinami/taidanaSanoSan/issues)
+GitHubのIssues(https://github.com/tukinami/taidanaSanoSan/issues)
 でも受け付けています。
 
 
