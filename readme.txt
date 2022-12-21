@@ -18,7 +18,9 @@
 ・Twitter(@tukinami_s)(ほとんど放置)
 でのDM、リプライでの受付となります。
 
-バグ報告についてはGitHubのIssueでも受け付けています。
+バグ報告については
+GitHubのIssue(https://github.com/tukinami/taidanaSanoSan/issues)
+でも受け付けています。
 
 
 使用しているものについて
