@@ -1,0 +1,86 @@
+On_Feeding {
+    if On_Status.fullness.p0.judge > 0 {
+        "\u\s[10]\h\s[4]…\w5…\w5うれしい、\w5うれしんだが…\w5…\w5。\w9\w9\uお腹がいっぱいで、\w5入らないみたいよ。\w9\w9\h\s[3]\n\nごめんな。\w9また後でな。"
+        --
+        '\h\n\n'
+        --
+        Feeding_close
+        return
+    }
+    if timesignal > 0 && (hour == 7 || hour == 11 || hour == 19) {
+        "\u\s[10]\h\s[36]%(username)がおやつをくれるって！\w9\w9\u\s[16]ご飯前なんだから、\w5我慢なさい。\w9\w9\h\s[3]\n\nえー。\w9\w9\u\s[10]\n\n悪いわね、\w5%(username)、\w5また後でお願いするわ。"
+        --
+        '\h\n\n'
+        --
+        Feeding_close
+        return
+    }
+
+    On_Feeding_start
+}
+
+On_Feeding_start {
+    _sweets = Word_meal_sweets
+    _paging_body = (IARRAY)
+
+    foreach _sweets; _item {
+        _i = SPLIT(_item, '|')
+        _s = "\q[%(_i[0]),On_Feeding_select,%(_i[0]),%(_i[1]),%(_i[2])]"
+        _paging_body ,= _s
+    }
+
+    _header = Feeding_intro
+    _footer = Feeding_close
+    Paging_begin(_header, _footer, 7, 2, 0, _paging_body)
+}
+
+Feeding_intro : nonoverlap {
+"\u\s[10]\h\s[6]もしかして、\w9\s[3]何か、\w9\s[2]いただけたりするのでしょうか？\w9\w9\u何故敬語？"
+    "\u\s[10]\h\s[1]…\w5…\w5…。\w9\w9\u伊織はおやつを欲しそうにしている。\w9\w9\h\s[4]\n\n解説しないでくれ…\w5…\w5。"
+}
+
+Feeding_close {
+    FillLine_list_full('メインメニュー', 'On_Menu_0')
+    --
+    FillLine_list_full('閉じる', 'CLOSE_NOTALK')
+}
+
+On_Feeding_select {
+    _meal = SHIORI3FW.EscapeDangerousTags(reference[0])
+    _cal = TOINT(reference[1])
+    _genre = Meal_genre(reference[2])
+
+    p0_s_fullness += _cal
+
+    if ISFUNC("On_Feeding_select_%(_meal)") {
+        EVAL("On_Feeding_select_%(_meal)")
+    }
+    else {
+        On_Feeding_select_OTHERS(_meal)
+    }
+    --
+   '\h\n\n'
+    --
+    Feeding_close
+}
+
+On_Feeding_select_ティラミス : nonoverlap {
+    "\u\s[10]\h\s[35]ティラミスだー！\w9ありがとう！\w9いただきます！\w9\s[6]\nモグモグ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\n\nん～。\w9エスプレッソが大人の味って感じでおいしい…\w5…\w5。\w9\s[5]\nごちそうさま。\w9ありがとう、\w5%(username)。"
+}
+
+On_Feeding_select_モンブラン : nonoverlap {
+    "\u\s[10]\h\s[35]モンブラン！\w9ありがとう、\w5いただきます！\w9\s[6]\nモグモグ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\s[36]\n\n栗の風味が口いっぱいに広がって幸せ…\w5…\w5。\w9\s[5]\nごちそうさま。\w9ありがとう、\w5%(username)。"
+}
+
+On_Feeding_select_ホットケーキ : nonoverlap {
+    "\u\s[10]\h\s[35]ホットケーキだ！\w9ありがとう、\w5いただきます！\w9\s[6]\nモグモグ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\s[36]\n\n甘くてふわふわでおいしい…\w5…\w5。\w9\s[5]\nごちそうさま、\w5ありがとう、\w5%(username)。"
+}
+
+On_Feeding_select_OTHERS : nonoverlap {
+    _meal = _argv[0]
+    "\u\s[10]\h\s[35]おお、\w5%(_meal)か。\w9ありがとう、\w5いただきます。\w9\s[6]\nモグモグ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\s[36]\n\nおいしくて幸せ…\w5…\w5。\w9\s[5]\nごちそうさまでした。"
+}
+
+BalloonTooltip_On_Feeding {
+    'おやつメニュー'
+}

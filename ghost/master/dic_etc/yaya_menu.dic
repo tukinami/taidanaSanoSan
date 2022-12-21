@@ -10,9 +10,9 @@ On_Menu_0 {
     --
     '\n'
     --
-    FillLine_list_full('設定を変更して','On_Menu_0_setting')
+    FillLine_list_half('設定を変更して','On_Menu_0_setting', '更新履歴を見せて', 'On_Update_log')
     --
-    FillLine_list_full('更新履歴を見せて', 'On_Update_log')
+    FillLine_list_full('おやつをあげる','On_Feeding')
     --
     if basewarenameex != 'Ikagaka' {
         FillLine_list_full('頼み事','On_Menu_0_func')
