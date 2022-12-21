@@ -282,21 +282,3 @@ OnGhostLoad {
 OnGhostUnload {
     On_U.eraseVar
 }
-
-// ===================================================================
-// On_tamaOpen / On_tamaExit
-// ===================================================================
-On_tamaOpen {
-    _result = SETTAMAHWND(reference[0])
-
-    if _result == 1 {
-        '\u\s[10]\h\s[0]tamaが起動した。'
-    } else {
-        "\u\s[10]\h\s[0]tamaとの連携に失敗。HWND:%(reference[0])"
-    }
-}
-
-On_tamaExit {
-    SETTAMAHWND(0)
-    '\u\s[10]\h\s[0]tamaが終了した。'
-}
