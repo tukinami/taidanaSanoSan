@@ -49,8 +49,8 @@ OnGhostChanging_佐野伊織 {
 // -------------------------------------------------------------------
 OnGhostChangedOther {
     // OnBoot_talk_date_日付_first 関数があり、今年はやってなかったら優先
-    if (ISFUNC("OnBoot_talk_date_%(month)_%(date)_first") &&  EVAL("datetalk_year_%(month)_%(date)") != year ) {
-        EVAL("OnBoot_talk_date_%(month)_%(date)_first")
+    if (ISFUNC("OnBoot_talk_date_%(month)_%(day)_first") &&  EVAL("datetalk_year_%(month)_%(day)") != year ) {
+        EVAL("OnBoot_talk_date_%(month)_%(day)_first")
         return
     }
     
