@@ -11,16 +11,18 @@
 
 バグ報告など
 ============================================================
-バグ報告・感想などの窓口は、現在作成中です。
-
-現在は、
+バグ報告・感想などは、現在、
+・Peing質問箱(https://peing.net/ja/tukinami_seika)
+または、
 ・Mastodon(@tukinami_seika@fedibird.com)
 ・Twitter(@tukinami_s)(ほとんど放置)
-でのDM、リプライでの受付となります。
+でのDM、リプライで受け付けています。
 
 バグ報告については
 GitHubのIssues(https://github.com/tukinami/taidanaSanoSan/issues)
 でも受け付けています。
+
+ご気軽にどうぞ。
 
 
 使用しているものについて
