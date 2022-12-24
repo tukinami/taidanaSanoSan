@@ -1,103 +1,103 @@
- �ӑĂȍ��삳��
+ 怠惰な佐野さん
 ============================================================
-�ʓ|��������ȏ��N�u���� �ɐD�v�ƁA�L���́u���ʁv��
-�G�k�n�S�[�X�g�ł��B
+面倒くさがりな少年「佐野 伊織」と、猫又の「きぬ」の
+雑談系ゴーストです。
 
-�����x�ɂ���āA�킸���΂���g�[�N���������܂��B
+満腹度によって、わずかばかりトークが増減します。
 
-(�g�[�N�̓��e�ɂ��āA�s���m�ȓ��e���܂܂�邩�Ǝv���܂��B
-���p���ɂ��܂��ẮA���̓_�����Ӊ������B)
+(トークの内容について、不正確な内容も含まれるかと思います。
+引用等につきましては、その点ご注意下さい。)
 
 
-�o�O�񍐂Ȃ�
+バグ報告など
 ============================================================
-�o�O�񍐁E���z�Ȃǂ́A���݁A
-�EPeing���┠(https://peing.net/ja/tukinami_seika)
-�܂��́A
-�EMastodon(@tukinami_seika@fedibird.com)
-�ETwitter(@tukinami_s)(�قƂ�Ǖ��u)
-�ł�DM�A���v���C�Ŏ󂯕t���Ă��܂��B
+バグ報告・感想などは、現在、
+・Peing質問箱(https://peing.net/ja/tukinami_seika)
+または、
+・Mastodon(@tukinami_seika@fedibird.com)
+・Twitter(@tukinami_s)(ほとんど放置)
+でのDM、リプライで受け付けています。
 
-�o�O�񍐂ɂ��Ă�
-GitHub��Issues(https://github.com/tukinami/taidanaSanoSan/issues)
-�ł��󂯕t���Ă��܂��B
+バグ報告については
+GitHubのIssues(https://github.com/tukinami/taidanaSanoSan/issues)
+でも受け付けています。
 
-���C�y�ɂǂ����B
+ご気軽にどうぞ。
 
 
-�g�p���Ă�����̂ɂ���
+使用しているものについて
 ============================================================
 YAYA(SHIORI)
 https://github.com/ponapalt/yaya-shiori/wiki
-�������(�e���v���[�g�S�[�X�g)
+紺野ややめ(テンプレートゴースト)
 http://ms.shillest.net/yayame.xhtml
 
 
-�ӎ�
+謝辞
 ============================================================
 Emily/Phase4.5
 Copyright (C) 2004- Emily/Phase4.5 Project.
 http://ssp.shillest.net/
-�S�[�X�g�쐬�ɂ����đ�ώQ�l�ɂ����Ă��������܂����B
-���肪�Ƃ��������܂��B
+ゴースト作成において大変参考にさせていただきました。
+ありがとうございます。
 
 
- �S�[�X�g�̒��쌠���ɂ���(2022.12.12 ����)
+ ゴーストの著作権等について(2022.12.12 現在)
 ============================================================
 
-�S�[�X�g���쌠�ӎ��ɂ��Ă̎���
+ゴースト著作権意識についての質問
 http://emily.shillest.net/specwiki/index.php?ueda%2F%E3%82%B4%E3%83%BC%E3%82%B9%E3%83%88%E8%91%97%E4%BD%9C%E6%A8%A9%E6%84%8F%E8%AD%98%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E8%B3%AA%E5%95%8F
 
-[1.�S�[�X�g�_�E�����[�h�y�[�W�ɒ��ڃ����N�����]
- �\�BURL���ς�邩������Ȃ��_�ɋC��t���ĉ������B
+[1.ゴーストダウンロードページに直接リンクされる]
+ 可能。URLが変わるかもしれない点に気を付けて下さい。
 
-[2.�S�[�X�g�̃l�^�o���������]
- OK�B
+[2.ゴーストのネタバレをされる]
+ OK。
 
-[3.�S�[�X�g�ɑ΂��ᔻ�I�Ȉӌ���������]
- OK�B
+[3.ゴーストに対し批判的な意見を言われる]
+ OK。
 
-[4.�񎟑n�앨�̔z�z�������(HP�f�ރt���[�z�z�A���l���̔���)]
- ���g���Όl�̒��앨 : OK�B�l�͈̔͂ŁB
- ���̑��̕��̒��앨 : ���̒��앨�̋K���ɏ]���ĉ������B
+[4.二次創作物の配布をされる(HP素材フリー配布、同人誌販売等)]
+ 月波清火個人の著作物 : OK。個人の範囲で。
+ その他の方の著作物 : その著作物の規則に従って下さい。
 
-[5.����̐ݒ�Ƒ傫���������ꂽ�񎟑n��������]
- OK�B
+[5.原作の設定と大きくかけ離れた二次創作をされる]
+ OK。
 
-[6.18�֓񎟑n��������]
- OK�B�l�̐ӂŁB
+[6.18禁二次創作をされる]
+ OK。個人の責で。
 
-[7.�ǉ��V�F���A�o���[������z�z�����]
- OK�B��т܂��B
+[7.追加シェル、バルーン等を配布される]
+ OK。喜びます。
 
-[8.�}�X�^�[�V�F���A�o���[���������ς������̂�z�z�����]�i7��OK�̐l�̂݁j
- OK�B���ς������Ƃ𖾋L�̏�B
+[8.マスターシェル、バルーン等を改変したものを配布される]（7がOKの人のみ）
+ OK。改変したことを明記の上。
 
-[9.�g�[�N���E�F�u��ɓ]��]
- OK�B
+[9.トークをウェブ上に転載]
+ OK。
 
-[10.�}�X�^�[�V�F����f��(�f���̃A�C�R���Ȃ�)�Ƃ��Ďg�p]
- ���g���΂̒��앨�Ȃ�Ή\�B
+[10.マスターシェルを素材(掲示板のアイコンなど)として使用]
+ 月波清火の著作物ならば可能。
 
-[11.�S�[�X�g�A�[�J�C�u�ւ̒������N]
- �s�B
+[11.ゴーストアーカイブへの直リンク]
+ 不可。
 
-[12.���J���S�[�X�g���E�F�u��ōĔz�z]
- OK�B
+[12.公開中ゴーストをウェブ上で再配布]
+ OK。
 
-[13.�z�z�I�������S�[�X�g���E�F�u��ōĔz�z]
- OK�B
+[13.配布終了したゴーストをウェブ上で再配布]
+ OK。
 
-[14.���g�����ς�����ŃE�F�u��ōĔz�z]�i12��13�̂ǂ��炩��OK�̐l�̂݁j
- OK�B���ς������ƁA�������̃S�[�X�g�ł��邱�Ƃ𖾋L�̏�B
+[14.中身を改変した上でウェブ上で再配布]（12と13のどちらかがOKの人のみ）
+ OK。改変したこと、元がそのゴーストであることを明記の上。
 
-[15.�S�[�X�g�̓��l�����^]
- OK�B����ł��񍐂�����Ƃ��肪�����ł��B
+[15.ゴーストの同人誌収録]
+ OK。事後でも報告があるとありがたいです。
 
-[16.�S�[�X�g�̏��Ǝ����^]
- ���O�񍐌㔻�f�������܂��B
+[16.ゴーストの商業誌収録]
+ 事前報告後判断いたします。
 
 
 
-����: ���g ����
+制作: 月波 清火
 https://github.com/tukinami/taidanaSanoSan
