@@ -207,7 +207,7 @@ Talk_eat_hungerfew : array {
     '\u\s[10]\h\s[4]おなか減った…\w5…\w5。'
     '\u\s[10]\h\s[3]ちょっとお腹減ったな…\w5…\w5。'
     --
-    if hour == 7 || hour == 11 || hour == 19 {
+    if hour == 7 || hour == 11 || hour == 18 {
         '\w9\w9\h\s[0]\u\s[16]もう少しで食事時なんだから、\w5少し待ったら？\w9\w9\h\s[4]えー。'
     }
     else {

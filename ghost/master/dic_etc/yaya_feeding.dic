@@ -7,7 +7,7 @@ On_Feeding {
         Feeding_close
         return
     }
-    if timesignal > 0 && (hour == 7 || hour == 11 || hour == 19) {
+    if timesignal > 0 && (hour == 7 || hour == 11 || hour == 18) {
         "\u\s[10]\h\s[36]%(username)がおやつをくれるって！\w9\w9\u\s[16]ご飯前なんだから、\w5我慢なさい。\w9\w9\h\s[3]\n\nえー。\w9\w9\u\s[10]\n\n悪いわね、\w5%(username)、\w5また後でお願いするわ。"
         --
         '\h\n\n'
