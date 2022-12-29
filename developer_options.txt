@@ -34,3 +34,5 @@ lazy_cats_blue_stone/profile/,nonar,noupdate
 .git/,nonar,noupdate
 .github/,nonar,noupdate
 md5buildignore.txt,nonar,noupdate
+.vscode/
+taidanaSanoSan.code-workspace
