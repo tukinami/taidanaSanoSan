@@ -52,6 +52,10 @@ On_Feeding_select {
 
     p0_s_fullness += _cal
 
+    if p0_s_feeding_first_item == '' {
+        p0_s_feeding_first_item = _meal
+    }
+
     if ISFUNC("On_Feeding_select_%(_meal)") {
         EVAL("On_Feeding_select_%(_meal)")
     }

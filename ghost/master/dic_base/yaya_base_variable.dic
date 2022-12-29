@@ -33,6 +33,11 @@ On_V.p0_s_pride {
     p0_s_pride
 }
 
+// 最初にもらったおやつ
+On_V.p0_s_feeding_first_item {
+    p0_s_feeding_first_item
+}
+
 // ===================================================================
 // 初期化
 // ===================================================================
@@ -72,6 +77,10 @@ On_InitVar.p0_s_fullness {
 
 On_InitVar.p0_s_pride {
     p0_s_pride = 0
+}
+
+On_InitVar.p0_s_feeding_first_item {
+    p0_s_feeding_first_item = ''
 }
 
 // ===================================================================
