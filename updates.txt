@@ -22,7 +22,7 @@ file,ghost/master/dic_events/yaya_event_etc.dic821a509655010e3baae52df695e907a8
 file,ghost/master/dic_events/yaya_event_feature.dic8a843471f18c9ba3efeeeaf8a2d1b593size=19501date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_mouse.dic179884a0a625060cc1f2eec884c858a0size=3437date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_timeChange.dic7a93e18a6bd73abde6da88026d5a6b12size=14094date=2012-12-21T00:00:00
-file,ghost/master/dic_events/yaya_event_update.dic2f277611e17a9eb01c756d9bce87c6cdsize=5583date=2012-12-21T00:00:00
+file,ghost/master/dic_events/yaya_event_update.dic2816196e02a0516b59eeaf3f2aacfe57size=5651date=2012-12-21T00:00:00
 file,ghost/master/explorer2/character_descript.txt5ae2818a2df95789de8789568435d9c7size=587date=2012-12-21T00:00:00
 file,ghost/master/icon.icoc39a9f642b9e16f2c3815b6406887d4asize=1406date=2012-12-21T00:00:00
 file,ghost/master/stamp.pngdb6568b9b56eec66a691fd166740b3e5size=1831date=2012-12-21T00:00:00
