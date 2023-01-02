@@ -132,7 +132,7 @@ InstallComplete_change_and_call {
 }
 
 OnInstallComplete_change {
-    if basewarename != 'SSP' {
+    if basewarename == 'SSP' {
         "\![change,%(reference[0]),lastinstalled]"
     }
     else {
@@ -141,8 +141,12 @@ OnInstallComplete_change {
 }
 
 OnInstallComplete_call {
-    // "\![call,%(reference[0]),lastinstalled]"
-    "\![call,%(reference[0]),%(reference[1])]"
+    if basewarename == 'SSP' {
+        "\![call,%(reference[0]),lastinstalled]"
+    }
+    else {
+        "\![call,%(reference[0]),%(reference[1])]"
+    }
 }
 
 OnInstallFailure {
