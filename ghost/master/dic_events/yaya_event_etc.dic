@@ -401,6 +401,9 @@ Ghostbook_property {
         }
         // when '1カード画像パス' {
         // }
+        when '-1NOB' {          // 戦闘参加人数 0/1/2
+             '2'
+        }
         others {
             ''
         }
