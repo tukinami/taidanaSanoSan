@@ -21,7 +21,7 @@ On_Feeding {
 
 On_Feeding_start {
     _sweets = Word_meal_sweets
-    _paging_body = (IARRAY)
+    _paging_body = IARRAY
 
     foreach _sweets; _item {
         _i = SPLIT(_item, '|')
@@ -56,6 +56,8 @@ On_Feeding_select {
         p0_s_feeding_first_item = _meal
     }
 
+    Feeding_count_up(_meal)
+
     if ISFUNC("On_Feeding_select_%(_meal)") {
         EVAL("On_Feeding_select_%(_meal)")
     }
@@ -66,6 +68,19 @@ On_Feeding_select {
    '\h\n\n'
     --
     Feeding_close
+}
+
+Feeding_count_up : void {
+    _meal = _argv[0]
+    _count = 0
+
+    if GETTYPEEX("On_Feeding_count_%(_meal)") == 1 {
+        _count = EVAL("On_Feeding_count_%(_meal)")
+    }
+
+    _count++
+
+    EVAL("On_Feeding_count_%(_meal)=_count")
 }
 
 On_Feeding_select_ティラミス : nonoverlap {
