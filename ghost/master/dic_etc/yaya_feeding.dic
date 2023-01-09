@@ -1,3 +1,5 @@
+#define FEEDING_COUNT_EVENT_1 15
+
 On_Feeding {
     if On_Status.fullness.p0.judge > 0 {
         "\u\s[10]\h\s[4]…\w5…\w5うれしい、\w5うれしいんだが…\w5…\w5。\w9\w9\uお腹がいっぱいで、\w5入らないみたいよ。\w9\w9\h\s[3]\n\nごめんな。\w9また後でな。"
@@ -58,6 +60,20 @@ On_Feeding_select {
 
     Feeding_count_up(_meal)
 
+    // 第一イベント
+    if EVAL("On_Feeding_count_%(_meal)") >= FEEDING_COUNT_EVENT_1 {
+        // 変数が空ならイベント未達成
+        if EVAL("feeding_user_like_%(_meal)") == '' {
+            if ISFUNC("On_Feeding_select_events_1_%(_meal)") {
+                EVAL("On_Feeding_select_events_1_%(_meal)")
+            } else {
+                On_Feeding_select_events_1_OTHERS(_meal)
+            }
+            return
+        }
+    }
+
+    // 通常の反応
     if ISFUNC("On_Feeding_select_%(_meal)") {
         EVAL("On_Feeding_select_%(_meal)")
     }
@@ -101,6 +117,108 @@ On_Feeding_select_ホットケーキ : nonoverlap {
 On_Feeding_select_OTHERS : nonoverlap {
     _meal = _argv[0]
     "\u\s[10]\h\s[35]おお、\w5%(_meal)か。\w9ありがとう、\w5いただきます。\w9\s[6]\nモグモグ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\s[36]\n\nおいしくて幸せ…\w5…\w5。\w9\s[5]\nごちそうさまでした。"
+}
+
+On_Feeding_select_events_1_OTHERS {
+    _meal = SHIORI3FW.EscapeAllTags(_argv[0])
+    "\u\s[10]\h\s[36]おお、\w5%(_meal)、\w5ありがとう！\w9いただきます！\w9\n(モグモグ…\w5…\w5)\w9\s[0]\n…\w5…\w5結構たくさん%(_meal)もらったけど、\w5%(username)は%(_meal)好きか？"
+    --
+    Feeding_select_event_1_choice(_meal)
+}
+
+Feeding_select_event_1_choice {
+    _meal = SHIORI3FW.EscapeAllTags(_argv[0])
+
+    FillLine_list_full('好き', "On_Feeding_user_like_1,%(_meal),1")
+    --
+    FillLine_list_full('それほどでもない', "On_Feeding_user_like_1,%(_meal),0")
+    --
+    FillLine_list_full('嫌い', "On_Feeding_user_like_1,%(_meal),-1")
+}
+
+On_Feeding_user_like_1 {
+    _meal = SHIORI3FW.EscapeAllTags(reference[0])
+    _like_flag = TOINT(reference[1])
+
+    _var_name = "feeding_user_like_%(_meal)"
+    _like = 'normal'
+    case _like_flag {
+        when 1 {
+            EVAL("%(_var_name)=1")
+            _like = 'like'
+        }
+        when -1 {
+            EVAL("%(_var_name)=-1")
+            _like = 'dislike'
+        }
+        others {
+            EVAL("%(_var_name)=0")
+            _like = 'normal'
+        }
+    }
+
+    if ISFUNC("On_Feeding_user_like_1_select_%(_meal)_%(_like)") {
+        EVAL("On_Feeding_user_like_1_select_%(_meal)_%(_like)")
+    }
+    else {
+        EVAL("On_Feeding_user_like_1_select_OTHERS_%(_like)(%(CHR(34))%(_meal)%(CHR(34)))")
+    }
+    --
+   '\h\n\n'
+    --
+    Feeding_close
+}
+
+On_Feeding_user_like_1_select_ティラミス_like {
+    "\u\s[10]\h\s[5]そうか、\w5%(username)はティラミスが好きなんだな。\w9\s[6]\n俺もティラミス好きだ。\w9コーヒーの苦さとチーズのまろやかさがあわさって、\w5とても美味い。\w9\w9\u…\w5…\w5食べ物大体好きでしょ貴方。\w9\w9\h\s[3]\n\nみなまで言うな。"
+}
+
+On_Feeding_user_like_1_select_ティラミス_dislike {
+    "\u\s[10]\h\s[3]そうか。\w9ティラミス嫌いだったか。\w9\n苦手な人もいるよな。\w9\w9\uコーヒーが苦手だったり、\w5色々よね。\w9\w9\h\s[5]\n\n今度ティラミスが出てきても、\w5俺に任せてくれ。\w9\n代わりに食べるから。\w9\w9\u\n\n食べたいだけでは？\w9\w9\h\s[34]\n\nち\w2ー\w2が\w2ー\w2い\w2ー\w2ま\w2ー\w2す\w2ー\w2！"
+}
+
+On_Feeding_user_like_1_select_ティラミス_normal {
+    "\u\s[10]\h\s[0]そうか。\w9普通か。\w9\s[6]\nと、\w5いうことは、\w5俺がティラミス好きそうってことだよな。\w9\s[2]\n…\w5…\w5イタリアっぽいってことか！？\w9\w9\u何処の辺りが？"
+}
+
+On_Feeding_user_like_1_select_モンブラン_like {
+    "\u\s[10]\h\s[5]そうか、\w5%(username)はモンブランが好きなんだな。\w9\s[35]\n俺もモンブラン好きだ。\w9フランス生まれのお菓子なのに、\w5栗のおかげかなんとなく和の雰囲気を感じるところが好きだ。\w9\w9\u…\w5…\w5栗の甘露煮、\w5マロングラッセ…\w5…\w5。\w9\w9\h\s[36]\n\nどっちがのってても好き。"
+}
+
+On_Feeding_user_like_1_select_モンブラン_dislike {
+    "\u\s[10]\h\s[4]そうか。\w9モンブラン、\w5嫌いなんだな。\w9\s[3]\n栗が苦手とかか？\w9\w9\uまぁ、\w5理由は人それぞれよね。\w9\w9\h\s[5]\n\n今度モンブランが出てきたら、\w5俺が代わりに食べるから呼んでくれ。\w9\w9\u\n\nそういう問題？"
+}
+
+On_Feeding_user_like_1_select_モンブラン_normal {
+    "\u\s[10]\h\s[0]そうか、\w5それほどでもないか。\w9\s[6]\nということは、\w5俺がモンブラン好きそうってことかな。\w9\w9\u栗毛ってことじゃない？\w9\w9\h\s[0]\n\n俺は馬か何かか。"
+}
+
+On_Feeding_user_like_1_select_ホットケーキ_like {
+    "\u\s[10]\h\s[5]そうか、\w5%(username)はホットケーキが好きなんだな。\w9\s[6]\n俺もホットケーキ好きだ。\w9\n普通の厚さのもいいし、\w5ふっくら厚いのも好きだ。\w9\s[3]\n何をのせるかも迷う。\w9シンプルにバターとか、\w5フルーツのせたりクリームのせたり…\w5…\w5。\w9\w9\uあの～。\w9\w9\h\s[36]\n\nと、\w5とにかく！\w9ホットケーキ美味いよなって話だ！\w9\w9\u\s[16]\n\nやれやれ。"
+}
+
+On_Feeding_user_like_1_select_ホットケーキ_dislike {
+    "\u\s[10]\h\s[3]そうか、\w5ホットケーキ嫌いなんだな。\w9\w9\u人それぞれ好みは色々。\w9\w9\h\s[5]\n\n…\w5…\w5そうだよな。\w9\s[7]\nホットケーキは俺に任せとけ！\w9\w9\u\n\nバリバリバリバリ\w9\w9\h\s[3]\n\nえっ？\w9何？"
+}
+
+On_Feeding_user_like_1_select_ホットケーキ_normal {
+    "\u\s[10]\h\s[0]そっか。\w9普通か。\w9\s[6]\nじゃあ、\w5俺がホットケーキ好きそうってことだよな。\w9\n確かに、\w5俺はホットケーキ好きだ。\w9\s[3]\nただ、\w5トッピングの種類が多いと迷うんだよな。\w9\nクリーム、\w5チョコレート、\w5フルーツ、\w5ソース…\w5…\w5。\w9\w9\uそうして結局全部のせ？\w9\w9\h\s[2]\n\nしないよ！？"
+}
+
+On_Feeding_user_like_1_select_OTHERS_like {
+    _meal = _argv[0]
+    "\u\s[10]\h\s[5]そうか！\w9%(username)も%(_meal)好きなんだな！\w9\s[35]\n俺も%(_meal)好きだ。\w9\w9\u大体そう。\w9多分そう。\w9\w9\h\s[8]\n\nそう言うなって。"
+}
+
+On_Feeding_user_like_1_select_OTHERS_dislike {
+    _meal = _argv[0]
+    "\u\s[10]\h\s[2]そうなのか！？\w9\n(ササッ)\w9\w9\u何故隠すの？\w9\w9\h\s[3]\n\n見るのもイヤかと。\w9\w9\u\n\nそういう人も居るでしょうけどね。"
+    "\u\s[10]\h\s[0]そうなのか。\w9\s[5]\nなら、\w5%(_meal)が出てきたときは、\w5俺に任せろ。\w9代わりに食べるから。\w9\w9\u…\w5…\w5そういう話？"
+}
+
+On_Feeding_user_like_1_select_OTHERS_normal {
+    _meal = _argv[0]
+    "\u\s[10]\h\s[0]そうか、\w5普通か。\w9\s[6]\nということは、\w5俺が%(_meal)好きそうだってことか？\w9\s[5]\nああ、\w5%(_meal)好きだよ。\w9\w9\u大体そう。\w9多分そう。"
 }
 
 BalloonTooltip_On_Feeding {
