@@ -1,4 +1,4 @@
-#define FEEDING_COUNT_EVENT_1 15
+#define FEEDING_COUNT_EVENT_1 9
 
 On_Feeding {
     if On_Status.fullness.p0.judge > 0 {
