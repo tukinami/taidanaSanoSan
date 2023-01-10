@@ -150,6 +150,8 @@ On_Feeding_select_events_1_OTHERS {
     _meal = SHIORI3FW.EscapeAllTags(_argv[0])
     "\u\s[10]\h\s[36]おお、\w5%(_meal)、\w5ありがとう！\w9いただきます！\w9\n(モグモグ…\w5…\w5)\w9\s[0]\n…\w5…\w5結構たくさん%(_meal)もらったけど、\w5%(username)は%(_meal)好きか？"
     --
+    '\h\n\n'
+    --
     Feeding_select_event_1_choice(_meal)
 }
 
