@@ -426,7 +426,7 @@ On_Menu_0_plugin {
     }
 
     if _body == '' {
-        '\u\s[10]\h\s[0]対応しているプラグインはないようだ。\w9\w9\u「十徳ナイフ」や「スタンプ帳」に対応しているから、\w5気になったらダウンロードしてみてね。'
+        '\u\s[10]\h\s[0]対応しているプラグインはないようだ。\w9\w9\u「十徳ナイフ」や「スタンプ帳」、\w5「GetWindowTitle」に対応しているから、\w5気になったらダウンロードしてみてね。'
     } else {
         '\u\s[10]\h\s[0]対応しているプラグインだ。\n\n'
         --
@@ -456,7 +456,7 @@ On_Menu_0_plugin_stamp {
 
 On_Menu_0_plugin_GetWindowTitle {
     _flag = Bool.toOnOffStr(Plugin_should_GetWindowTitle)
-    "\u\s[10]\h\s[0]プラグイン「GetWindowTitle」を使って、\w5%(username)の作業をたまにのぞいてもいいか？\w9\n今は、\w5%(_flag)になっている。\w9\w9\u(取得するのは作業中ウィンドウのタイトルだけです。\w9)"
+    "\u\s[10]\h\s[0]プラグイン「GetWindowTitle」を使って、\w5%(username)の作業をたまにのぞいてもいいか？\w9\n今は、\w5%(_flag)になっている。\w9\w9\u(取得するのは作業中ウィンドウのタイトルだけです)"
     --
     '\h\n\n'
     --
