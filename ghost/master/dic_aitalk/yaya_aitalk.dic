@@ -33,6 +33,11 @@ RandomTalkEx : nonoverlap {
 RandomTalkExSub : array {
     _talk_array = IARRAY
 
+    // Plugin GetWIndowTitle対応
+    if (AYATEMPLATE.IsPluginExist('GetWindowTitle') == 1) && (Plugin_should_GetWindowTitle == 1) {
+        _talk_array = (_talk_array, On_Plugin_GetWindowTitle)
+    }
+
     // 日付トーク
     _season = Time_month_toSeason
     if ISFUNC("Talk_season_%(_season)") {

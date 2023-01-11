@@ -144,3 +144,72 @@ ghost/master/stamp.png,/
 On_Plugin_stamp_menu_exec {
     '\![raiseplugin,379E0DA0-131C-11DD-E1AC-90009E101CFE,OnMenuExec]'
 }
+
+// ===================================================================
+// GetWindowTitle
+// ===================================================================
+On_Plugin_GetWindowTitle {
+    '\![raiseplugin,GetWindowTitle,OnGetWindowTitle]'
+}
+
+Plugin_should_GetWindowTitle {
+    if plugin_should_GetWindowTitle == '' {
+        plugin_should_GetWindowTitle = 0
+    }
+
+    plugin_should_GetWindowTitle
+}
+
+Plugin_set_should_GetWindowTitle : void {
+    _flag = TOINT(_argv[0])
+
+    if _flag == 0 {
+        plugin_should_GetWindowTitle = 0
+    }
+    else {
+        plugin_should_GetWindowTitle = 1
+    }
+}
+
+OnRecieveGetWindowTitle {
+    _window_title = SHIORI3FW.EscapeAllTags(reference[0])
+
+    // small category
+    if RE_SEARCH(_window_title, 'クックパッド') == 1 {
+        {
+            // 実際早くおなかを減らす
+            On_Status.fullness.p0.decrease
+            --
+            '\u\s[10]\h\s[8]レシピの検索をしていると腹が減って困る。\w9\w9\uいつも腹ペコでしょ貴方。\w9\w9\h\s[3]\n\nそれよりもっと。\w9\n(…\w5…\w5グ\w2ゥ\w2～\w2)\w9\w9\u\s[11]\n\n本当に！？'
+        }
+        '\u\s[10]\h\s[0]人のレシピを見ると、\w5結構勉強になるよな。\w9\s[6]\n使ったことなかったり、\w5見たこともない食材とか、\w5たまに見かけるし。\w9\w9\uだがしかし？\w9\w9\h\s[3]\n\n買いに行くのは面倒。\w9\w9\u\n\nやはりな。'
+    }
+    elseif (RE_SEARCH(_window_title, 'GitHub') == 1) || (RE_SEARCH(_window_title, 'GitLab') == 1) {
+        '\u\s[10]\h\s[0]ぎっとレポジトリ？\w9姉がよく話してたな。\w9\s[3]\nいや、\w5「叫んでた」な。\w9\w9\uえ、\w5なんて？\w9\w9\h\s[7]\n\n「イシューが！\w9イシューがぁああ！！」\w9\s[0]\nって。\w9何のことだ？\w9\w9\u\n\nま、\w5まあ知らないでもいいことはあるでしょ。\w9\w9\h\n\n？\w9そうか？'
+    }
+    // large category
+    elseif (RE_SEARCH(_window_title, 'wiki') == 1) || (RE_SEARCH(_window_title, 'Wiki') == 1) {
+        '\u\s[10]\h\s[8]Wiki系のサイトって、\w5リンクをたどるのにハマると時間が溶けるよな。\w9\w9\u「ウィキ」、\w5「データベース」、\w5「図書館」、\w9\w9\h\s[6]\n\n「アーカイブ」、\w5「バックアップ」、\w5「ソフトウェア」、\w9\w9\u\n\n「プログラミング言語」、\w5「ページ記述言語」、\w5「マークアップ言語」、\w9\w9\h\s[0]\n\n「軽量マークアップ言語」、\w5そして「ウィキ」…\w5…\w5。\w9\w9\u\s[11]\n\n無限ループって、\w9\w9\h\s[2]\n\n怖くね？'
+        '\u\s[10]\h\s[8]Wiki系のサイトって、\w5リンクをたどるのにハマると時間が溶けるよな。\w9\w9\u「ウィキ」、\w5「ハワイ語」、\w5「パイナップル」、\w9\w9\h\s[6]\n\n「螺旋」、\w5「ばね」、\w5「洗濯ばさみ」、\w9\w9\u\n\n「C47」、\w5「NGC 6934」、\w5「Milky Way」！\w9\w9\h\s[2]\n\n「ウィキ」\w5が「銀河系」\w5に！\w9\w9\u\n\nもう戻ってこれないわね。\w9\w9\h\s[3]\n\n嗚呼、\w5時間が過ぎていく…\w5…\w5。'
+    }
+    elseif (RE_SEARCH(_window_title, 'YouTube') == 1) || (RE_SEARCH(_window_title, '動画') == 1) {
+        '\u\s[10]\h\s[0]料理作ってる動画が好きだな。\w9\w9\uそして、\w5見てると、\w9\w9\h\s[4]\n\nお\w2な\w2か\w2が\w2へ\w2る\w2…\w5…\w5。\w9\w9\u\n\nいつもの。'
+    }
+    elseif (RE_SEARCH(_window_title, 'FANZA') == 1 ) || (RE_SEARCH(_window_title, 'アダルト') == 1) {
+        '\u\s[10]\h\s[9]…\w5…\w5！！\w9\s[-1]\nふぁああああ！！\w9\w9\uあっ、\w5逃げた。'
+        '\u\s[10]\h\s[6]…\w5…\w5。\w9\w9\uどうしたの？\w9\w9\h\s[34]\n\nお、\w5俺はなんにも見てないから！\w9\n見てないから大丈夫！！\w9\w9\u\s[16]\n\nまぁ、\w5はい。'
+    }
+    elseif RE_SEARCH(_window_title, '佐野伊織') == 1 {
+        "\u\s[10]\h\s[0]…\w5…\w5\w9\s[1]\n…\w5…\w5\w9\w9\u何？\w9\w9\h\n\n%(username)と目が合った気がして…\w5…\w5。"
+        --
+        if boot_times > 20 {
+            "\w9\w9\u\n\n今更。\w9\w9\h\s[4]\n\nそういうなって。"
+        }
+        '\w9\w9\u\n\n見つめあっても素直におしゃべりするのよ。\w9\w9\h\s[0]\n\n？\w9あ、\w5ああ。'
+        "\w9\w9\u\s[11]\n\nあ\w2～\w2な\w2た\w2～\w2は\w2だ\w2～\w2ん\w2だ\w2～\w2ん\w2ね\w2～\w2む\w2く\w2～\w2な\w2る\w2～\w9\w9\h\s[7]\n\n%(username)に催眠術やめろ！"
+    }
+    else {
+        // TODO: 対応するものがなかったらTalk_defaultにする
+        parallel Talk_default
+    }
+}

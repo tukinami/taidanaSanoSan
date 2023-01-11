@@ -420,6 +420,10 @@ On_Menu_0_plugin {
     if AYATEMPLATE.IsPluginExist('379E0DA0-131C-11DD-E1AC-90009E101CFE') == 1 {
         _body += FillLine_list_full('スタンプ帳', 'On_Menu_0_plugin_stamp')
     }
+    if AYATEMPLATE.IsPluginExist('GetWindowTitle') == 1 {
+        _flag = Bool.toOnOffStr(Plugin_should_GetWindowTitle)
+        _body += FillLine_list_full("GetWindowTitle（%(_flag)）", 'On_Menu_0_plugin_GetWindowTitle')
+    }
 
     if _body == '' {
         '\u\s[10]\h\s[0]対応しているプラグインはないようだ。\w9\w9\u「十徳ナイフ」や「スタンプ帳」に対応しているから、\w5気になったらダウンロードしてみてね。'
@@ -448,6 +452,45 @@ On_Menu_0_plugin_stamp {
     // call_from_menu = 1
     // --
     On_Plugin_stamp_begin
+}
+
+On_Menu_0_plugin_GetWindowTitle {
+    _flag = Bool.toOnOffStr(Plugin_should_GetWindowTitle)
+    "\u\s[10]\h\s[0]プラグイン「GetWindowTitle」を使って、\w5%(username)の作業をたまにのぞいてもいいか？\w9\n今は、\w5%(_flag)になっている。\w9\w9\u(取得するのは作業中ウィンドウのタイトルだけです。\w9)"
+    --
+    '\h\n\n'
+    --
+    FillLine_list_full('いいよ', 'On_Menu_0_plugin_GetWindowTitle_toOn')
+    --
+    FillLine_list_full('やめとく', 'On_Menu_0_plugin_GetWindowTitle_toOff')
+    --
+    '\h\n'
+    --
+    On_Menu_0_plugin_GetWindowTitle_footer
+}
+
+On_Menu_0_plugin_GetWindowTitle_toOn {
+    Plugin_set_should_GetWindowTitle(1)
+    '\u\s[10]\h\s[5]そうか。\w9じゃあ、\w5たまにのぞかせてもらうよ。\w9\w9'
+    --
+    '\h\n\n'
+    --
+    On_Menu_0_plugin_GetWindowTitle_footer
+}
+
+On_Menu_0_plugin_GetWindowTitle_toOff {
+    Plugin_set_should_GetWindowTitle(0)
+    '\u\s[10]\h\s[0]そうか。\w9なら止めておこう。\w9\w9'
+    --
+    '\h\n\n'
+    --
+    On_Menu_0_plugin_GetWindowTitle_footer
+}
+
+On_Menu_0_plugin_GetWindowTitle_footer {
+    FillLine_list_half('メインメニューヘ','On_Menu_0','プラグインへ','On_Menu_0_plugin')
+    --
+    FillLine_list_full('閉じる','On_Menu_0_close')
 }
 
 // ===================================================================
@@ -521,6 +564,10 @@ BalloonTooltip_On_Menu_0_plugin_SWISSARMY {
 
 BalloonTooltip_On_Menu_0_plugin_stamp {
     'スタンプを押したり管理したり'
+}
+
+BalloonTooltip_On_Menu_0_plugin_GetWindowTitle {
+    '作業中のウィンドウに関連したトークをするようになる'
 }
 
 // ===================================================================
