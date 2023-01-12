@@ -300,8 +300,8 @@ Paging_generate {
     // 目次用スクリプトの用意
     _index = Paging_generate_indexes
     // 返り値の作成
-    _str += '\c\h\b[2]\_q'
-    _str += paging_header + '\n\n[half]'
+    _str += '\c\h\b[2]'
+    _str += paging_header + '\_q\n\n[half]'
     _str += _body + '\n'
     _str += _index + '\n\n[half]'
     _str += paging_footer + '\n\_q'

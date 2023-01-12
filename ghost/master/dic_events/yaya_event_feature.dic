@@ -384,7 +384,7 @@ OnBIFF2Complete {
 }
 
 BIFF_makeList {
-    _header = SHIORI3FW.EscapeDangerousTags(_argv[0])
+    _header = '\_q' + SHIORI3FW.EscapeDangerousTags(_argv[0]) + '\_q'
     _footer = SHIORI3FW.EscapeDangerousTags(_argv[1])
     _body   = SHIORI3FW.EscapeDangerousTags(_argv[2])
 

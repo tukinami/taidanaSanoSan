@@ -146,7 +146,7 @@ OnUpdate.OnMD5CompareFailure {
 }
 
 On_Update_log {
-    _header = On_Update_log_header()
+    _header = '\_q' + On_Update_log_header() + '\_q'
     _footer = On_Update_log_footer()
     _item = On_Update_log_body()
 
