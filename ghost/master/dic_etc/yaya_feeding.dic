@@ -83,6 +83,7 @@ On_Feeding_select {
     // ユーザーの好きなもの
     if EVAL("feeding_user_like_%(_meal)") == 1 {
         if ISFUNC("On_Feeding_select_user_favorite_%(_meal)") {
+             p0_s_fullness -= _cal / 2
             EVAL("On_Feeding_select_user_favorite_%(_meal)(%(_cal))")
         }
     }
@@ -132,21 +133,18 @@ On_Feeding_select_OTHERS : nonoverlap {
 }
 
 On_Feeding_select_user_favorite_ティラミス {
-    _half = TOINT(_argv[0]) / 2
-    "\u\s[10]\h\s[35]ティラミスだ！\w9ありがとう、\w5%(username)。\w9\s[6]\n…\w5…\w5、\w9\s[5]はい、\w5%(username)。\w9半分こしよう。\w9\w9\s[35]\n…\w5…\w5それでは、\w5いただきまーす！\e:eval=p0_s_fullness-=%(_half)"
-    "\u\s[10]\h\s[36]ティラミス！\w9ありがとう、\w5%(username)！\w9\s[6]\n…\w5…\w5\w9\s[5]\nはい、\w5%(username)、\w5半分こしよう。\w9\w9\u上下に？\w9\w9\h\s[4]\n\n難しいだろそれ。\w9\s[35]\n…\w5…\w5それでは、\w5いただきまーす！\e:eval=p0_s_fullness-=%(_half)"
+    "\u\s[10]\h\s[35]ティラミスだ！\w9ありがとう、\w5%(username)。\w9\s[6]\n…\w5…\w5、\w9\s[5]はい、\w5%(username)。\w9半分こしよう。\w9\w9\s[35]\n…\w5…\w5それでは、\w5いただきまーす！"
+    "\u\s[10]\h\s[36]ティラミス！\w9ありがとう、\w5%(username)！\w9\s[6]\n…\w5…\w5\w9\s[5]\nはい、\w5%(username)、\w5半分こしよう。\w9\w9\u上下に？\w9\w9\h\s[4]\n\n難しいだろそれ。\w9\s[35]\n…\w5…\w5それでは、\w5いただきまーす！"
 }
 
 On_Feeding_select_user_favorite_モンブラン {
-    _half = TOINT(_argv[0]) / 2
-    "\u\s[10]\h\s[5]モンブランだ。\w9ありがとう。\w9%(username)。\w9\s[6]\n…\w5…\w5。\w9\s[5]はい。\w9半分こしよう。\w9\n栗、\w5%(username)の分でよかったか？\w9\s[35]\n…\w5…\w5それじゃあ、\w5いただきまーす。\e:eval=p0_s_fullness-=%(_half)"
-    "\u\s[10]\h\s[35]モンブラン、\w5ありがとう、\w5%(username)！\w9\s[6]\n…\w5…\w5\w9\s[5]\nほら、\w5%(username)、\w5半分こしよう。\w9\n%(username)、\w5栗は食べるか？\w9\s[35]\n…\w5…\w5それでは、\w5いただきまーす！\e:eval=p0_s_fullness-=%(_half)"
+    "\u\s[10]\h\s[5]モンブランだ。\w9ありがとう。\w9%(username)。\w9\s[6]\n…\w5…\w5。\w9\s[5]はい。\w9半分こしよう。\w9\n栗、\w5%(username)の分でよかったか？\w9\s[35]\n…\w5…\w5それじゃあ、\w5いただきまーす。"
+    "\u\s[10]\h\s[35]モンブラン、\w5ありがとう、\w5%(username)！\w9\s[6]\n…\w5…\w5\w9\s[5]\nほら、\w5%(username)、\w5半分こしよう。\w9\n%(username)、\w5栗は食べるか？\w9\s[35]\n…\w5…\w5それでは、\w5いただきまーす！"
 }
 
 On_Feeding_select_user_favorite_ホットケーキ {
-    _half = TOINT(_argv[0]) / 2
-    "\u\s[10]\h\s[5]ホットケーキだ。\w9ありがとう。\w9%(username)。\w9\s[6]\n…\w5…\w5、\w9\w9\s[5]ほら、\w5%(username)、\w5半分こしよう。\w9\w9\n何かかけるか？\w9メープルシロップとか、\w5ジャムとか。\w9\s[35]\n…\w5…\w5それじゃあ、\w5い\w2っ\w2ただきまーす！\e:eval=p0_s_fullness-=%(_half)"
-    "\u\s[10]\h\s[5]ホットケーキ、\w5ありがとう、\w5%(username)。\w9\s[6]\n…\w5…\w5\w9\s[5]\n%(username)、\w5半分こしよう。\w9\nメープルシロップあるけど、\w5かけるか？\w9\s[35]\n…\w5…\w5それじゃあ、\w5いただきます！\e:eval=p0_s_fullness-=%(_half)"
+    "\u\s[10]\h\s[5]ホットケーキだ。\w9ありがとう。\w9%(username)。\w9\s[6]\n…\w5…\w5、\w9\w9\s[5]ほら、\w5%(username)、\w5半分こしよう。\w9\w9\n何かかけるか？\w9メープルシロップとか、\w5ジャムとか。\w9\s[35]\n…\w5…\w5それじゃあ、\w5い\w2っ\w2ただきまーす！"
+    "\u\s[10]\h\s[5]ホットケーキ、\w5ありがとう、\w5%(username)。\w9\s[6]\n…\w5…\w5\w9\s[5]\n%(username)、\w5半分こしよう。\w9\nメープルシロップあるけど、\w5かけるか？\w9\s[35]\n…\w5…\w5それじゃあ、\w5いただきます！"
 }
 
 On_Feeding_select_events_1_OTHERS {
