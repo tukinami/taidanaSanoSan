@@ -1,9 +1,11 @@
+charset,Shift_JIS
 name,‘Ó‘Ä‚È²–ì‚³‚ñ
 id,taidanaSanoSan
 type,ghost
 craftman,tukinami seika
 craftmanw,Œ”g ´‰Î
 craftmanurl,https://github.com/tukinami/taidanaSanoSan
+homeurl,https://raw.githubusercontent.com/tukinami/taidanaSanoSan/main/
 
 sakura.name,²–ìˆÉD
 kero.name,‚«‚Ê
