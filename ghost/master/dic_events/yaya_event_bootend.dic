@@ -271,9 +271,15 @@ OnClose_talk : nonoverlap {
 
 OnClose_talk_default : array {
     '\u\s[10]\h\s[5]お疲れ様。\w9\w9\uそれでは、\w5またね。'
+    '\u\s[10]\h\s[5]じゃあな。\w9\w9\uまたね。'
+    '\h\s[0]\u\s[10]ではでは！\w9\w9\h\s[5]またな。'
     '\u\s[11]\h\s[6]\_sえんい～。\_s\w9\n…\w5…\w5\w9\s[3]って、\w5何だ？'
     // おふざけ
     '\h\s[0]\u\s[11]今日のお相手は！\w9\nきぬと！\w9\w9\h\s[5]伊織でした～！\w9\w9\u\s[-1]\n\nではでは！\w9\w9\h\s[-1]\n\nまたね～！！\w9…\w5…\w5\w9\s[9]\nって、\w5何のノリだこれは！？'
+}
+
+OnClose_talk_timeSlot_朝 : array {
+    '\u\s[10]\h\s[0]お疲れ様。\w9\s[6]\n俺はこれから、\w9\s[30]二度寝しようかな～。\w9\w9\uさせません。\w9\w9\h\s[3]\n\nえー。'
 }
 
 OnClose_talk_timeSlot_深夜  : array {
