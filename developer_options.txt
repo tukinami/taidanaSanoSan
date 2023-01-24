@@ -23,6 +23,9 @@ ghost/master/yaya_debug.dic,nonar,noupdate
 shell/master/profile/,nonar,noupdate
 shell/master-s/profile/,nonar,noupdate
 
+shell/master-l/,nonar,noupdate
+
+
 // balloon
 // --------------------------------------------------
 lazy_cats_blue_stone/,noupdate
@@ -34,5 +37,5 @@ lazy_cats_blue_stone/profile/,nonar,noupdate
 .git/,nonar,noupdate
 .github/,nonar,noupdate
 md5buildignore.txt,nonar,noupdate
-.vscode/
-taidanaSanoSan.code-workspace
+.vscode/,nonar,noupdate
+taidanaSanoSan.code-workspace,nonar,noupdate

@@ -26,4 +26,6 @@ XtraStuf.mac/
 
 /lazy_cats_blue_stone/
 
+/shell/master-l/
+
 *.log
