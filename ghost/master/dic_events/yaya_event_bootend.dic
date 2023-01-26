@@ -109,31 +109,35 @@ OnBoot {
 }
 
 OnBoot_talk : nonoverlap {
-    _talk_array = IARRAY
-
     // 日付_first 関数があり、今年はやってなかったら優先
     if (ISFUNC("OnBoot_talk_date_%(month)_%(day)_first") &&  EVAL("datetalk_year_%(month)_%(day)") != year ) {
         EVAL("OnBoot_talk_date_%(month)_%(day)_first")
         return
     }
 
+    _talk_funcs = IARRAY
+
     // 季節
-    if (ISFUNC("OnBoot_talk.season.%(Time_month_toSeason)")) {
-        _talk_array ,= EVAL("OnBoot_talk_season_%(Time_month_toSeason)")
+    if ISFUNC("OnBoot_talk.season_%(Time_month_toSeason)") {
+        _talk_funcs ,= "OnBoot_talk.season_%(Time_month_toSeason)"
     }
     // 時間帯
     _timeslot = Time_hour_toSlot
     if ISFUNC("OnBoot_talk_timeSlot_%(_timeslot)") {
-        _talk_array ,= EVAL("OnBoot_talk_timeSlot_%(_timeslot)")
+        _talk_funcs ,= "OnBoot_talk_timeSlot_%(_timeslot)"
     }
 
     // 通常
-    _talk_array ,= OnBoot_talk_default
+    _talk_funcs ,= 'OnBoot_talk_default'
 
     // 満腹度
-    _talk_array ,= OnBoot_talk_eat
+    _eat_func = OnBoot_talk_eat_func
+    if _eat_func != '' {
+        _talk_funcs ,= _eat_func
+    }
 
-    parallel _talk_array
+    _talk_func = Array_toParallel(_talk_funcs)
+    parallel (EVAL(_talk_func))
 }
 
 // -------------------------------------------------------------------
@@ -154,12 +158,14 @@ OnBoot_talk_season_夏 : array {
     if '朝' _in_ Time_hour_toSlot {
         '\u\s[10]\h\s[30]ふ\w2ぁ\w2～\w2…\w5…\w5。\w9\s[4]\n昨日暑くてあんまり眠れてない…\w5…\w5。\w9\w9\uほら、\w5シャキっとする！\w9\w9\h\s[2]\n\nシャキッ！\w9\w9\u\n\n…\w5…\w5。\w9\w9\h\s[1]\n\n…\w5…\w5何か言えよ。'
     }
+    "\u\s[10]\h\s[4]こ\w2ん\w2に\w2ち\w2は\w2%(username)…\w5…\w5。\w9\w9\u暑さで溶けそう。"
 }
 
 OnBoot_talk_season_冬 : array {
     if '朝' _in_ Time_hour_toSlot {
         '\u\s[10]\h\s[-1]う～ん…\w5…\w5あと5分…\w5…\w5。\w9\w9\u\s[16]はいはい。\w9出てくる。\w9\w9\h\s[4]\n\nおふとん…\w5…\w5おふとん…\w5…\w5。\w9\w9\u\s[10]\n\n寒くて出てきたくないのは分かるけどね。'
     }
+    "\u\s[10]\h\s[31]こ\w2ん\w2に\w2ち\w2は\w2%(username)…\w5…\w5。\w9\w9\u眠そう。\w9\w9\h\s[4]\n\n寒\w2い\w2と\w2眠\w2い\w2…\w5…\w5。\w9\w9\u\n\n季節問わずでしょうに。"
 }
 
 OnBoot_talk_timeSlot_早朝 : array {
@@ -191,28 +197,35 @@ OnBoot_talk_timeSlot_深夜 : array {
     "\u\s[10]\h\s[31]お\w2や\w2す\w2み\w2%(username)…\w5…\w5。\w9\w9\uこら、\w5寝ようとしない。"
 }
 
-OnBoot_talk_eat : array {
-    _hunger = On_Status.fullness.p0.judge
+OnBoot_talk_eat_func {
+    _hunger_flag = On_Status.fullness.p0.judge
 
-    case _hunger {
+    _hunger = 'normal'
+    case _hunger_flag {
         when 2 {
-            OnBoot_talk_eat_fullover
+            _hunger = 'fullover'
         }
         when 1 {
-            OnBoot_talk_eat_full
+            _hunger = 'full'
         }
         when 0 {
-            OnBoot_talk_eat_normal
+            _hunger = 'normal'
         }
         when -1 {
-            OnBoot_talk_eat_hungerfew
+            _hunger = 'hungerfew'
         }
         when -2 {
-            OnBoot_talk_eat_hunger
+            _hunger = 'hunger'
         }
         others {
-            OnBoot_talk_eat_hungerover
+            _hunger = 'hungerover'
         }
+    }
+
+    if ISFUNC("OnBoot_talk_eat_%(_hunger)") {
+        "OnBoot_talk_eat_%(_hunger)"
+    } else {
+        ''
     }
 }
 
@@ -223,24 +236,25 @@ OnBoot_talk_eat_full : array {
     '\u\s[10]\h\s[31]お\w2な\w2か\w2い\w2っ\w2ぱ\w2い\w2で\w2ね\w2む\w2い\w2…\w5…\w5。\w9\w9\uはいはい、\w5いくわよ。'
 }
 
-OnBoot_talk_eat_normal : array {
-}
+// OnBoot_talk_eat_normal : array {
+// }
 
-OnBoot_talk_eat_hungerfew  : array {
-}
+// OnBoot_talk_eat_hungerfew  : array {
+// }
 
-OnBoot_talk_eat_hunger : array {
-
-}
+// OnBoot_talk_eat_hunger : array {
+// }
 
 OnBoot_talk_eat_hungerover : array {
     _meal = Meal_array('Word_meal_light')
+    p0_s_fullness += _meal[1]
 
-    "\u\s[10]\h\s[6]（モグモグ…\w5…\w5）\w9\n…\w5…\w5\w9\s[9]！！\w9\w9\u何してるの？\w9\w9\h\s[1]\n\n起動前に軽く腹ごしらえしておこうと%(_meal[0])を…\w5…\w5。\w9\w9\u\n\nはい、\w5食べ終わったなら、\w5始めるわよ。\w9\w9\h\s[3]\n\nはい…\w5…\w5。\e:eval=p0_s_fullness+=%(_meal[1])"
+    "\u\s[10]\h\s[6]（モグモグ…\w5…\w5）\w9\n…\w5…\w5\w9\s[9]！！\w9\w9\u何してるの？\w9\w9\h\s[1]\n\n起動前に軽く腹ごしらえしておこうと%(_meal[0])を…\w5…\w5。\w9\w9\u\n\nはい、\w5食べ終わったなら、\w5始めるわよ。\w9\w9\h\s[3]\n\nはい…\w5…\w5。"
 }
 
 OnBoot_talk_date_1_1_first {
-    "\u\s[16]\h\s[6]あけまして、\w9\w9\u\s[11]\h\s[5]\n\_sおめでとうございます！\_s\w9\w9\w9\s[6]\n\n本年も、\w5よろしくお願いいたします。\w9\w9\u\s[10]\n\n%(username)にとって、\w5今年が良い年でありますように。\e:eval=datetalk_year_1_1=%(year)"
+    datetalk_year_1_1 = year
+    "\u\s[16]\h\s[6]あけまして、\w9\w9\u\s[11]\h\s[5]\n\_sおめでとうございます！\_s\w9\w9\w9\s[6]\n\n本年も、\w5よろしくお願いいたします。\w9\w9\u\s[10]\n\n%(username)にとって、\w5今年が良い年でありますように。"
 }
 
 // ===================================================================
