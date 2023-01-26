@@ -243,6 +243,7 @@ Talk_eat_hunger : array {
     _maindish  = Meal_array('maindish')
     _meal      = _maindish[0]
     _cal       = _maindish[1]
+    p0_s_fullness += _cal
     --
     '\u\s[10]\h\s[4]おなか減った…\w5…\w5。\w9\w9'
     --
@@ -252,7 +253,7 @@ Talk_eat_hunger : array {
     --
     "\h\s[6]\n\nんー、\w5空腹の時の%(_meal)は格別だな。\w9\w9"
     --
-    "\u\s[11]\n\nもう食べてるし。\e:eval=p0_s_fullness+=%(_cal)"
+    "\u\s[11]\n\nもう食べてるし。"
 }
 
 Talk_eat_hungerover : array {
@@ -288,6 +289,8 @@ Talk_eat_hungerover : array {
         }
     }
 
+    p0_s_fullness += _cal
+
     {
         "\u\s[10]\h\s[4]おなか減って力が出ない…\w5…\w5。\w9\w9"
         --
@@ -308,7 +311,7 @@ Talk_eat_hungerover : array {
         "\h\s[6]\n\n…\w5…\w5ああ。\w9\n"
         --
 
-        "\h\s[6]いただきます。\e:eval=p0_s_fullness+=%(_cal)"
+        "\h\s[6]いただきます。"
     }
 }
 // ===================================================================

@@ -1,3 +1,5 @@
+#define TALK_EAT_RATIO 1
+
 RandomTalk
 {
     Surface_reset
@@ -12,22 +14,27 @@ RandomTalk
 //高速化対策
 //------------------------------------------------------------------------------
 RandomTalkEx : nonoverlap {
-    _talk_array = IARRAY
-
-    _hunger = On_Status.fullness.p0.judge
+    _hunger_flag = On_Status.fullness.p0.judge
 
     // 空腹が酷い場合は有無を言わさず食事
-    if _hunger < -2 {
-        _talk_array ,= Talk_eat
-        parallel _talk_array
+    if _hunger_flag < -2 {
+        parallel Talk_eat
         return
     }
 
     _talk_array = RandomTalkExSub
-    // 食事トーク
-    _talk_array ,= Talk_eat
 
-    parallel _talk_array
+    _talk_len = ARRAYSIZE(_talk_array)
+    _talk_flag = RAND(_talk_len + TALK_EAT_RATIO)
+
+    case _talk_flag {
+        when 0-TALK_EAT_RATIO {
+            parallel Talk_eat
+        }
+        others {
+            parallel _talk_array
+        }
+    }
 }
 
 RandomTalkExSub : array {
