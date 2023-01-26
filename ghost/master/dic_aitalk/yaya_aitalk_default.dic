@@ -239,7 +239,7 @@ Talk_eat_hungerfew : array {
     '\u\s[10]\h\s[6]腹が減っては戦はできぬと申します。\w9\w9\u…\w5…\w5。\w9\w9\h\s[0]\n\n…\w5…\w5。\w9\w9\u\n\n'
     --
     if timesignal > 0 && (hour == 7 || hour == 11 || hour == 18) {
-        '\s[16]\n\nもう少しで食事時なんだから、\w5少し待ったら？\w9\w9\h\s[4]\n\nえー。'
+        '\s[16]もう少しで食事時なんだから、\w5少し待ったら？\w9\w9\h\s[4]\n\nえー。'
     }
     else {
         p0_s_fullness += _cal
