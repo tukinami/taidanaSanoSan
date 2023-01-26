@@ -176,11 +176,20 @@ OnRecieveGetWindowTitle {
 
     // small category
     if RE_SEARCH(_window_title, 'クックパッド') == 1 {
-        {
-            // 実際早くおなかを減らす
-            '\u\s[10]\h\s[8]レシピの検索をしていると腹が減って困る。\w9\w9\uいつも腹ペコでしょ貴方。\w9\w9\h\s[3]\n\nそれよりもっと。\w9\n(…\w5…\w5グ\w2ゥ\w2～\w2)\w9\w9\u\s[11]\n\n本当に！？\e:eval=On_Status.fullness.p0.decrease'
+        _flag_max = 2
+        _flag = RAND(_flag_max)
+
+        case _flag {
+            when 0 {
+                // 実際早くおなかを減らす
+                On_Status.fullness.p0.decrease
+                --
+                '\u\s[10]\h\s[8]レシピの検索をしていると腹が減って困る。\w9\w9\uいつも腹ペコでしょ貴方。\w9\w9\h\s[3]\n\nそれよりもっと。\w9\n(…\w5…\w5グ\w2ゥ\w2～\w2)\w9\w9\u\s[11]\n\n本当に！？'
+            }
+            others {
+                '\u\s[10]\h\s[0]人のレシピを見ると、\w5結構勉強になるよな。\w9\s[6]\n使ったことなかったり、\w5見たこともない食材とか、\w5たまに見かけるし。\w9\w9\uだがしかし？\w9\w9\h\s[3]\n\n買いに行くのは面倒。\w9\w9\u\n\nやはりな。'
+            }
         }
-        '\u\s[10]\h\s[0]人のレシピを見ると、\w5結構勉強になるよな。\w9\s[6]\n使ったことなかったり、\w5見たこともない食材とか、\w5たまに見かけるし。\w9\w9\uだがしかし？\w9\w9\h\s[3]\n\n買いに行くのは面倒。\w9\w9\u\n\nやはりな。'
     }
     elseif (RE_SEARCH(_window_title, 'GitHub') == 1) || (RE_SEARCH(_window_title, 'GitLab') == 1) {
         '\u\s[10]\h\s[0]ぎっとレポジトリ？\w9姉がよく話してたな。\w9\s[3]\nいや、\w5「叫んでた」な。\w9\w9\uえ、\w5なんて？\w9\w9\h\s[7]\n\n「イシューが！\w9イシューがぁああ！！」\w9\s[0]\nって。\w9何のことだ？\w9\w9\u\n\nま、\w5まあ知らないでもいいことはあるでしょ。\w9\w9\h\n\n？\w9そうか？'
