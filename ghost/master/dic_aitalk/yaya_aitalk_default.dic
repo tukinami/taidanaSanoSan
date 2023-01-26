@@ -166,28 +166,37 @@ Talk_timeSlot_早朝 {
 // 食事トーク
 // ===================================================================
 Talk_eat : array {
-    _hunger = On_Status.fullness.p0.judge
+    _hunger_flag = On_Status.fullness.p0.judge
 
-    case _hunger {
+    _talk_funcs = IARRAY
+    case _hunger_flag {
         when 2 {
-            Talk_eat_fullover
+            _talk_funcs ,= 'Talk_eat_fullover'
         }
         when 1 {
-            Talk_eat_full
+            _talk_funcs ,= 'Talk_eat_full'
         }
         when 0 {
-            Talk_eat_normal
+            _talk_funcs ,= 'Talk_eat_normal'
         }
         when -1 {
-            Talk_eat_hungerfew
+            _talk_funcs ,= 'Talk_eat_hungerfew'
         }
         when -2 {
-            Talk_eat_hunger
+            _talk_funcs ,= 'Talk_eat_hunger'
         }
         others {
-            Talk_eat_hungerover
+            _talk_funcs ,= 'Talk_eat_hungerover'
         }
     }
+
+    _season = Time_month_toSeason
+    if ISFUNC("Talk_eat_season_%(_season)") {
+        _talk_funcs ,= "Talk_eat_season_%(_season)"
+    }
+
+    _talk_func = Array_toParallel(_talk_funcs)
+    EVAL(_talk_func)
 }
 
 Talk_eat_fullover : array {
@@ -314,6 +323,21 @@ Talk_eat_hungerover : array {
         "\h\s[6]いただきます。"
     }
 }
+
+Talk_eat_season_秋 : array {
+    '\u\s[10]\h\s[0]食材をチーズと一緒にホイル焼きするとうまいが、\w9\s[5]\nこの時期は特にきのこがうまい！\w9\w9'
+    --
+    '\u\s[10]好みの茸はどれ？\w9\w9\h\s[5]\n\nチーズと合わせるならしめじかな。\w9\n'
+    --
+    if On_Status.fullness.p0.judge < 0 {
+        p0_s_fullness += 111
+        '\h\s[4]…\w5…\w5あー、\w5お腹減ってきた！\w9\s[-1]\nちょっと行ってきます！\w9\w9\u\s[11]\n\nちょ、\w5ちょっと！\w9\s[10]\n…\w5…\w5食べ物のことだけ早いわね。'
+    }
+    else {
+        '\h\s[5]えのきも捨て難いけどな。\w9\w9\u\s[10]\n\n本当、\w5食べ物のことになるといきいきし始めるわね。'
+    }
+}
+
 // ===================================================================
 // Talk_chain
 // ===================================================================
