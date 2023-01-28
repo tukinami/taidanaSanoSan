@@ -206,11 +206,13 @@ surface10
 element0,base,surface0010.png,0,0
 
 collision0,185,40,270,83,Head
-collision1,184,122,252,185,Chest
-collision2,195,254,248,285,Hand
-collision3,75,28,145,151,Tail
-collision4,5,82,75,163,Tail
-collision5,104,222,124,248,TailRoot
+collision1,198,109,270,126,Chin
+collision2,227,128,256,154,Stone
+collision3,186,159,254,192,Chest
+collision4,195,254,248,285,Hand
+collision5,75,28,145,151,Tail
+collision6,5,82,75,163,Tail
+collision7,104,222,124,248,TailRoot
 
 animation0.interval,rarely
 animation0.pattern0,overlay,199,80,0,0
@@ -227,11 +229,13 @@ element0,base,surface0010.png,0,0
 element1,overlay,p1-eye-fullopen.png,0,0
 
 collision0,185,40,270,83,Head
-collision1,184,122,252,185,Chest
-collision2,195,254,248,285,Hand
-collision3,75,28,145,151,Tail
-collision4,5,82,75,163,Tail
-collision5,104,222,124,248,TailRoot
+collision1,198,109,270,126,Chin
+collision2,227,128,256,154,Stone
+collision3,186,159,254,192,Chest
+collision4,195,254,248,285,Hand
+collision5,75,28,145,151,Tail
+collision6,5,82,75,163,Tail
+collision7,104,222,124,248,TailRoot
 }
 
 // –Ú•Â‚¶
@@ -241,11 +245,13 @@ element0,base,surface0010.png,0,0
 element1,overlay,p1-eye-close.png,0,0
 
 collision0,185,40,270,83,Head
-collision1,184,122,252,185,Chest
-collision2,195,254,248,285,Hand
-collision3,75,28,145,151,Tail
-collision4,5,82,75,163,Tail
-collision5,104,222,124,248,TailRoot
+collision1,198,109,270,126,Chin
+collision2,227,128,256,154,Stone
+collision3,186,159,254,192,Chest
+collision4,195,254,248,285,Hand
+collision5,75,28,145,151,Tail
+collision6,5,82,75,163,Tail
+collision7,104,222,124,248,TailRoot
 }
 // 10-19 kero‘¤ 19 kero‰Ì
 
