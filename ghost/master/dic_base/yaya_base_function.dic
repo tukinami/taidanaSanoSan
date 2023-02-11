@@ -445,7 +445,7 @@ On_Paging_index_on_choice_selected {
     paging_page_pointer = TOINT(reference[0])
     --
     // バルーン再利用
-    "\u@@_CB\s@@_CB"
+    "@@_CB\u\c\h"
     --
     // Paging_generateを呼ぶ。
     Paging_generate
