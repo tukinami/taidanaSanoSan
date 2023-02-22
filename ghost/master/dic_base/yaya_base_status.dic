@@ -132,7 +132,7 @@ On_Status.set.aigraph.p0_s_fullness : array {
 }
 
 On_Status.set.aigraph.talk : array {
-    _talk_array = RandomTalkExSub
+    _talk_array = RandomTalk_NormalSize
     _len = 0
 
     _len = ARRAYSIZE(_talk_array)

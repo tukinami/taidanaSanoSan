@@ -22,22 +22,28 @@ RandomTalkEx : nonoverlap {
         return
     }
 
-    _talk_array = RandomTalkExSub
-
-    _talk_len = ARRAYSIZE(_talk_array)
-    _talk_flag = RAND(_talk_len + TALK_EAT_RATIO)
+    _talk_normal_size = RandomTalk_NormalSize
+    _talk_flag = RAND(_talk_normal_size + TALK_EAT_RATIO)
 
     case _talk_flag {
         when 0-TALK_EAT_RATIO {
             parallel Talk_eat
         }
         others {
-            parallel _talk_array
+            RandomTalk_Normal
         }
     }
 }
 
-RandomTalkExSub : array {
+RandomTalk_Normal : nonoverlap {
+    parallel RandomTalk_NormalBody
+}
+
+RandomTalk_NormalSize {
+    ARRAYSIZE(RandomTalk_NormalBody)
+}
+
+RandomTalk_NormalBody : array {
     _talk_array = IARRAY
 
     // Plugin GetWIndowTitle対応
