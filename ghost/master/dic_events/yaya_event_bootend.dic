@@ -115,6 +115,10 @@ OnBoot_talk : nonoverlap {
         return
     }
 
+    OnBoot_talkEx
+}
+
+OnBoot_talkEx : nonoverlap {
     _talk_funcs = IARRAY
 
     // 季節
