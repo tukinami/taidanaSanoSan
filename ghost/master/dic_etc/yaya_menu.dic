@@ -617,6 +617,11 @@ BalloonTooltip_On_Menu_0_func_timeAdjust
     'パソコンの時刻を合わせる'
 }
 
+BalloonTooltip_On_Menu_0_func_emptyRecycleBin
+{
+    'ごみ箱を空にする'
+}
+
 // plugin ______________________________
 BalloonTooltip_On_Menu_0_plugin
 {
