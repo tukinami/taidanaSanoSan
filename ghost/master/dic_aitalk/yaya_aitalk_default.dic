@@ -1,4 +1,5 @@
-Talk_default : array {
+Talk_default : array
+{
     // 通常
     // ===============================================================
     '\u\s[10]\h\s[3]…\w5…\w5おかしい。\w9\w9\u何がよ。\w9\w9\h\s[4]\n\nおまえのことだよ。\w9きぬ。\w9\w9\u\n\nずいぶん今更ね。\w9\w9\h\s[7]\n\nどう考えても、\w5家に堂々と野良猫が上がってきてんのはおかしい！！\w9\w9\u\s[11]\n\nそこ？\n'
@@ -109,24 +110,27 @@ Talk_default : array {
     '\u\s[10]\h\s[0]スマホに位置情報ゲームを入れてみた。\w9\w9\uやっと運動する気に…\w5…\w5！\w9\w9\h\s[6]\n\n入れただけで終わった。\w9\w9\u\s[16]\n\nする気になっただけかー。'
     '\u\s[10]\h\s[3]スマホのゲームが長続きしない。\w9\n毎日のログインボーナスが面倒になって途中でリタイアする。\w9\w9\uまぁ、\w5気持ちは分からなくはないけど。\w9\w9\h\s[0]\n\nログインボーナス、\w51週間くらいとっておいてくれても…\w5…\w5。\w9\w9\u\n\nログインとは？'
     '\h\s[0]\u\s[10]いい？\w9伊織。\w9\n人間は時に面倒だからこそ熱中してしまうことがあるのよ。\w9\w9\h例えば？\w9\w9\u\n\n蜜柑の薄皮についてる繊維を全て取り除きたくならない？\w9\w9\h\n\nならないですね。\w9栄養あるし。\w9\w9\u\s[11]\n\nやり始めたら止まらないわよ！？\w9\w9\h\s[3]\n\nやらないってば。'
+    '\u\s[10]\h\s[0]ベイクドモチョチョっておいしいよな。\w9\w9\uべ？\w9\w5ああ、\w9今が\w9\h\s[7]\n\nストップ！\w9\w9\u\n\n！\w9何よ。\w9急に。\w9\w9\h\s[6]\n\n論争がある名前なので、\w5名を伏せるために「ベイクドモチョチョ」と呼ぶのです。\w9\w9\u\n\nふ\w5～\w5ん\w5…\w9…\w9\w9\s[11]\n…\w9…\w9大ば\w9\h\s[2]\n\nおい！！\w9\w9\u\n\n太鼓\w9\h\s[7]\n\nこら！\w9\w9\u\n\n回転\w9\h\s[9]\n\nやめろって！！\w9\w9\u\s[10]\n\n…\w5…\w5人間って、\w5おもしろ。\w9\w9\h\s[8]\n\nやめて下さいってば。'
+    '\h\s[0]\u\s[10]貴方も何か骨を惜しまずやってみればいいのに。\w9\w9\hいや、\w5骨は惜しいだろ？\w9折ったら大変だ。\w9\w9\u\s[16]\n\n(分かっててぼけてるのか否か判断がつかない…\w5…\w5)'
 }
 
 // ===============================================================
 // ワード使用
 // ===============================================================
-Talk_usingWord : nonoverlap {
+Talk_usingWord : nonoverlap
+{
     // ワード + 妖気
     {
         '\h\s[0]\u\s[10]私の妖気占いによると、\w5%(ms)は今日最高の運勢！\w9\w9\h\s[4]妖気？\w9占い？\w9\w9'
         --
         '\u\s[11]\n\n特に%(mz)を持って%(mp)に行くと%(mt)の威力が120倍に…\w5…\w5！\w9\w9'
         {
-             '\u\s[11]\n\nただし%(mc)に勤めている場合は要注意で、\w5'
-             --
-             '%(mz)を%(mh)で購入する'
-             '%(mt)の練習をする'
-             --
-             'とよいでしょう！\w9\w9'
+            '\u\s[11]\n\nただし%(mc)に勤めている場合は要注意で、\w5'
+            --
+            '%(mz)を%(mh)で購入する'
+            '%(mt)の練習をする'
+            --
+            'とよいでしょう！\w9\w9'
         }
         --
         '\h\s[2]\n\n適当言ってないかお前！'
@@ -185,43 +189,45 @@ Talk_usingWord : nonoverlap {
     // 通常
     {
         '\u\s[10]\h\s[0]白飯って、\w5基本何でも合うよな。\w9\w9\u%meとも？\w9\w9\h\s[3]\n\nまぁ、\w5いけなくはないんじゃないか？\w9\w9\u\s[11]\n\n%mzと%dmsとも？\w9\w9'
-    --
+        --
         '\h\s[4]\n\n食べものじゃない。'
         '\h\s[4]\n\n色の話か何かか？'
     }
     '\u\s[10]\h\s[0]「どこいつトーク」ってデスクトップマスコットっぽいんじゃないかな。\w9\w9\uやってみればいいじゃない。\w9\w9\h\s[6]\n\nそれじゃあ…\w5…\w5\w9\s[0]\n俺は%mpで%meが食べたいです。\w9\w9\u\n\nほう。\w9\w9\h\n\nあと、\w5%meと%me、\w5%meに%meも…\w5…\w5。\w9\w9\u\n\n「なに食べトーク」じゃないの。'
 }
 
-Talk_timeSlot_早朝 {
+Talk_timeSlot_早朝
+{
     '\u\s[10]\h\s[6]…\w9…\w9…\w9…\w9\s[30]…\w9…\w9…\w9…\w9\s[31]…\w9…\w9…\w9…\w9\w9\s[6]\n…\w5…\w5Z\w5z\w5z\w5…\w5…\w5。\w9\w9\u\s[11]寝るなー！！'
 }
 
 // ===================================================================
 // 食事トーク
 // ===================================================================
-Talk_eat : array {
+Talk_eat : array
+{
     _hunger_flag = On_Status.fullness.p0.judge
 
     _talk_funcs = IARRAY
     case _hunger_flag {
-        when 2 {
-            _talk_funcs ,= 'Talk_eat_fullover'
-        }
-        when 1 {
-            _talk_funcs ,= 'Talk_eat_full'
-        }
-        when 0 {
-            _talk_funcs ,= 'Talk_eat_normal'
-        }
-        when -1 {
-            _talk_funcs ,= 'Talk_eat_hungerfew'
-        }
-        when -2 {
-            _talk_funcs ,= 'Talk_eat_hunger'
-        }
-        others {
-            _talk_funcs ,= 'Talk_eat_hungerover'
-        }
+    when 2 {
+        _talk_funcs ,= 'Talk_eat_fullover'
+    }
+    when 1 {
+        _talk_funcs ,= 'Talk_eat_full'
+    }
+    when 0 {
+        _talk_funcs ,= 'Talk_eat_normal'
+    }
+    when -1 {
+        _talk_funcs ,= 'Talk_eat_hungerfew'
+    }
+    when -2 {
+        _talk_funcs ,= 'Talk_eat_hunger'
+    }
+    others {
+        _talk_funcs ,= 'Talk_eat_hungerover'
+    }
     }
 
     _season = Time_month_toSeason
@@ -233,19 +239,22 @@ Talk_eat : array {
     EVAL(_talk_func)
 }
 
-Talk_eat_fullover : array {
+Talk_eat_fullover : array
+{
     '\u\s[10]\h\s[4]ちょっと食べすぎたな。\w9\w9\u少し普通の食事を減らそうか？\w9\w9\h\s[3]\n\nそれは嫌だ。\w9\w9\u\s[11]\n\n何故。'
     '\u\s[10]\h\s[34]う～、\w5ちょっと苦しい…\w5…\w5。\w9\w9\u食べすぎよ。\w9\w9\h\n\n…\w5…\w5\w9\s[0]人はこれを「幸福の苦しみ」と呼び\w9\w9\u\n\nません。'
     '\u\s[10]\h\s[34]う～ん、\w5食べ過ぎた…\w5…\w5。\w9\s[6]\nこういうときは、\w9\s[7]\n寝\w2る\w2に\w2限\w2り\w2ま\w2す\w2ね\w2！\w9\w9\u無理しないことは重要だけど、\w9\s[16]\n…\w5…\w5釈然としない！'
 }
 
-Talk_eat_full : array {
+Talk_eat_full : array
+{
     '\u\s[10]\h\s[6]おなかがいっぱいで、\w5し\w2あ\w2わ\w2せ\w2…\w5…\w5。\w9\w9\u…\w5…\w5。\w9\w9\h\s[4]\n\n…\w5…\w5し\w2あ\w2わ\w5せ\w5で\w5眠\w5い\w5…\w5…\w5。\w9\w9\u\n\nだと思った。'
     '\u\s[10]\h\s[5]今日はたくさん美味しいものを食べました。\w9まる。\w9\w9\u…\w5…\w5。\w9\w9\h\s[6]\n\nよし、\w5これから、\w9\s[7]\n寝ていいですか！！\w9\w9\u\n\n駄目です。'
     '\u\s[10]\h\s[36]ふー、\w5食べた食べた。\w9\w9\uなら、\w5おやつは要らないわね。\w9\w9\h\s[2]\n\n！！\w9\n\w9\s[1]…\w5…\w5\w9\s[4]…\w5…\w5\w9\s[3]…\w5…\w5\w9\s[34]…\w5…\w5！！\w9\w9\u\n\n一人百面相やめい。'
 }
 
-Talk_eat_normal : array {
+Talk_eat_normal : array
+{
     {
         '\u\s[10]\h\s[5]'
         --
@@ -262,7 +271,8 @@ Talk_eat_normal : array {
     '\u\s[10]\h\s[6]腹がちょうどいい満腹感だ。\w9\w9\uそう、\w5じゃあおやつは要らないわね。\w9\w9\h\s[2]\n\n！！\w9\s[7]いる！\w9おやつはいる！！\w9\s[34]\nおやつは別腹ー！\w9\w9\u\n\n分かった分かった。'
 }
 
-Talk_eat_hungerfew : array {
+Talk_eat_hungerfew : array
+{
     _eat = Meal_array('light')
     _meal = _eat[0]
     _cal = TOINT(_eat[1])
@@ -282,10 +292,11 @@ Talk_eat_hungerfew : array {
     }
 }
 
-Talk_eat_hunger : array {
-    _maindish  = Meal_array('maindish')
-    _meal      = _maindish[0]
-    _cal       = _maindish[1]
+Talk_eat_hunger : array
+{
+    _maindish = Meal_array('maindish')
+    _meal = _maindish[0]
+    _cal = _maindish[1]
     p0_s_fullness += _cal
     --
     '\u\s[10]\h\s[4]おなか減った…\w5…\w5。\w9\w9'
@@ -299,18 +310,19 @@ Talk_eat_hunger : array {
     "\u\s[11]\n\nもう食べてるし。"
 }
 
-Talk_eat_hungerover : array {
-    _func  = GETFUNCLIST('Word_meal_')
-    _meal  = ''
-    _m_dm  = ('と','、','に、','と','、')
-    _cal   = 0
-    _flg   = 0
+Talk_eat_hungerover : array
+{
+    _func = GETFUNCLIST('Word_meal_')
+    _meal = ''
+    _m_dm = ('と', '、', 'に、', 'と', '、')
+    _cal = 0
+    _flg = 0
     _genre = ''
-    _g_li  = (IARRAY)
-    _g_dm  = '、\w5'
+    _g_li = (IARRAY)
+    _g_dm = '、\w5'
 
     // 食事リストの作成
-    for _i = 0; _i < ARRAYSIZE(_func); _i ++ {
+    for _i = 0; _i < ARRAYSIZE(_func); _i++ {
         // メインディッシュ以外
         if STRSTR(_func[_i], 'maindish', 0) == -1 {
             _t = Meal_array(_func[_i])
@@ -323,7 +335,7 @@ Talk_eat_hungerover : array {
 
     // genreが重複しているか判別して整形
     _genre = _g_li[0]
-    for _i = 1; _i < ARRAYSIZE(_g_li); _i ++ {
+    for _i = 1; _i < ARRAYSIZE(_g_li); _i++ {
         // 異なっている場合
         if _genre != _g_li[_i] {
             _genre = JOIN(_g_li, _g_dm)
@@ -358,7 +370,8 @@ Talk_eat_hungerover : array {
     }
 }
 
-Talk_eat_season_秋 : array {
+Talk_eat_season_秋 : array
+{
     '\u\s[10]\h\s[0]食材をチーズと一緒にホイル焼きするとうまいが、\w9\s[5]\nこの時期は特にきのこがうまい！\w9\w9'
     --
     '\u\s[10]好みの茸はどれ？\w9\w9\h\s[5]\n\nチーズと合わせるならしめじかな。\w9\n'
@@ -375,16 +388,17 @@ Talk_eat_season_秋 : array {
 // ===================================================================
 // Talk_chain
 // ===================================================================
-Talk_chain : array {
+Talk_chain : array
+{
     '\h\s[0]\u\s[11]ここでクイズです！\w9\s[10]\n「SSP」とは、\w5一体何の略称でしょう？\w9\w9\h\s[6]姉が何か言ってたな。\w9\s[3]確か…\w5…\w5。\w9\s[0]\n「Super Shark Panching」かな。\w9\w9\u\n\n何だそれは。\e:chain=Talk_chain_ukagakaquiz'
     '\u\s[10]\h\s[3]英語はちょっと苦手かもしれない。\w9\w9\uふーん、\w5ちょっとやってみましょうか。\w9\s[11]\nExcuse me. Could I have a minute of your time?\w9\w9\h\s[2]\n\nえ、\w5ぱ、\w5ぱーどん、\w5みー？\w9\w9\u\s[10]\n\n(Pardon me？\w9は使えるのか)\w9\nCould\w5 I\w5 have\w5 a\w5 minute\w5 of\w5 your\w5 time?\w9\w9\h\n\n…\w5…\w5。\w9\w9\u\n\n…\w5…\w5。\w9\w9\h\s[34]\n\nの、\w5のー！\w9\w9\u\s[11]\n\nNo？！\w9\w9\h\s[-1]\n\nさんきゅーべりまっち！\w9しーゆー！\w9\w9\u\n\nちょ、\w5ちょっと！\w9何処行くの！？\e:chain=Talk_chain_englishStudy'
 }
 
 Talk_chain_ukagakaquiz
 {{CHAIN
-  '\h\s[0]\u\s[10]「CROW」といえば？\w9\w9\h\s[7]汝のあるべき姿に戻れ！！\w9\nC\u\s[11]\n\nちょっと待った！\w9\w9\s[10]…\w5…\w5それを何処で覚えた！？\w9\w9\h\s[3]\n\n姉にいろいろやらされてな。\w9\w9\u\s[11]\n\n何を！？'
-  '\h\s[0]\u\s[10]じゃ、\w5じゃあ、\w5「ninix」といえば？\w9\w9\h\s[6]それはたまに見るな。\w9\s[0]\n見れなくなったサイトの表示に、\w5たま～にかいてあるやつ。\w9\w9\u\s[11]\n\nえ？\w9 …\w5…\w5私知らないわ、\w5それ。\w9\w9\h\s[3]\n\nあれ、\w5何て読むんだろうな…\w5…\w5？\w9\n「んぎんっくす」？\w9\w9\u\s[16]\n\n…\w5…\w5知らないけど、\w5知っててとぼけてるんかいな…\w5…\w5。\e:chain=end'
- }}CHAIN
+    '\h\s[0]\u\s[10]「CROW」といえば？\w9\w9\h\s[7]汝のあるべき姿に戻れ！！\w9\nC\u\s[11]\n\nちょっと待った！\w9\w9\s[10]…\w5…\w5それを何処で覚えた！？\w9\w9\h\s[3]\n\n姉にいろいろやらされてな。\w9\w9\u\s[11]\n\n何を！？'
+    '\h\s[0]\u\s[10]じゃ、\w5じゃあ、\w5「ninix」といえば？\w9\w9\h\s[6]それはたまに見るな。\w9\s[0]\n見れなくなったサイトの表示に、\w5たま～にかいてあるやつ。\w9\w9\u\s[11]\n\nえ？\w9 …\w5…\w5私知らないわ、\w5それ。\w9\w9\h\s[3]\n\nあれ、\w5何て読むんだろうな…\w5…\w5？\w9\n「んぎんっくす」？\w9\w9\u\s[16]\n\n…\w5…\w5知らないけど、\w5知っててとぼけてるんかいな…\w5…\w5。\e:chain=end'
+}}CHAIN
 
 Talk_chain_englishStudy
 {{CHAIN
