@@ -1,38 +1,40 @@
 // ===================================================================
 // On_Menu_0 (self)
 // ===================================================================
-On_Menu_0 {
+On_Menu_0
+{
     "\_q\u\s[10]\h\s[0]%(year)年%(month)月%(day)日、"
     --
     "%(Time_week_toString)曜日、%(hour)時%(minute)分だ。\n\n\_q"
     --
-    FillLine_list_half('何か喋って','OnAITalk', 'さっき何て言った？','On_Menu_0_lastTalk')
+    FillLine_list_half('何か喋って', 'OnAITalk', 'さっき何て言った？', 'On_Menu_0_lastTalk')
     --
     '\n'
     --
-    FillLine_list_half('設定を変更して','On_Menu_0_setting', '更新履歴を見せて', 'On_Update_log')
+    FillLine_list_half('設定を変更して', 'On_Menu_0_setting', '更新履歴を見せて', 'On_Update_log')
     --
-    FillLine_list_full('おやつをあげる','On_Feeding')
+    FillLine_list_full('おやつをあげる', 'On_Feeding')
     --
     if basewarenameex != 'Ikagaka' {
-        FillLine_list_full('頼み事','On_Menu_0_func')
+        FillLine_list_full('頼み事', 'On_Menu_0_func')
     }
     --
-    FillLine_list_full('さらに頼み事','On_Menu_0_plugin')
+    FillLine_list_full('さらに頼み事', 'On_Menu_0_plugin')
     --
     '\n'
     --
-    FillLine_list_full('閉じる','On_Menu_0_close')
+    FillLine_list_full('閉じる', 'On_Menu_0_close')
 }
 
 // On_Menu_0_close {
-//     '\_q'
-//     --
-//     '\h\s[0]わかった。\n\e'
-//     '\h\s[0]また何かあったら言ってくれ。\n\e'
+// '\_q'
+// --
+// '\h\s[0]わかった。\n\e'
+// '\h\s[0]また何かあったら言ってくれ。\n\e'
 // }
 
-On_Menu_0_lastTalk {
+On_Menu_0_lastTalk
+{
     if ARRAYSIZE(AYATEMPLATE.LastTalk) > 0 {
         AYATEMPLATE.LastTalk[0]
     }
@@ -41,9 +43,9 @@ On_Menu_0_lastTalk {
         --
         '\n'
         --
-        FillLine_list_full('戻る','On_Menu_0')
+        FillLine_list_full('戻る', 'On_Menu_0')
         --
-        FillLine_list_full('閉じる','On_Menu_0_close')
+        FillLine_list_full('閉じる', 'On_Menu_0_close')
         --
     }
 }
@@ -51,71 +53,76 @@ On_Menu_0_lastTalk {
 // ===================================================================
 // On_Menu_0_setting
 // ===================================================================
-On_Menu_0_setting {
+On_Menu_0_setting
+{
     // _secStr        = Time_sec_toString(aitalkinterval)
     _secStr = Time_sec_toString(aitalkinterval)
-    _timeSignalFlg  = Bool.toOnOffStr(timesignal)
+    _timeSignalFlg = Bool.toOnOffStr(timesignal)
     "\h\s[0]どの設定を変更するんだ？\n\n"
     --
-    FillLine_list_full("喋り頻度を変更（%(_secStr)）",'On_Menu_0_talkInterval')
+    FillLine_list_full("喋り頻度を変更（%(_secStr)）", 'On_Menu_0_talkInterval')
     --
-    FillLine_list_full("名前を変更（%(username)）",'On_Menu_0_username')
+    FillLine_list_full("名前を変更（%(username)）", 'On_Menu_0_username')
     --
-    FillLine_list_full("時報の設定（%(_timeSignalFlg)）",'On_Menu_0_timeSignal')
+    FillLine_list_full("時報の設定（%(_timeSignalFlg)）", 'On_Menu_0_timeSignal')
     --
     FillLine_list_full("メニューアイテムの長さを調整 (%(balloon_line_max)) ", 'On_Menu_0_balloon_line')
     --
     '\n'
     --
-    FillLine_list_full('戻る','On_Menu_0')
+    FillLine_list_full('戻る', 'On_Menu_0')
     --
-    FillLine_list_full('閉じる','On_Menu_0_close')
+    FillLine_list_full('閉じる', 'On_Menu_0_close')
     --
 }
 
-On_Menu_0_setting_footer {
+On_Menu_0_setting_footer
+{
     '\h\n'
     --
-    FillLine_list_half('メインメニュー','On_Menu_0', '設定メニュー','On_Menu_0_setting')
+    FillLine_list_half('メインメニュー', 'On_Menu_0', '設定メニュー', 'On_Menu_0_setting')
     --
-    FillLine_list_full('閉じる','On_Menu_0_close')
+    FillLine_list_full('閉じる', 'On_Menu_0_close')
 }
 
 // ===================================================================
 // On_Menu_0_talkInterval
 // ===================================================================
-On_Menu_0_talkInterval {
+On_Menu_0_talkInterval
+{
     _secStr = Time_sec_toString(aitalkinterval)
-    _t = (IARRAY,Time_sec_toString(On_Menu_0_talkInterval_list("FAST")))
-    _t = (_t,Time_sec_toString(On_Menu_0_talkInterval_list("NORMAL")))
-    _t = (_t,Time_sec_toString(On_Menu_0_talkInterval_list("SLOW")))
+    _t = (IARRAY, Time_sec_toString(On_Menu_0_talkInterval_list("FAST")))
+    _t = (_t, Time_sec_toString(On_Menu_0_talkInterval_list("NORMAL")))
+    _t = (_t, Time_sec_toString(On_Menu_0_talkInterval_list("SLOW")))
 
     "\_q\h\s[0]どれ位の間隔で喋ろうか？今は、%(_secStr)になっている。\n\n\_q"
     --
-    FillLine_list_full("そりゃもう沢山（%(_t[0])）",'On_Menu_0_talkInterval_FAST')
+    FillLine_list_full("そりゃもう沢山（%(_t[0])）", 'On_Menu_0_talkInterval_FAST')
     --
-    FillLine_list_full("普通に（%(_t[1])）",'On_Menu_0_talkInterval_NORMAL')
+    FillLine_list_full("普通に（%(_t[1])）", 'On_Menu_0_talkInterval_NORMAL')
     --
-    FillLine_list_full("ゆっくり（%(_t[2])）",'On_Menu_0_talkInterval_SLOW')
+    FillLine_list_full("ゆっくり（%(_t[2])）", 'On_Menu_0_talkInterval_SLOW')
     --
-    FillLine_list_full("だまっていて（0秒）",'On_Menu_0_talkInterval_0sec')
+    FillLine_list_full("だまっていて（0秒）", 'On_Menu_0_talkInterval_0sec')
     --
-    FillLine_list_full("自分で設定する",'OnInputTalkInterval')
+    FillLine_list_full("自分で設定する", 'OnInputTalkInterval')
     --
     On_Menu_0_setting_footer
 }
 
-On_Menu_0_talkInterval_FAST {
+On_Menu_0_talkInterval_FAST
+{
     aitalkinterval = On_Menu_0_talkInterval_list("FAST")
     _t = Time_sec_toString(aitalkinterval)
     "\h\s[0]%(_t)に変更した。\w9\n"
     --
     '\s[3]そんなに喋ることがあるか不安だが\w9…\w9…\w9\s[5]頑張るよ。\n'
     --
-   On_Menu_0_setting_footer
+    On_Menu_0_setting_footer
 }
 
-On_Menu_0_talkInterval_NORMAL {
+On_Menu_0_talkInterval_NORMAL
+{
     aitalkinterval = On_Menu_0_talkInterval_list("NORMAL")
     _t = Time_sec_toString(aitalkinterval)
 
@@ -129,20 +136,22 @@ On_Menu_0_talkInterval_NORMAL {
     --
     '\h\s[6]いや、\w5なんとなく…\w5…\w5。\n'
     --
-   On_Menu_0_setting_footer
+    On_Menu_0_setting_footer
 }
 
-On_Menu_0_talkInterval_SLOW {
+On_Menu_0_talkInterval_SLOW
+{
     aitalkinterval = On_Menu_0_talkInterval_list("SLOW")
     _t = Time_sec_toString(aitalkinterval)
     "\h\s[6]%(_t)に変更した。\w9\w9\n\n"
     --
     '\u\s[10]のんびり行きましょう。\n'
     --
-   On_Menu_0_setting_footer
+    On_Menu_0_setting_footer
 }
 
-On_Menu_0_talkInterval_0sec {
+On_Menu_0_talkInterval_0sec
+{
     aitalkinterval = 0
     '\h\s[6]…\w5…\w5'
     --
@@ -150,40 +159,44 @@ On_Menu_0_talkInterval_0sec {
     --
     '\u\s[11]この人、\w5直接脳内に…\w5…\w5！\n'
     --
-   On_Menu_0_setting_footer
+    On_Menu_0_setting_footer
 }
 
-On_Menu_0_talkInterval_list {
+On_Menu_0_talkInterval_list
+{
     _label = TOSTR(_argv[0])
     case _label {
-        when 'FAST' {
-            TOINT(30)
-        }
-        when 'NORMAL' {
-            TOINT(180)
-        }
-        when 'SLOW' {
-            TOINT(480)
-        }
-        others {
-            TOINT(180)
-        }
+    when 'FAST' {
+        TOINT(30)
+    }
+    when 'NORMAL' {
+        TOINT(180)
+    }
+    when 'SLOW' {
+        TOINT(480)
+    }
+    others {
+        TOINT(180)
+    }
     }
 }
 
 // 入力関連 ____________________________
-OnInputTalkInterval {
-    _slider    = "\![open,sliderinput,OnInputTalkInterval_slider,0,%(aitalkinterval),0,1000]"
-    _input     = "\![open,inputbox,OnInputTalkInterval_input, -1]"
-    _inputFunc = AdaptScript( "%(_slider)","%(_input)","SSP")
+OnInputTalkInterval
+{
+    _slider = "\![open,sliderinput,OnInputTalkInterval_slider,0,%(aitalkinterval),0,1000]"
+    _input = "\![open,inputbox,OnInputTalkInterval_input, -1]"
+    _inputFunc = AdaptScript("%(_slider)", "%(_input)", "SSP")
     "\h\s[0]秒数を入力してくれ。%(_inputFunc)\n\e"
 }
 
-OnInputTalkInterval_slider {
+OnInputTalkInterval_slider
+{
     OnInputTalkInterval_check(TOINT(ZEN2HAN(reference[0])))
 }
 
-OnInputTalkInterval_input {
+OnInputTalkInterval_input
+{
     if GETTYPE(reference[0]) != 1 {
         "\h\s[4]秒数のみを入力してくれ。\w9\nどう解釈していいか、\w5\s[3]…\w5…\w5困る。\w9\w9\n"
         --
@@ -200,18 +213,20 @@ OnInputTalkInterval_input {
     }
 }
 
-OnInputTalkInterval_check {
+OnInputTalkInterval_check
+{
     _t = Time_sec_toString(_argv[0])
     _s = TOINT(_argv[0])
     "\h\s[0]%(_t)（%(_s)秒）でいいのか？\n\n"
     --
-    FillLine_list_full("いいよ","OnInputTalkInterval_decide,%(_s)")
+    FillLine_list_full("いいよ", "OnInputTalkInterval_decide,%(_s)")
     --
-    FillLine_list_full("やり直す",'OnInputTalkInterval')
+    FillLine_list_full("やり直す", 'OnInputTalkInterval')
     --
-    FillLine_list_full('やめる','CLOSE_NOTALK')
+    FillLine_list_full('やめる', 'CLOSE_NOTALK')
 }
-OnInputTalkInterval_decide {
+OnInputTalkInterval_decide
+{
     aitalkinterval = TOINT(reference[0])
     _t = Time_sec_toString(aitalkinterval)
     "\h\s[0]喋り間隔を%(_t)にした。\n"
@@ -222,13 +237,15 @@ OnInputTalkInterval_decide {
 // ===================================================================
 // On_Menu_0_username
 // ===================================================================
-On_Menu_0_username {
+On_Menu_0_username
+{
     "\h\s[0]何て呼べばいいんだ？\n"
     --
     "\![open,inputbox,OnInputUsername, -1,%(username)]\e"
 }
 
-OnInputUsername {
+OnInputUsername
+{
     _tmpname = SHIORI3FW.EscapeAllTags(reference[0])
     if _tmpname == "" {
         OnInputUsername_empty
@@ -238,24 +255,27 @@ OnInputUsername {
     }
 }
 
-OnInputUsername_empty {
+OnInputUsername_empty
+{
     "\h\s[0]変更せずに、\w5%(username)のままにするが、\w5それでいいか?\n\n"
     --
-    FillLine_list_full('いいよ',"OnInputUsername_decide,%(username)")
+    FillLine_list_full('いいよ', "OnInputUsername_decide,%(username)")
     --
-    FillLine_list_full('やり直す','On_Menu_0_username')
+    FillLine_list_full('やり直す', 'On_Menu_0_username')
 }
 
-OnInputUsername_check {
+OnInputUsername_check
+{
     _name = SHIORI3FW.EscapeAllTags(_argv[0])
     "\h\s[0]%(_name)でいいのか？\n\n"
     --
-    FillLine_list_full("いいよ","OnInputUsername_decide,%(_name)")
+    FillLine_list_full("いいよ", "OnInputUsername_decide,%(_name)")
     --
-    FillLine_list_full("やり直す","On_Menu_0_username")
+    FillLine_list_full("やり直す", "On_Menu_0_username")
 }
 
-OnInputUsername_decide {
+OnInputUsername_decide
+{
     username = SHIORI3FW.EscapeAllTags(reference[0])
     "\h\s[5]わかった。\w9%(username)、\w9これからもよろしく。\n"
     --
@@ -265,27 +285,30 @@ OnInputUsername_decide {
 // ===================================================================
 // On_Menu_0_timeSignal
 // ===================================================================
-On_Menu_0_timeSignal {
+On_Menu_0_timeSignal
+{
     _str = Bool.toOnOffStr(timesignal)
 
     '\h\s[0]時報を知らせるか？\w9\n'
     --
     "今は、\w5%(_str)になっている。\n\n"
     --
-    FillLine_list_full('時報ON','On_Menu_0_timeSignal_toOn')
+    FillLine_list_full('時報ON', 'On_Menu_0_timeSignal_toOn')
     --
-    FillLine_list_full('時報OFF','On_Menu_0_timeSignal_toOff')
+    FillLine_list_full('時報OFF', 'On_Menu_0_timeSignal_toOff')
     --
     On_Menu_0_setting_footer
 }
 
-On_Menu_0_timeSignal_toOn {
+On_Menu_0_timeSignal_toOn
+{
     timesignal = 1
     '\h\s[0]時報をONにした。\n'
     --
     On_Menu_0_setting_footer
 }
-On_Menu_0_timeSignal_toOff {
+On_Menu_0_timeSignal_toOff
+{
     timesignal = 0
     '\h\s[0]時報をOFFにした。\n'
     --
@@ -295,14 +318,16 @@ On_Menu_0_timeSignal_toOff {
 // ===================================================================
 // On_Menu_0_balloon_line
 // ===================================================================
-On_Menu_0_balloon_line {
-    _slider    = "\![open,sliderinput,OnInputBalloonLine_slider,0,%(balloon_line_max),14,100]"
-    _input     = "\![open,inputbox,OnInputBalloonLine_input, -1,%(balloon_line_max)]"
-    _inputFunc = AdaptScript( "%(_slider)","%(_input)","SSP")
+On_Menu_0_balloon_line
+{
+    _slider = "\![open,sliderinput,OnInputBalloonLine_slider,0,%(balloon_line_max),14,100]"
+    _input = "\![open,inputbox,OnInputBalloonLine_input, -1,%(balloon_line_max)]"
+    _inputFunc = AdaptScript("%(_slider)", "%(_input)", "SSP")
     "\u\s[10]\h\s[0]\_qメニューアイテムの長さを調節する。\n今は、\w5%(balloon_line_max)文字文くらいの長さだ。%(_inputFunc)\_q\n"
 }
 
-On_Menu_0_ballloon_line_footer {
+On_Menu_0_ballloon_line_footer
+{
     FillLine_list_full('やり直す', 'On_Menu_0_balloon_line')
     --
     FillLine_list_full('やめてメインメニューへ', 'On_Menu_0')
@@ -310,7 +335,8 @@ On_Menu_0_ballloon_line_footer {
     FillLine_list_full('やめて設定メニューへ', 'On_Menu_0_setting')
 }
 
-OnInputBalloonLine_slider {
+OnInputBalloonLine_slider
+{
     _input = TOINT(ZEN2HAN(reference[0]))
 
     if _input < 14 {
@@ -319,14 +345,16 @@ OnInputBalloonLine_slider {
         '\n'
         --
         On_Menu_0_ballloon_line_footer
-    } else {
+    }
+    else {
         OnInputBalloonLine_check(TOINT(ZEN2HAN(reference[0])))
     }
 }
 
-OnInputBalloonLine_input {
+OnInputBalloonLine_input
+{
     if GETTYPE(reference[0]) != 1 {
-       "\u\s[10]\h\s[4]数値でないので設定できない…\w5…\w5。\w9\s[0]\nそれとも、\w5止めるか？\n"
+        "\u\s[10]\h\s[4]数値でないので設定できない…\w5…\w5。\w9\s[0]\nそれとも、\w5止めるか？\n"
         --
         '\n'
         --
@@ -347,7 +375,8 @@ OnInputBalloonLine_input {
     }
 }
 
-OnInputBalloonLine_check {
+OnInputBalloonLine_check
+{
     _full = TOINT(_argv[0])
     _half = TOINT(_full / 2) - 1
 
@@ -365,7 +394,8 @@ OnInputBalloonLine_check {
     --
     _close
 }
-OnInputBalloonLine_decide {
+OnInputBalloonLine_decide
+{
     balloon_line_max = TOINT(reference[0])
     '\u\s[10]\h\s[0]メニューアイテムの長さを調整した。\n'
     --
@@ -375,43 +405,56 @@ OnInputBalloonLine_decide {
 // ===================================================================
 // On_Menu_0_func
 // ===================================================================
-On_Menu_0_func {
+On_Menu_0_func
+{
     "\h\s[0]何をすればいいんだ？\n\n[half]"
     --
-    FillLine_list_full("メールの確認","On_Menu_0_func_mail")
+    FillLine_list_full("メールの確認", "On_Menu_0_func_mail")
     --
     if basewarenameex == "SSP" {
-        FillLine_list_full("ヘッドラインを一覧表示","On_Menu_0_func_headlineRSS")
+        FillLine_list_full("ヘッドラインを一覧表示", "On_Menu_0_func_headlineRSS")
         --
         // FillLine_list_full("カレンダーを開く","On_Menu_0_func_calendar")
+        // --
+        FillLine_list_full('ごみ箱を空にする', 'On_Menu_0_func_emptyRecycleBin')
     }
     --
-    FillLine_list_full("時刻を合わせる","On_Menu_0_func_timeAdjust")
+    FillLine_list_full("時刻を合わせる", "On_Menu_0_func_timeAdjust")
     --
     '\n[half]'
     --
-    FillLine_list_full('戻る','On_Menu_0')
+    FillLine_list_full('戻る', 'On_Menu_0')
     --
-    FillLine_list_full('閉じる','On_Menu_0_close')
+    FillLine_list_full('閉じる', 'On_Menu_0_close')
 }
 
-On_Menu_0_func_mail {
+On_Menu_0_func_mail
+{
     "\![biff]"
 }
-On_Menu_0_func_headlineRSS {
+On_Menu_0_func_headlineRSS
+{
     "\![open,headlinesencorexplorer]"
 }
-On_Menu_0_func_calendar {
+On_Menu_0_func_calendar
+{
     "\![open,calendar]"
 }
-On_Menu_0_func_timeAdjust {
+On_Menu_0_func_timeAdjust
+{
     "\![executesntp]"
+}
+
+On_Menu_0_func_emptyRecycleBin
+{
+    '\![execute,emptyrecyclebin]'
 }
 
 // ===================================================================
 // On_Menu_0_plugin
 // ===================================================================
-On_Menu_0_plugin {
+On_Menu_0_plugin
+{
     _body = ''
 
     if AYATEMPLATE.IsPluginExist('8F8BCFB8-B27A-456f-9BA0-551484856DDC') == 1 {
@@ -427,7 +470,8 @@ On_Menu_0_plugin {
 
     if _body == '' {
         '\u\s[10]\h\s[0]対応しているプラグインはないようだ。\w9\w9\u「十徳ナイフ」や「スタンプ帳」、\w5「GetWindowTitle」に対応しているから、\w5気になったらダウンロードしてみてね。'
-    } else {
+    }
+    else {
         '\u\s[10]\h\s[0]対応しているプラグインだ。\n\n'
         --
         _body
@@ -437,24 +481,27 @@ On_Menu_0_plugin {
     --
     '\h'
     --
-    FillLine_list_full('戻る','On_Menu_0')
+    FillLine_list_full('戻る', 'On_Menu_0')
     --
-    FillLine_list_full('閉じる','On_Menu_0_close')
+    FillLine_list_full('閉じる', 'On_Menu_0_close')
 }
 
-On_Menu_0_plugin_SWISSARMY {
+On_Menu_0_plugin_SWISSARMY
+{
     call_from_menu = 1
     --
     "\![raiseplugin,8F8BCFB8-B27A-456f-9BA0-551484856DDC,OnMenuExec]"
 }
 
-On_Menu_0_plugin_stamp {
+On_Menu_0_plugin_stamp
+{
     // call_from_menu = 1
     // --
     On_Plugin_stamp_begin
 }
 
-On_Menu_0_plugin_GetWindowTitle {
+On_Menu_0_plugin_GetWindowTitle
+{
     _flag = Bool.toOnOffStr(Plugin_should_GetWindowTitle)
     "\u\s[10]\h\s[0]プラグイン「GetWindowTitle」を使って、\w5%(username)の作業をたまにのぞいてもいいか？\w9\n今は、\w5%(_flag)になっている。\w9\w9\u(取得するのは作業中ウィンドウのタイトルだけです)"
     --
@@ -469,7 +516,8 @@ On_Menu_0_plugin_GetWindowTitle {
     On_Menu_0_plugin_GetWindowTitle_footer
 }
 
-On_Menu_0_plugin_GetWindowTitle_toOn {
+On_Menu_0_plugin_GetWindowTitle_toOn
+{
     Plugin_set_should_GetWindowTitle(1)
     '\u\s[10]\h\s[5]そうか。\w9じゃあ、\w5たまにのぞかせてもらうよ。\w9\w9'
     --
@@ -478,7 +526,8 @@ On_Menu_0_plugin_GetWindowTitle_toOn {
     On_Menu_0_plugin_GetWindowTitle_footer
 }
 
-On_Menu_0_plugin_GetWindowTitle_toOff {
+On_Menu_0_plugin_GetWindowTitle_toOff
+{
     Plugin_set_should_GetWindowTitle(0)
     '\u\s[10]\h\s[0]そうか。\w9なら止めておこう。\w9\w9'
     --
@@ -487,113 +536,135 @@ On_Menu_0_plugin_GetWindowTitle_toOff {
     On_Menu_0_plugin_GetWindowTitle_footer
 }
 
-On_Menu_0_plugin_GetWindowTitle_footer {
-    FillLine_list_half('メインメニューヘ','On_Menu_0','プラグインへ','On_Menu_0_plugin')
+On_Menu_0_plugin_GetWindowTitle_footer
+{
+    FillLine_list_half('メインメニューヘ', 'On_Menu_0', 'プラグインへ', 'On_Menu_0_plugin')
     --
-    FillLine_list_full('閉じる','On_Menu_0_close')
+    FillLine_list_full('閉じる', 'On_Menu_0_close')
 }
 
 // ===================================================================
 // BalloonTooltip on On_Menu_0
 // ===================================================================
-BalloonTooltip_On_Menu_0 {
+BalloonTooltip_On_Menu_0
+{
     'メインメニューを表示'
 }
 
-BalloonTooltip_OnAITalk {
+BalloonTooltip_OnAITalk
+{
     '何か喋る'
 }
 
-BalloonTooltip_On_Menu_0_lastTalk {
+BalloonTooltip_On_Menu_0_lastTalk
+{
     '前回の話をもう一度話す'
 }
 
-BalloonTooltip_On_Menu_0_close {
+BalloonTooltip_On_Menu_0_close
+{
     'メニューを閉じる'
 }
 
 // setting _____________________________
-BalloonTooltip_On_Menu_0_setting {
+BalloonTooltip_On_Menu_0_setting
+{
     '個別設定のメニューを表示'
 }
 
-BalloonTooltip_On_Menu_0_talkInterval {
+BalloonTooltip_On_Menu_0_talkInterval
+{
     '喋る間隔を変更'
 }
 
-BalloonTooltip_On_Menu_0_username {
+BalloonTooltip_On_Menu_0_username
+{
     'このゴーストが覚えている名前を変更'
 }
 
-BalloonTooltip_On_Menu_0_timeSignal {
+BalloonTooltip_On_Menu_0_timeSignal
+{
     '時報の有無を変更'
 }
 
-BalloonTooltip_On_Menu_0_balloon_line {
+BalloonTooltip_On_Menu_0_balloon_line
+{
     'メニューアイテムの長さを調整'
 }
 
 // func ________________________________
-BalloonTooltip_On_Menu_0_func {
+BalloonTooltip_On_Menu_0_func
+{
     'ベースウェア付属機能の一部を表示'
 }
 
-BalloonTooltip_On_Menu_0_func_mail {
+BalloonTooltip_On_Menu_0_func_mail
+{
     '登録されている全アカウントのメールを確認'
 }
-BalloonTooltip_On_Menu_0_func_headlineRSS {
+BalloonTooltip_On_Menu_0_func_headlineRSS
+{
     '登録されているヘッドラインセンス・ＲＳＳの一覧'
 }
 
-BalloonTooltip_On_Menu_0_func_calendar {
+BalloonTooltip_On_Menu_0_func_calendar
+{
     'ベースウェア付属のカレンダーを表示'
 }
 
-BalloonTooltip_On_Menu_0_func_timeAdjust {
+BalloonTooltip_On_Menu_0_func_timeAdjust
+{
     'パソコンの時刻を合わせる'
 }
 
 // plugin ______________________________
-BalloonTooltip_On_Menu_0_plugin {
+BalloonTooltip_On_Menu_0_plugin
+{
     'プラグインによる機能の一部を表示'
 }
 
-BalloonTooltip_On_Menu_0_plugin_SWISSARMY {
+BalloonTooltip_On_Menu_0_plugin_SWISSARMY
+{
     'ちょっとした便利機能集'
 }
 
-BalloonTooltip_On_Menu_0_plugin_stamp {
+BalloonTooltip_On_Menu_0_plugin_stamp
+{
     'スタンプを押したり管理したり'
 }
 
-BalloonTooltip_On_Menu_0_plugin_GetWindowTitle {
+BalloonTooltip_On_Menu_0_plugin_GetWindowTitle
+{
     '作業中のウィンドウに関連したトークをするようになる'
 }
 
 // ===================================================================
 // On_Menu.1
 // ===================================================================
-On_Menu_1 {
+On_Menu_1
+{
     '\_q\u\s[10]何かしら。\n\n'
     --
     if TOINT(SHIORI3FW.IsVisible[0]) == 0 {
-        FillLine_list_full('伊織呼んで','On_Menu_1_call_p0')
+        FillLine_list_full('伊織呼んで', 'On_Menu_1_call_p0')
     }
     else {
-        FillLine_list_full('伊織と間違えた','On_Menu_1_menu_p0')
+        FillLine_list_full('伊織と間違えた', 'On_Menu_1_menu_p0')
     }
     --
-    FillLine_list_full('なんでもない','On_Menu_1_close')
+    FillLine_list_full('なんでもない', 'On_Menu_1_close')
     --
     '\_q'
 }
 
-On_Menu_1_close {
+On_Menu_1_close
+{
     '\u\s[11]にゃあ。\n\e'
     '\h\s[0]\u\s[16]みゃ\w5～\w5…\w5…\w5。\n\e'
 }
 
-On_Menu_1_call_p0 {
+On_Menu_1_call_p0
+{
     '\u\s[10]分かったわ。\w9\nちょっと待っててね。\w9\s[-1]\n…\w5…\w5…\w5…\w5\w9\w9'
     --
     '\h\s[2]なんだなんだ？\w9\w9'
@@ -601,7 +672,8 @@ On_Menu_1_call_p0 {
     '\u\s[10]\n\n任務完了。\e'
 }
 
-On_Menu_1_menu_p0 {
+On_Menu_1_menu_p0
+{
     '\h\s[0]\u\s[10]しょうがないわね。\w9\nほら、\w5伊織、\w5メニューを開きなさい。\w9\w9\h\s[4]何だその言い方…\w5…\w5。\w9\nまぁ、\w5わかったよ。'
     --
     '\w9\w9\u\b[-1]\h\c'
@@ -612,18 +684,22 @@ On_Menu_1_menu_p0 {
 // ===================================================================
 // BalloonTooltip on On_Menu_1
 // ===================================================================
-BalloonTooltip_On_Menu_1 {
+BalloonTooltip_On_Menu_1
+{
     'メインメニューを表示'
 }
 
-BalloonTooltip_On_Menu_1_close {
+BalloonTooltip_On_Menu_1_close
+{
     'メニューを閉じる'
 }
 
-BalloonTooltip_On_Menu_1_call_p0 {
+BalloonTooltip_On_Menu_1_call_p0
+{
     'どこかに行っている伊織を無理矢理連れてくる'
 }
 
-BalloonTooltip_On_Menu_1_menu_p0 {
+BalloonTooltip_On_Menu_1_menu_p0
+{
     '伊織側のメニューを開く'
 }

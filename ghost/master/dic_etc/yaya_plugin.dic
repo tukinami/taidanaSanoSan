@@ -1,7 +1,8 @@
 // ===================================================================
 // SwissArmyKnife (十徳ナイフ)
 // ===================================================================
-OnSwissArmyKnifeMenu {
+OnSwissArmyKnifeMenu
+{
     if _argc > 0 && _argv[0] == 'noplugin' {
         '\h\s[4]十徳ナイフプラグインは無いようだ。\n\e'
         return
@@ -14,17 +15,17 @@ OnSwissArmyKnifeMenu {
     SHIORI3FW.RegisterTempVar('samenu_text', 'samenu_id')
 
     samenu_text = IARRAY
-    samenu_id   = IARRAY
+    samenu_id = IARRAY
 
-    _s    = ''
+    _s = ''
     _data = IARRAY
 
-    foreach reference ; _ref {
-        _data = SPLIT(_ref, ',' ,2)
-        _id   = SPLIT(_data[1], ',')
+    foreach reference; _ref {
+        _data = SPLIT(_ref, ',', 2)
+        _id = SPLIT(_data[1], ',')
 
         samenu_text ,= _data[0]
-        samenu_id   ,= _id[0]
+        samenu_id ,= _id[0]
 
         if _data[1] != 'cancel' {
             _s += FillLine_list_full(_data[0], _data[1])
@@ -35,69 +36,72 @@ OnSwissArmyKnifeMenu {
     '\n'
     --
     if call_from_menu > 0 {
-        FillLine_list_full('メインメニュー','On_Menu_0')
+        FillLine_list_full('メインメニュー', 'On_Menu_0')
     }
     --
-    FillLine_list_full('閉じる','CLOSE_NOTALK')
+    FillLine_list_full('閉じる', 'CLOSE_NOTALK')
     --
     '\_q'
     call_from_menu = 0
 }
 
-OnSwissArmyKnifeExecute {
+OnSwissArmyKnifeExecute
+{
     case reference[0] {
-        when 'empty_recycle_bin' {
-            if TOINT(reference[1]) > 0 {
-                On_Plugin.SWISSARMY.empty_recycle_bin.exist(TOINT(reference[1]), TOINT(reference[2]))
-            }
-            else {
-                '\h\s[6]ごみ箱には何もなかった。\n'
-            }
+    when 'empty_recycle_bin' {
+        if TOINT(reference[1]) > 0 {
+            On_Plugin.SWISSARMY.empty_recycle_bin.exist(TOINT(reference[1]), TOINT(reference[2]))
         }
-        when 'delete_tmpfile' {
-            _num = TOINT(reference[1])
-            On_Status.pride.p0.increase(1)
-            '\h\s[0]一時ファイルを削除した。\w9\n'
-            --
-            "%(_num)個のファイルが存在していた。\n"
+        else {
+            '\h\s[6]ごみ箱には何もなかった。\n'
         }
+    }
+    when 'delete_tmpfile' {
+        _num = TOINT(reference[1])
+        On_Status.pride.p0.increase(1)
+        '\h\s[0]一時ファイルを削除した。\w9\n'
+        --
+        "%(_num)個のファイルが存在していた。\n"
+    }
     }
     --
     '\n'
     --
-    FillLine_list_half('メインメニュー', 'On_Menu_0', 'プラグインメニュー', 'On_Menu_0_plugin' )
+    FillLine_list_half('メインメニュー', 'On_Menu_0', 'プラグインメニュー', 'On_Menu_0_plugin')
     --
     FillLine_list_full('閉じる', 'CLOSE_NOTALK')
 }
 
-On_Plugin.SWISSARMY.empty_recycle_bin.exist {
+On_Plugin.SWISSARMY.empty_recycle_bin.exist
+{
     _num = TOINT(_argv[0])
-    _kb  = TOINT(_argv[1])
+    _kb = TOINT(_argv[1])
     On_Status.pride.p0.increase(1)
 
     {
         "\u\s[10]\h\s[6]ごみ箱を空にした。\w9\n\s[0]%(_num)個のファイル、%(_kb) KB を削除した。"
         --
-        '\w9\w9\u空にしたって、\w5一体どうしたの？\w9\w9\h\n\n大きなごみ箱に移したんだよ。\w9\s[6]\nごみの回収は、\w5ここでは毎週月木金曜日。\w9\s[0]\nその時まとめて捨てる。\w9\w9\u\n\nなるほど。\e'
-        '\w9\w9\u\s[10]スッキリ。\e'
-        '\w9\w9\u\s[10]面倒でも不燃物とかの分別はしっかりしなさいよ。\w9\w9\h\s[7]\n\nデータにそれはないだろ！\e'
+        '\w9\w9\u空にしたって、\w5一体どうしたの？\w9\w9\h\n\n大きなごみ箱に移したんだよ。\w9\s[6]\nごみの回収は、\w5ここでは毎週月木金曜日。\w9\s[0]\nその時まとめて捨てる。\w9\w9\u\n\nなるほど。'
+        '\w9\w9\u\s[10]スッキリ。'
+        '\w9\w9\u\s[10]面倒でも不燃物とかの分別はしっかりしなさいよ。\w9\w9\h\s[7]\n\nデータにそれはないだろ！'
         if _kb > 51200 {
             // 50MB越え
-            '\w9\s[4]\n…\w5…\w5。\w9\w9\uどうしたの？\w9\w9\h\s[3]\n\nちょっと、\w5重くて腰が…\w5…\w5。\w9\w9\u\s[11]\n\n日頃の運動不足が…\w5…\w5！\e'
+            '\w9\s[4]\n…\w5…\w5。\w9\w9\uどうしたの？\w9\w9\h\s[3]\n\nちょっと、\w5重くて腰が…\w5…\w5。\w9\w9\u\s[11]\n\n日頃の運動不足が…\w5…\w5！'
         }
     }
     {
         "\h\s[0]\u\s[11]私の妖術で%(username)のごみは跡形もなく消し飛んだわ！"
         --
-        '\w9\w9\h\s[3]消し…\w5…\w5…\w5\s[2]え？\e'
-        '\w9\w9\h\s[3]パソコンってごみ箱空にしても、\w5色々すると復元できるって、\w5姉が言ってたけど。\w9\w9\u\s[10]\n\n細かいことは気にしない。\e'
+        '\w9\w9\h\s[3]消し…\w5…\w5…\w5\s[2]え？'
+        '\w9\w9\h\s[3]パソコンってごみ箱空にしても、\w5色々すると復元できるって、\w5姉が言ってたけど。\w9\w9\u\s[10]\n\n細かいことは気にしない。'
     }
 }
 
 // ===================================================================
 // スタンプ帳
 // ===================================================================
-On_Plugin_stamp_begin {
+On_Plugin_stamp_begin
+{
     SHIORI3FW.RegisterTempVar('stamp_info_is_exist')
 
     "\![raiseplugin,379E0DA0-131C-11DD-E1AC-90009E101CFE,OnStampInfoCall]"
@@ -105,11 +109,13 @@ On_Plugin_stamp_begin {
     "\![raise,On_Plugin_stamp_menu]"
 }
 
-OnStampInfo : void {
+OnStampInfo : void
+{
     stamp_info_is_exist = reference[1]
 }
 
-On_Plugin_stamp_menu {
+On_Plugin_stamp_menu
+{
     if stamp_info_is_exist == 0 {
         FillLine_list_full("スタンプを押す", "On_Plugin_stamp_push")
     }
@@ -118,41 +124,45 @@ On_Plugin_stamp_menu {
     --
     '\n'
     --
-    FillLine_list_half('メインメニュー', 'On_Menu_0', 'プラグインメニュー', 'On_Menu_0_plugin' )
+    FillLine_list_half('メインメニュー', 'On_Menu_0', 'プラグインメニュー', 'On_Menu_0_plugin')
     --
     FillLine_list_full('閉じる', 'CLOSE_NOTALK')
 }
 
-On_Plugin_stamp_push {
+On_Plugin_stamp_push
+{
     '\u\s[10]\h\s[3]ん～スタンプか、\w5何を送ろうか…\w5…\w5。\w9\s[5]\nあ、\w5これなんか良いんじゃないか？\w9\n前に作った肉じゃがの画像！\w9\w9\uスタンプ違いな気がするけど、\w5まぁ、\w5いいでしょう。\w9\w9\h\n\nはい、\w5どうぞ。\w9\w9'
     --
     "\![raiseplugin,379E0DA0-131C-11DD-E1AC-90009E101CFE,OnStampAdd,/
-ghost/master/stamp.png,/
-伊織の肉じゃがスタンプ,/
-伊織が調理した肉じゃがを写したスタンプ。おいしそうにできている。/
-]"
+    ghost/master/stamp.png,/
+    伊織の肉じゃがスタンプ,/
+    伊織が調理した肉じゃがを写したスタンプ。おいしそうにできている。/
+    ]"
     --
     "\n\n"
     --
     FillLine_list_full("スタンプメニュー", "On_Plugin_stamp_menu_exec")
     --
-    FillLine_list_half('メインメニュー', 'On_Menu_0', 'プラグインメニュー', 'On_Menu_0_plugin' )
+    FillLine_list_half('メインメニュー', 'On_Menu_0', 'プラグインメニュー', 'On_Menu_0_plugin')
     --
     FillLine_list_full('閉じる', 'CLOSE_NOTALK')
 }
 
-On_Plugin_stamp_menu_exec {
+On_Plugin_stamp_menu_exec
+{
     '\![raiseplugin,379E0DA0-131C-11DD-E1AC-90009E101CFE,OnMenuExec]'
 }
 
 // ===================================================================
 // GetWindowTitle
 // ===================================================================
-On_Plugin_GetWindowTitle {
+On_Plugin_GetWindowTitle
+{
     '\![raiseplugin,GetWindowTitle,OnGetWindowTitle]'
 }
 
-Plugin_should_GetWindowTitle {
+Plugin_should_GetWindowTitle
+{
     if plugin_should_GetWindowTitle == '' {
         plugin_should_GetWindowTitle = 0
     }
@@ -160,7 +170,8 @@ Plugin_should_GetWindowTitle {
     plugin_should_GetWindowTitle
 }
 
-Plugin_set_should_GetWindowTitle : void {
+Plugin_set_should_GetWindowTitle : void
+{
     _flag = TOINT(_argv[0])
 
     if _flag == 0 {
@@ -171,7 +182,8 @@ Plugin_set_should_GetWindowTitle : void {
     }
 }
 
-OnRecieveGetWindowTitle {
+OnRecieveGetWindowTitle
+{
     _window_title = SHIORI3FW.EscapeAllTags(reference[0])
 
     // small category
@@ -180,15 +192,15 @@ OnRecieveGetWindowTitle {
         _flag = RAND(_flag_max)
 
         case _flag {
-            when 0 {
-                // 実際早くおなかを減らす
-                On_Status.fullness.p0.decrease
-                --
-                '\u\s[10]\h\s[8]レシピの検索をしていると腹が減って困る。\w9\w9\uいつも腹ペコでしょ貴方。\w9\w9\h\s[3]\n\nそれよりもっと。\w9\n(…\w5…\w5グ\w2ゥ\w2～\w2)\w9\w9\u\s[11]\n\n本当に！？'
-            }
-            others {
-                '\u\s[10]\h\s[0]人のレシピを見ると、\w5結構勉強になるよな。\w9\s[6]\n使ったことなかったり、\w5見たこともない食材とか、\w5たまに見かけるし。\w9\w9\uだがしかし？\w9\w9\h\s[3]\n\n買いに行くのは面倒。\w9\w9\u\n\nやはりな。'
-            }
+        when 0 {
+            // 実際早くおなかを減らす
+            On_Status.fullness.p0.decrease
+            --
+            '\u\s[10]\h\s[8]レシピの検索をしていると腹が減って困る。\w9\w9\uいつも腹ペコでしょ貴方。\w9\w9\h\s[3]\n\nそれよりもっと。\w9\n(…\w5…\w5グ\w2ゥ\w2～\w2)\w9\w9\u\s[11]\n\n本当に！？'
+        }
+        others {
+            '\u\s[10]\h\s[0]人のレシピを見ると、\w5結構勉強になるよな。\w9\s[6]\n使ったことなかったり、\w5見たこともない食材とか、\w5たまに見かけるし。\w9\w9\uだがしかし？\w9\w9\h\s[3]\n\n買いに行くのは面倒。\w9\w9\u\n\nやはりな。'
+        }
         }
     }
     elseif (RE_SEARCH(_window_title, 'GitHub') == 1) || (RE_SEARCH(_window_title, 'GitLab') == 1) {
@@ -202,7 +214,7 @@ OnRecieveGetWindowTitle {
     elseif (RE_SEARCH(_window_title, 'YouTube') == 1) || (RE_SEARCH(_window_title, '動画') == 1) {
         '\u\s[10]\h\s[0]料理作ってる動画が好きだな。\w9\w9\uそして、\w5見てると、\w9\w9\h\s[4]\n\nお\w2な\w2か\w2が\w2へ\w2る\w2…\w5…\w5。\w9\w9\u\n\nいつもの。'
     }
-    elseif (RE_SEARCH(_window_title, 'FANZA') == 1 ) || (RE_SEARCH(_window_title, 'アダルト') == 1) {
+    elseif (RE_SEARCH(_window_title, 'FANZA') == 1) || (RE_SEARCH(_window_title, 'アダルト') == 1) {
         '\u\s[10]\h\s[9]…\w5…\w5！！\w9\s[-1]\nふぁああああ！！\w9\w9\uあっ、\w5逃げた。'
         '\u\s[10]\h\s[6]…\w5…\w5。\w9\w9\uどうしたの？\w9\w9\h\s[34]\n\nお、\w5俺はなんにも見てないから！\w9\n見てないから大丈夫！！\w9\w9\u\s[16]\n\nまぁ、\w5はい。'
     }
