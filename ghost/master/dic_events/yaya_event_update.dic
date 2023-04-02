@@ -1,127 +1,164 @@
 // ===================================================================
 // OnUpdate ***
 // ===================================================================
-OnUpdateBegin {
-    _update_self = 0
+OnUpdateBegin
+{
+    SHIORI3FW.RegisterTempVar('update_self', 'update_other_type', 'update_other_name')
+    update_self = 0
+    update_other_type = ''
+    update_other_name = ''
+
     _type = On_Update_targetList(reference[3])
     _name = SHIORI3FW.EscapeDangerousTags(reference[0])
 
     if basewarenameex == 'embryo' {
-        _update_self = 1
+        update_self = 1
     }
     elseif reference[0] == SHIORI3FW.GhostName && reference[3] == 'ghost' {
-        _update_self = 1
+        update_self = 1
     }
 
-    if _update_self > 0 {
+    if update_self == 1 {
         '\h\s[6]ネットワーク更新を確認中。'
         '\h\s[0]\u\s[11]更新を確認しまーす！'
         '\h\s[0]\u\s[16]妖術で更新があるか確かめています…\w5…\w5。\w9\w9\h\s[4]ええ…\w5…\w5？'
     }
     else {
+        update_other_type = _type
+        update_other_name = _name
         "\h\s[6]%(_type)、\w5%(_name)のネットワーク更新を開始。"
     }
 }
 
-On_Update_targetList {
+On_Update_targetList
+{
     if _argc <= 0 {
         0
         return
     }
     case TOSTR(_argv[0]) {
-        when 'shell' {
-            'シェル'
-        }
-        when 'ghost' {
-            'ゴースト'
-        }
-        when 'balloon' {
-            'バルーン'
-        }
-        when 'headline' {
-            'ヘッドライン'
-        }
-        when 'plugin' {
-            'プラグイン'
-        }
-        when 'baseware' {
-            'ベースウェア'
-        }
-        others {
-            '不明なタイプ'
-        }
+    when 'shell' {
+        'シェル'
+    }
+    when 'ghost' {
+        'ゴースト'
+    }
+    when 'balloon' {
+        'バルーン'
+    }
+    when 'headline' {
+        'ヘッドライン'
+    }
+    when 'plugin' {
+        'プラグイン'
+    }
+    when 'baseware' {
+        'ベースウェア'
+    }
+    others {
+        '不明なタイプ'
+    }
     }
 }
 
-OnUpdateReady {
+On_Update_other_header
+{
+    if update_self == 1 || (update_other_type == '' || update_other_name == '') {
+        ''
+        return
+    }
+    _type = SHIORI3FW.EscapeAllTags(update_other_type)
+    _name = SHIORI3FW.EscapeAllTags(update_other_name)
+    "\_q\h@@l%(_type) : %(_name)\n\n[half]\_q"
+}
+
+OnUpdateReady
+{
+    On_Update_other_header
+    --
     _files = TOINT(reference[0]) + 1
     "\u\s[10]\h\s[0]%(_files)個の更新ファイルが見つかった。\w9\n\w9\w9\u更新、\w5開始しまーす！"
     "\h\s[0]\u\s[10]%(_files)個のファイルを発見！\w9\w9\h更新、\w5開始。"
 }
 
-OnUpdateComplete {
-    if reference[0]  == 'none' {
+OnUpdateComplete
+{
+    On_Update_other_header
+    --
+    if reference[0] == 'none' {
         '\h\s[6]更新ファイルなし。\w9\s[0]すでに最新だ。\n\n'
-        '\h\s[0]\u\s[16]更新、\w5無し！\h'
-        --
-        FillLine_list_full('更新履歴を見る', 'On_Update_log')
-        --
-        FillLine_list_full('閉じる', 'CLOSE_NOTALK')
+        '\h\s[0]\u\s[16]更新、\w5無し！'
     }
     elseif reference[0] == 'changed' {
         On_Status.pride.p0.increase(1)
+
         '\h\s[5]更新が完了した。\n\n'
         '\h\s[0]\u\s[10]更新、\w5完了！'
-        --
-        '\h'
-        --
-        FillLine_list_full('更新履歴を見る', 'On_Update_log')
-        --
-        FillLine_list_full('閉じる', 'CLOSE_NOTALK')
     }
     else {
         On_Status.pride.p0.decrease(1)
-        '\h\s[3]予期せぬエラーかもしれない。\n'
+        '\h\s[3]予期せぬエラーかもしれない。\n\n'
     }
+
+    --
+    '\h'
+    --
+    if update_self == 1 {
+        FillLine_list_full('更新履歴を見る', 'On_Update_log')
+    }
+    --
+    FillLine_list_full('閉じる', 'CLOSE_NOTALK')
 }
 
-OnUpdateFailure {
+OnUpdateFailure
+{
+    On_Update_other_header
+    --
     On_Status.pride.p0.decrease(1)
     case reference[0] {
-        when 'timeout' {
-            '\h\s[0]更新サーバーに接続できなかった。\w9\n後でまた試してみてくれ。\n'
+    when 'timeout' {
+        '\h\s[0]更新サーバーに接続できなかった。\w9\n後でまた試してみてくれ。\n'
+    }
+    when 'too slow' {
+        '\h\s[0]回線が非常に重く、\w5更新できなかった。\n'
+    }
+    when 'md5 miss' {
+        '\u\s[10]\h\s[4]更新ファイルの破損、\w5またはシステムの不調で、\w5更新ができなかった。\w9\w9'
+        --
+        if update_self == 1 {
+            '\uお手数ですが、\w5作者に報告をしていただけると助かります。\n'
         }
-        when 'too slow' {
-            '\h\s[0]回線が非常に重く、\w5更新できなかった。\n'
+        else {
+            '\uもし、\w5作者の方と連絡がとれるなら、\w5このことをお知らせして下さるとよいかと。\n'
         }
-        when 'md5 miss' {
-            '\u\s[10]\h\s[4]更新ファイルの破損、\w5またはシステムの不調で、\w5更新ができなかった。\w9\w9\uお手数ですが、\w5作者に報告をしていただけると助かります。\n'
+    }
+    when 'artificial' {
+        '\h\s[6]更新を中断した。\n'
+    }
+    // SSP
+    when 'fileio' {
+        '\h\s[0]更新ファイルを書き込む容量がなかった。\n'
+    }
+    when 'readonly' {
+        '\h\s[0]ファイルが読み取り専用となっていて書き込めない。\n'
+    }
+    others {
+        if TOINT(reference[0]) > 0 {
+            "\h\s[3]ステータスコード%(TOINT(reference[0]))にて失敗した。\n"
         }
-        when 'artificial' {
-            '\h\s[6]更新を中断した。\n'
+        else {
+            _s = SHIORI3FW.EscapeDangerousTags(reference[0])
+            "\h\s[3]更新に失敗した。\w9\n理由は、「%(_s)」のようだ。\n"
         }
-        // SSP
-        when 'fileio' {
-            '\h\s[0]更新ファイルを書き込む容量がなかった。\n'
-        }
-        when 'readonly' {
-            '\h\s[0]ファイルが読み取り専用となっていて書き込めない。\n'
-        }
-        others {
-            if TOINT(reference[0]) > 0 {
-                "\h\s[3]ステータスコード%(TOINT(reference[0]))にて失敗した。\n"
-            }
-            else {
-                _s = SHIORI3FW.EscapeDangerousTags(reference[0])
-                "\h\s[3]更新に失敗した。\w9\n理由は、「%(_s)」のようだ。\n"
-            }
-        }
+    }
     }
 }
 
-OnUpdate.OnDownloadBegin {
-    _name = SHIORI3FW.EscapeDangerousTags(reference[0])
-
+OnUpdate.OnDownloadBegin
+{
+    On_Update_other_header
+    --
+    _name = SHIORI3FW.EscapeAllTags(reference[0])
     if basewarenameex != "crow" {
         _num = TOINT(reference[1])
         _num += 1
@@ -134,18 +171,62 @@ OnUpdate.OnDownloadBegin {
 }
 
 // OnUpdate.OnMD5CompareBegin {
-//     '\h\s[6]ファイルの正当性を確認している。\n\e'
+// '\h\s[6]ファイルの正当性を確認している。\n\e'
 // }
 
 // OnUpdate.OnMD5CompareComplete {
-//     '\h\s[0]ファイルに問題無し。\w9\nデータを適用。\n\e'
+// '\h\s[0]ファイルに問題無し。\w9\nデータを適用。\n\e'
 // }
 
-OnUpdate.OnMD5CompareFailure {
+OnUpdate.OnMD5CompareFailure
+{
+    On_Update_other_header
+    --
     '\h\s[3]ファイルに問題があった。\w9\nデータ破棄。\n'
 }
 
-On_Update_log {
+OnUpdateOtherBegin
+{
+    "\![raise,OnUpdateBegin,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+}
+
+OnUpdateOtherReady
+{
+    "\![raise,OnUpdateReady,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+}
+
+OnUpdateOtherComplete
+{
+    "\![raise,OnUpdateComplete,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+}
+
+OnUpdateOtherFailure
+{
+    "\![raise,OnUpdateFailure,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+}
+
+OnUpdateOther.OnDownloadBegin
+{
+    "\![raise,OnUpdate.OnDownloadBegin,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+}
+
+OnUpdateOther.OnMD5CompareBegin
+{
+    "\![raise,OnUpdate.OnMD5CompareBegin,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+}
+
+OnUpdateOther.OnMD5CompareComplete
+{
+    "\![raise,OnUpdate.OnMD5CompareComplete,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+}
+
+OnUpdateOther.OnMD5CompareFailure
+{
+    "\![raise,OnUpdate.OnMD5CompareFailure,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+}
+
+On_Update_log
+{
     _header = '\_q' + On_Update_log_header() + '\_q'
     _footer = On_Update_log_footer()
     _item = On_Update_log_body()
@@ -153,18 +234,21 @@ On_Update_log {
     Paging_begin(_header, _footer, 10, 2, 0, _item)
 }
 
-On_Update_log_header {
+On_Update_log_header
+{
     '\u\s[10]\h\s[0]前回までの更新履歴だ。'
     '\u\s[10]\h\s[0]\u前回までの更新履歴です。\h'
 }
 
-On_Update_log_footer {
+On_Update_log_footer
+{
     FillLine_list_full('メニューへ', 'On_Menu_0')
     --
     FillLine_list_full('閉じる', 'CLOSE_NOTALK')
 }
 
-On_Update_log_body : array {
+On_Update_log_body : array
+{
     // 新しいものが上にくるようにする。
     '2023-03-12: トーク増加。ホワイトデー起動トーク追加。'
     '2023-03-05: トーク増加。春トーク・3月トーク、それぞれ微増。'
@@ -188,6 +272,7 @@ On_Update_log_body : array {
 // BalloonTooltip
 // ===================================================================
 
-BalloonTooltip_On_Update_log {
+BalloonTooltip_On_Update_log
+{
     '更新履歴を見る'
 }
