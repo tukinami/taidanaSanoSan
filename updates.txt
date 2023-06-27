@@ -2,8 +2,8 @@ charset,UTF-8
 file,ghost/master/descript.txte4c70aba39406e13e3c6c40fde5fb076size=350date=2012-12-21T00:00:00
 file,ghost/master/dic_aitalk/_loading_order.txtdf652206c7767c975d193208b16bed3bsize=164date=2012-12-21T00:00:00
 file,ghost/master/dic_aitalk/yaya_aitalk.dic7e9e2f6b2fbf024b67ba3a7083becd67size=2291date=2012-12-21T00:00:00
-file,ghost/master/dic_aitalk/yaya_aitalk_date.dicdd16471b7a5d1cf432efc70bb6fb1934size=21117date=2012-12-21T00:00:00
-file,ghost/master/dic_aitalk/yaya_aitalk_default.dica2367a3b0ca35fac68ba9e6a9c1d54cdsize=46306date=2012-12-21T00:00:00
+file,ghost/master/dic_aitalk/yaya_aitalk_date.dic734bbf16c3ca7b748133c1bb3c1e8a33size=22685date=2012-12-21T00:00:00
+file,ghost/master/dic_aitalk/yaya_aitalk_default.dic30dc8b37e883e393ec1e8071d1a55de7size=47137date=2012-12-21T00:00:00
 file,ghost/master/dic_base/_loading_order.txt930511a8cca19c0b28e5661417904a2esize=261date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_function.dic31a8be1ce11c51b1f0d036fd7be5917esize=13197date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_status.dicf0404058a7af27f13e9a2f59e3053ae8size=3711date=2012-12-21T00:00:00
@@ -22,7 +22,7 @@ file,ghost/master/dic_events/yaya_event_etc.dicc9a54708be3042a1464f48d409a9239f
 file,ghost/master/dic_events/yaya_event_feature.dic2d66d22f4fa0f2d7d8148d49be8759e1size=21164date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_mouse.dic6a1fb4b887a83e820b69ad8eb7730c22size=6669date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_timeChange.dic7a93e18a6bd73abde6da88026d5a6b12size=14094date=2012-12-21T00:00:00
-file,ghost/master/dic_events/yaya_event_update.dic10a912ca1132c559ff13621f7c9bb88esize=8904date=2012-12-21T00:00:00
+file,ghost/master/dic_events/yaya_event_update.dic3ef5169a50b0e7791d0b3ab4a957574asize=8971date=2012-12-21T00:00:00
 file,ghost/master/explorer2/character_descript.txt5ae2818a2df95789de8789568435d9c7size=587date=2012-12-21T00:00:00
 file,ghost/master/icon.icoc39a9f642b9e16f2c3815b6406887d4asize=1406date=2012-12-21T00:00:00
 file,ghost/master/stamp.pngdb6568b9b56eec66a691fd166740b3e5size=1831date=2012-12-21T00:00:00
