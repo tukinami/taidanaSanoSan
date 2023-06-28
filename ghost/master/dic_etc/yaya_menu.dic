@@ -35,8 +35,10 @@ On_Menu_0
 
 On_Menu_0_lastTalk
 {
-    if ARRAYSIZE(AYATEMPLATE.LastTalk) > 0 {
-        AYATEMPLATE.LastTalk[0]
+    if AYATEMPLATE.LastTalk != '' {
+        SHIORI3FW.RegisterTempVar('lastTalk_flag')
+        lastTalk_flag = 1
+        AYATEMPLATE.LastTalk + '\![embed,On_Menu_0_lastTalk_finalize]'
     }
     else {
         '\h\s[0]今回はまだ何も話していないな。\n'
@@ -48,6 +50,11 @@ On_Menu_0_lastTalk
         FillLine_list_full('閉じる', 'On_Menu_0_close')
         --
     }
+}
+
+On_Menu_0_lastTalk_finalize
+{
+    lastTalk_flag = 0
 }
 
 // ===================================================================

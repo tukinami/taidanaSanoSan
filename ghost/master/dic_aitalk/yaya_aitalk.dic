@@ -4,16 +4,17 @@ RandomTalk
 {
     Surface_reset
     --
-    TOSTR(EVAL(CHR(0x22)+RandomTalkEx()+CHR(0x22)))
+    TOSTR(EVAL(CHR(0x22) + RandomTalkEx() + CHR(0x22)))
 }
 
-//------------------------------------------------------------------------------
-//ランダムトーク本体：この中にランダムトークを記載してください
-//ここのみ常に ' ' で括って書いてください。
-//上のRandomTalkの中身で%( )を展開していますので、" "を使わなくてもOKです。
-//高速化対策
-//------------------------------------------------------------------------------
-RandomTalkEx : nonoverlap {
+// ------------------------------------------------------------------------------
+// ランダムトーク本体：この中にランダムトークを記載してください
+// ここのみ常に ' ' で括って書いてください。
+// 上のRandomTalkの中身で%( )を展開していますので、" "を使わなくてもOKです。
+// 高速化対策
+// ------------------------------------------------------------------------------
+RandomTalkEx : nonoverlap
+{
     _hunger_flag = On_Status.fullness.p0.judge
 
     // 空腹が酷い場合は有無を言わさず食事
@@ -26,29 +27,32 @@ RandomTalkEx : nonoverlap {
     _talk_flag = RAND(_talk_normal_size + TALK_EAT_RATIO)
 
     case _talk_flag {
-        when 0-TALK_EAT_RATIO {
-            parallel Talk_eat
-        }
-        others {
-            RandomTalk_Normal
-        }
+    when 0-TALK_EAT_RATIO {
+        parallel Talk_eat
+    }
+    others {
+        RandomTalk_Normal
+    }
     }
 }
 
-RandomTalk_Normal : nonoverlap {
+RandomTalk_Normal : nonoverlap
+{
     parallel RandomTalk_NormalBody
 }
 
-RandomTalk_NormalSize {
+RandomTalk_NormalSize
+{
     ARRAYSIZE(RandomTalk_NormalBody)
 }
 
-RandomTalk_NormalBody : array {
+RandomTalk_NormalBody : array
+{
     _talk_array = IARRAY
 
     // Plugin GetWIndowTitle対応
     if (AYATEMPLATE.IsPluginExist('GetWindowTitle') == 1) && (Plugin_should_GetWindowTitle == 1) {
-        _talk_array = (_talk_array, On_Plugin_GetWindowTitle)
+        _talk_array = (_talk_array, '\![raise,On_Plugin_GetWindowTitle]')
     }
 
     // 日付トーク

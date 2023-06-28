@@ -158,7 +158,12 @@ On_Plugin_stamp_menu_exec
 // ===================================================================
 On_Plugin_GetWindowTitle
 {
-    '\![raiseplugin,GetWindowTitle,OnGetWindowTitle]'
+    if lastTalk_flag == 1 && getWindowTitle_lastTalk != '' {
+        getWindowTitle_lastTalk
+    }
+    else {
+        '\![raiseplugin,GetWindowTitle,OnGetWindowTitle]'
+    }
 }
 
 Plugin_should_GetWindowTitle
@@ -183,6 +188,13 @@ Plugin_set_should_GetWindowTitle : void
 }
 
 OnRecieveGetWindowTitle
+{
+    SHIORI3FW.RegisterTempVar('getWindowTitle_lastTalk')
+    getWindowTitle_lastTalk = OnRecieveGetWindowTitle_talk
+    getWindowTitle_lastTalk
+}
+
+OnRecieveGetWindowTitle_talk
 {
     _window_title = SHIORI3FW.EscapeAllTags(reference[0])
 
