@@ -19,7 +19,9 @@ On_Menu_0
         FillLine_list_full('頼み事', 'On_Menu_0_func')
     }
     --
-    FillLine_list_full('さらに頼み事', 'On_Menu_0_plugin')
+    if basewarenameex == 'SSP' {
+        FillLine_list_full('さらに頼み事', 'On_Menu_0_plugin')
+    }
     --
     '\n'
     --
