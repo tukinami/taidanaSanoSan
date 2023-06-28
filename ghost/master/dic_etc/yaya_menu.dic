@@ -38,7 +38,7 @@ On_Menu_0_lastTalk
     if AYATEMPLATE.LastTalk != '' {
         SHIORI3FW.RegisterTempVar('lastTalk_flag')
         lastTalk_flag = 1
-        AYATEMPLATE.LastTalk + '\![embed,On_Menu_0_lastTalk_finalize]'
+        AYATEMPLATE.LastTalk + '\![raise,On_Menu_0_lastTalk_finalize]'
     }
     else {
         '\h\s[0]今回はまだ何も話していないな。\n'
