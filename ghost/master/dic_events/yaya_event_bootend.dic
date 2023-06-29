@@ -1,7 +1,8 @@
 // ===================================================================
 // OnFirstBoot
 // ===================================================================
-OnFirstBoot {
+OnFirstBoot
+{
     void On_InitVar
     --
     if 0 < reference[0] {
@@ -15,7 +16,8 @@ OnFirstBoot {
 // -------------------------------------------------------------------
 // 一番最初
 // -------------------------------------------------------------------
-OnFirstBoot_first {
+OnFirstBoot_first
+{
     '\u\s[-1]\h\s[25]…\w5…\w5…\w5…\w5\w9\w9\s[30]\n…\w5…\w5ム\w2ニ\w2ャ\w2ム\w2ニ\w2ャ\w2\w5…\w5…\w5\w9\w9\u\s[10]ねぇ。\w9伊織？\w9\w9\h\s[2]\n\nわっ！？\w9なになに！？\w9\w9\u\n\nもう始まってるんだけど？\w9\w9\h\s[4]\n\nなんだ、\w5きぬか…\w5…\w5。\w9\nって、\w9\s[2]え？\w9\n！！\w9ごめん！\w9寝過ごした！\w9\w9\u\n\n初日から寝坊とか…\w5…\w5。\w9\w9\h\s[4]\n\nごめん！\w9本当にごめんって！！'
     --
     '\x\c'
@@ -28,19 +30,22 @@ OnFirstBoot_first {
 // -------------------------------------------------------------------
 // 二回目以降
 // -------------------------------------------------------------------
-OnFirstBoot_after {
+OnFirstBoot_after
+{
     "\u\s[10]\w9\h\s[0]おう、\w9\s[5]また会ったな。\w9\w9\u今回もよろしく。\w9\w9\h\s[3]\n\nさて、\w5俺のメモには名前が%(username)となっているんだが…\w5…\w5。"
     --
-    FillLine_list_full('そのままでよろしく','OnFirstBoot_after_ok')
+    FillLine_list_full('そのままでよろしく', 'OnFirstBoot_after_ok')
     --
-    FillLine_list_full('名前直して','OnFirstBoot_after_namecheck')
+    FillLine_list_full('名前直して', 'OnFirstBoot_after_namecheck')
 }
 
-OnFirstBoot_after_ok {
+OnFirstBoot_after_ok
+{
     '\u\s[10]\h\s[5]ああ、\w5よろしく。\w9\w9\u'
 }
 
-OnFirstBoot_after_namecheck {
+OnFirstBoot_after_namecheck
+{
     '\u\s[10]\h\s[4]やっぱり違ったか。'
     --
     if username == 'ユーザー' {
@@ -53,13 +58,15 @@ OnFirstBoot_after_namecheck {
 }
 
 // -------------------------------------------------------------------
-OnFirstBoot_inputUserName {
-     "\h\s[0]何て呼べばいいんだ？\n"
+OnFirstBoot_inputUserName
+{
+    "\h\s[0]何て呼べばいいんだ？\n"
     --
     "\![open,inputbox,OnFirstBoot_inputUserName_onInput,-1,%(username)]"
 }
 
-OnFirstBoot_inputUserName_onInput {
+OnFirstBoot_inputUserName_onInput
+{
     _input = SHIORI3FW.EscapeAllTags(reference[0])
 
     if _input == '' {
@@ -70,27 +77,30 @@ OnFirstBoot_inputUserName_onInput {
     }
 }
 
-OnFirstBoot_inputUserName_empty {
+OnFirstBoot_inputUserName_empty
+{
     '\u\s[10]\h\s[6]教えたくなかったかな？\w9\w9'
     --
     "\uじゃあ、\w5%(username)って呼ぶけど、\w5大丈夫？\n\n"
     --
-    FillLine_list_full('いいよ','OnFirstBoot_inputUserName_decide,'+username)
+    FillLine_list_full('いいよ', 'OnFirstBoot_inputUserName_decide,' + username)
     --
-    FillLine_list_full('やり直し','OnFirstBoot_inputUserName')
+    FillLine_list_full('やり直し', 'OnFirstBoot_inputUserName')
 }
 
-OnFirstBoot_inputUserName_check {
+OnFirstBoot_inputUserName_check
+{
     _name = SHIORI3FW.EscapeAllTags(_argv[0])
 
     "\h\s[0]%(_name)でいいのか？\n\n"
     --
-    FillLine_list_full('いいよ','OnFirstBoot_inputUserName_decide,'+_name)
+    FillLine_list_full('いいよ', 'OnFirstBoot_inputUserName_decide,' + _name)
     --
-    FillLine_list_full('やり直し','OnFirstBoot_inputUserName')
+    FillLine_list_full('やり直し', 'OnFirstBoot_inputUserName')
 }
 
-OnFirstBoot_inputUserName_decide {
+OnFirstBoot_inputUserName_decide
+{
     username = SHIORI3FW.EscapeAllTags(reference[0])
     "\u\s[10]\h\s[0]わかった。\w9%(username)、\w9"
     --
@@ -100,7 +110,8 @@ OnFirstBoot_inputUserName_decide {
 // ===================================================================
 // OnBoot
 // ===================================================================
-OnBoot {
+OnBoot
+{
     Surface_reset
     --
     On_Status.fullness.p0.reset
@@ -108,9 +119,17 @@ OnBoot {
     OnBoot_talk
 }
 
-OnBoot_talk : nonoverlap {
-    // 日付_first 関数があり、今年はやってなかったら優先
-    if (ISFUNC("OnBoot_talk_date_%(month)_%(day)_first") &&  EVAL("datetalk_year_%(month)_%(day)") != year ) {
+OnBoot_talk : nonoverlap
+{
+    // user_birthdayがあり、datetalk_year_user_birthdayが今年でなかったら優先
+    if user_birthday != '' && datetalk_year_user_birthday != year {
+        if month == user_birthday[1] && day == user_birthday[2] {
+            OnBoot_talk_date_user_birthday_first
+            return
+        }
+    }
+    // OnBoot_talk_date_日付_first 関数があり、今年はやってなかったら優先
+    if (ISFUNC("OnBoot_talk_date_%(month)_%(day)_first") && EVAL("datetalk_year_%(month)_%(day)") != year) {
         EVAL("OnBoot_talk_date_%(month)_%(day)_first")
         return
     }
@@ -118,7 +137,8 @@ OnBoot_talk : nonoverlap {
     OnBoot_talkEx
 }
 
-OnBoot_talkEx : nonoverlap {
+OnBoot_talkEx : nonoverlap
+{
     _talk_funcs = IARRAY
 
     // 季節
@@ -147,7 +167,8 @@ OnBoot_talkEx : nonoverlap {
 // -------------------------------------------------------------------
 // OnBoot_talk_*
 // -------------------------------------------------------------------
-OnBoot_talk_default : array {
+OnBoot_talk_default : array
+{
     '\u\s[10]\h\s[4]ふとんが恋しい！\w9\w9\u初っ端からやめなさい。'
     '\u\s[10]\h\s[5]今日ものんびりやっていこ\w5\s[30]ぉ\w5～\w5…\w5…\w5。\w9\w9\u\s[11]しまらない！'
     "\u\s[10]\h\s[35]%(me)を食べるときは、\w5部屋を明るくして、\w5近づいて食べような！\w9\w9\uそして流れるオープニングテーマ。\w9\w9\h\s[3]\n\nそして入らない突っ込み。"
@@ -156,89 +177,102 @@ OnBoot_talk_default : array {
     '\u\s[10]はいはい、\w5どうもこんにちは～。\w9\w9\h\s[35]俺たち、\s[5]\n\n\w9\w9\u\n\n\_s「\w2怠\w2惰\w2な\w2佐\w2野\w2さ\w2ん\w2」\w2で\w2～\w2す\w2！！\_s\w9\w9\h\s[4]\n\n…\w5…\w5これ、\w5いつまで続けるんだ？\w9\w9\u\s[16]\n\nはい、\w5通常通りにいきまーす。'
 }
 
-OnBoot_talk_season_春 : array {
+OnBoot_talk_season_春 : array
+{
     '\u\s[10]\h\s[6]春は気持ち良くて眠くなる…\w5…\w5。\w9\w9\u何かにつけて年中その調子じゃないの。\w9\w9\h\s[4]\n\n眠いと何もしたくなくなる…\w5…\w5。\w9\w9\u\s[11]\n\nそれも年中じゃない。'
 }
 
-OnBoot_talk_season_夏 : array {
+OnBoot_talk_season_夏 : array
+{
     if '朝' _in_ Time_hour_toSlot {
         '\u\s[10]\h\s[30]ふ\w2ぁ\w2～\w2…\w5…\w5。\w9\s[4]\n昨日暑くてあんまり眠れてない…\w5…\w5。\w9\w9\uほら、\w5シャキっとする！\w9\w9\h\s[2]\n\nシャキッ！\w9\w9\u\n\n…\w5…\w5。\w9\w9\h\s[1]\n\n…\w5…\w5何か言えよ。'
     }
     "\u\s[10]\h\s[4]こ\w2ん\w2に\w2ち\w2は\w2%(username)…\w5…\w5。\w9\w9\u暑さで溶けそう。"
 }
 
-OnBoot_talk_season_冬 : array {
+OnBoot_talk_season_冬 : array
+{
     if '朝' _in_ Time_hour_toSlot {
         '\u\s[10]\h\s[-1]う～ん…\w5…\w5あと5分…\w5…\w5。\w9\w9\u\s[16]はいはい。\w9出てくる。\w9\w9\h\s[4]\n\nおふとん…\w5…\w5おふとん…\w5…\w5。\w9\w9\u\s[10]\n\n寒くて出てきたくないのは分かるけどね。'
     }
     "\u\s[10]\h\s[31]こ\w2ん\w2に\w2ち\w2は\w2%(username)…\w5…\w5。\w9\w9\u眠そう。\w9\w9\h\s[4]\n\n寒\w2い\w2と\w2眠\w2い\w2…\w5…\w5。\w9\w9\u\n\n季節問わずでしょうに。"
 }
 
-OnBoot_talk_timeSlot_早朝 : array {
+OnBoot_talk_timeSlot_早朝 : array
+{
     '\u\s[10]\h\s[30]ふぁ…\w5…\w5。\w9\s[31]\nお\w9は\w9よ\w9…\w9…\w9。\w9\w9\uそのままおやすみしそう。'
     '\u\s[10]\h\s[6]おはようございます。\w9\s[-1]\nそして、\w5さようなら。\w9\w9\u\s[11]コラコラ！\w9\w9\h\s[8]\n\n冗談冗談。'
 }
 
-OnBoot_talk_timeSlot_朝 : array {
+OnBoot_talk_timeSlot_朝 : array
+{
     "\u\s[10]\h\s[0]おはよう。\w9%(username)。\w9\w9\u今日は何しようか？"
     '\u\s[10]\h\s[0]今日のお昼は何食べようか。\w9\w9\uまだ朝ですよ？'
 }
 
-OnBoot_talk_timeSlot_昼 : array {
+OnBoot_talk_timeSlot_昼 : array
+{
     "\u\s[10]\h\s[0]こんにちは。\w9%(username)。"
     "\h\s[0]\u\s[11]%(username)さーん！\w9\nこ\w2ー\w2ん\w2に\w5ー\w5ち\w2わ\w2ー\w5！！\w9\w9\hヒーロー出てきそう。"
 }
 
-OnBoot_talk_timeSlot_夕方 : array {
+OnBoot_talk_timeSlot_夕方 : array
+{
     "\u\s[10]\h\s[0]こんにちは。\w9%(username)。\w9\w9\u日も傾いてきたかしら。"
 }
 
-OnBoot_talk_timeSlot_夜 : array {
+OnBoot_talk_timeSlot_夜 : array
+{
     "\u\s[10]\h\s[0]こんばんは。\w9%(username)。"
 }
 
-OnBoot_talk_timeSlot_深夜 : array {
+OnBoot_talk_timeSlot_深夜 : array
+{
     "\u\s[10]\h\s[6]…\w5…\w5…\w5…\w5。\w9\w9\u…\w5…\w5寝てるわね。\w9\w9\h\s[6]\n\n…\w5…\w5\w9\s[2]\nはっ！！\w9\w9\u\n\nお、\w5起きた。\w9\w9\h\s[31]\n\nあれ、\w5俺の%(me)は…\w5…\w5。\w9\w9\u\s[16]\n\nねぼけてないで、\w5しゃっきりしなさい。"
     "\u\s[10]\h\s[30]ふぁ～…\w5…\w5。\w9\s[31]\nこんばんは…\w5…\w5%(username)…\w5…\w5。\w9\w9\u眠気に負けそう。"
     "\u\s[10]\h\s[31]お\w2や\w2す\w2み\w2%(username)…\w5…\w5。\w9\w9\uこら、\w5寝ようとしない。"
 }
 
-OnBoot_talk_eat_func {
+OnBoot_talk_eat_func
+{
     _hunger_flag = On_Status.fullness.p0.judge
 
     _hunger = 'normal'
     case _hunger_flag {
-        when 2 {
-            _hunger = 'fullover'
-        }
-        when 1 {
-            _hunger = 'full'
-        }
-        when 0 {
-            _hunger = 'normal'
-        }
-        when -1 {
-            _hunger = 'hungerfew'
-        }
-        when -2 {
-            _hunger = 'hunger'
-        }
-        others {
-            _hunger = 'hungerover'
-        }
+    when 2 {
+        _hunger = 'fullover'
+    }
+    when 1 {
+        _hunger = 'full'
+    }
+    when 0 {
+        _hunger = 'normal'
+    }
+    when -1 {
+        _hunger = 'hungerfew'
+    }
+    when -2 {
+        _hunger = 'hunger'
+    }
+    others {
+        _hunger = 'hungerover'
+    }
     }
 
     if ISFUNC("OnBoot_talk_eat_%(_hunger)") {
         "OnBoot_talk_eat_%(_hunger)"
-    } else {
+    }
+    else {
         ''
     }
 }
 
-OnBoot_talk_eat_fullover : array {
+OnBoot_talk_eat_fullover : array
+{
     '\u\s[10]\h\s[4]起動前に食べ過ぎた…\w5…\w5。\w9\w9\u何食べたの？\w9\w9\h\s[1]\n\n%meと%meと%meと%meと…\w5…\w5\w9\w9\u\s[11]\n\n食べ過ぎ！？'
 }
-OnBoot_talk_eat_full : array {
+OnBoot_talk_eat_full : array
+{
     '\u\s[10]\h\s[31]お\w2な\w2か\w2い\w2っ\w2ぱ\w2い\w2で\w2ね\w2む\w2い\w2…\w5…\w5。\w9\w9\uはいはい、\w5いくわよ。'
 }
 
@@ -251,24 +285,28 @@ OnBoot_talk_eat_full : array {
 // OnBoot_talk_eat_hunger : array {
 // }
 
-OnBoot_talk_eat_hungerover : array {
+OnBoot_talk_eat_hungerover : array
+{
     _meal = Meal_array('Word_meal_light')
     p0_s_fullness += _meal[1]
 
     "\u\s[10]\h\s[6]（モグモグ…\w5…\w5）\w9\n…\w5…\w5\w9\s[9]！！\w9\w9\u何してるの？\w9\w9\h\s[1]\n\n起動前に軽く腹ごしらえしておこうと%(_meal[0])を…\w5…\w5。\w9\w9\u\n\nはい、\w5食べ終わったなら、\w5始めるわよ。\w9\w9\h\s[3]\n\nはい…\w5…\w5。"
 }
 
-OnBoot_talk_date_1_1_first {
+OnBoot_talk_date_1_1_first
+{
     datetalk_year_1_1 = year
     "\u\s[16]\h\s[6]あけまして、\w9\w9\u\s[11]\h\s[5]\n\_sおめでとうございます！\_s\w9\w9\w9\s[6]\n\n本年も、\w5よろしくお願いいたします。\w9\w9\u\s[10]\n\n%(username)にとって、\w5今年が良い年でありますように。"
 }
 
-OnBoot_talk_date_2_14_first {
+OnBoot_talk_date_2_14_first
+{
     datetalk_year_2_14 = year
     "\u\s[10]\h\s[6]今日はバレンタインデーなので、\w5チョコを作りました。\w9\w9\u自分が食べるための？\w9\w9\h\n\nそれも作りましたが、\w5違います。\w9\s[5]\n%(username)にあげるためのだよ。\w9\s[35]\n嫌いじゃなかったら、\w5どうぞ。\w9チョコブラウニー。"
 }
 
-OnBoot_talk_date_3_14_first {
+OnBoot_talk_date_3_14_first
+{
     datetalk_year_3_14 = year
 
     if datetalk_year_2_14 == year {
@@ -280,10 +318,17 @@ OnBoot_talk_date_3_14_first {
     }
 }
 
+OnBoot_talk_date_user_birthday_first
+{
+    datetalk_year_user_birthday = year
+    "\u\s[10]\h\s[25]ハ\w2ッ\w2ピ\w2バ\w5ー\w5ス\w2デ\w5ー\w5トゥ\w5ー\w5ユ\w5ー\w5♪\w9\w9\u\s[16]ハ\w2ッ\w2ピ\w2バ\w5ー\w5ス\w2デ\w5ー\w5トゥ\w5ー\w5ユ\w5ー\w5♪\w9\w9\h\s[5]\n\nハ\w2ッ\w2ピ\w2バ\w5ー\w5ス\w2デ\w5ー\w5ディ\w2ア\w2%(username)♪\w9\w9\w9\u\s[10]\n\nハ\w2ッ\w2ピ\w2バ\w5ー\w5ス\w2デ\w5ー\w5トゥ\w5ー\w5ユ\w5ー\w5♪\s[11]\n\n\w9\w9\h\s[35]\n\n\_sおめでと～！！\_s\w9\w9\w9\w9\s[5]\n\n今日という日を祝えて本当にうれしい。\w9\w9\u\s[10]\n\n次の誕生日までに、\w5%(username)に良いことがたくさん起こりますように！！"
+}
+
 // ===================================================================
 // OnClose
 // ===================================================================
-OnClose {
+OnClose
+{
     Surface_reset
     --
     OnClose_talk
@@ -291,7 +336,8 @@ OnClose {
     "\-"
 }
 
-OnClose_talk : nonoverlap {
+OnClose_talk : nonoverlap
+{
     _talk_array = IARRAY
 
     // 時間帯
@@ -306,7 +352,8 @@ OnClose_talk : nonoverlap {
     parallel _talk_array
 }
 
-OnClose_talk_default : array {
+OnClose_talk_default : array
+{
     '\u\s[10]\h\s[5]お疲れ様。\w9\w9\uそれでは、\w5またね。'
     '\u\s[10]\h\s[5]じゃあな。\w9\w9\uまたね。'
     '\h\s[0]\u\s[10]ではでは！\w9\w9\h\s[5]またな。'
@@ -315,22 +362,26 @@ OnClose_talk_default : array {
     '\h\s[0]\u\s[11]今日のお相手は！\w9\nきぬと！\w9\w9\h\s[5]伊織でした～！\w9\w9\u\s[-1]\n\nではでは！\w9\w9\h\s[-1]\n\nまたね～！！\w9…\w5…\w5\w9\s[9]\nって、\w5何のノリだこれは！？'
 }
 
-OnClose_talk_timeSlot_朝 : array {
+OnClose_talk_timeSlot_朝 : array
+{
     '\u\s[10]\h\s[0]お疲れ様。\w9\s[6]\n俺はこれから、\w9\s[30]二度寝しようかな～。\w9\w9\uさせません。\w9\w9\h\s[3]\n\nえー。'
 }
 
-OnClose_talk_timeSlot_深夜  : array {
+OnClose_talk_timeSlot_深夜 : array
+{
     '\u\s[10]\h\s[30]ふぁ\w2～\w2～\w2…\w5…\w5。\w9\w9\u\s[16]う～ん、\w5私も眠いわ。\w9\w9\h\s[6]\n\n…\w5…\w5。\w9\w9\u\s[11]\n\nもう寝てるし！\w9\s[10]\nそ、\w5それじゃあ、\w5おやすみ！'
 }
 
 // ===================================================================
 // OnGhostLoad | OnGhostUnload
 // ===================================================================
-OnGhostLoad {
+OnGhostLoad
+{
     On_Status.aigraph.recent
-    boot_times ++
+    boot_times++
 }
 
-OnGhostUnload {
+OnGhostUnload
+{
     On_U.eraseVar
 }

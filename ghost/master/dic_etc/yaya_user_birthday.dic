@@ -133,7 +133,18 @@ On_UserBirthday_input_inputbox_check
 
 On_UserBirthday_input_decide
 {
-    user_birthday = user_temp_birthday
+    _is_same = 1
+    for _i = 0; _i < 3; _i++ {
+        if user_birthday[_i] != user_temp_birthday[_i] {
+            _is_same = 0
+            break
+        }
+    }
+    if _is_same == 0 {
+        user_birthday = user_temp_birthday
+        datetalk_year_user_birthday = ''
+    }
+    --
 
     "\h\_q誕生日: %(user_birthday[0])年%(user_birthday[1])月%(user_birthday[2])日\n\n\_q"
     --
@@ -147,7 +158,14 @@ On_UserBirthday_input_decide
     --
     '\n'
     --
-    On_Menu_0_setting_footer
+    if _is_same == 0 && user_birthday[1] == month && user_birthday[2] == day {
+        '\x\c'
+        --
+        On_UserBirthday_input_decide_today
+    }
+    else {
+        On_Menu_0_setting_footer
+    }
 }
 
 On_UserBirthday_menu_chancel
@@ -197,6 +215,7 @@ On_UserBirthday_menu_erase
 On_UserBirthday_menu_erase_deside
 {
     user_birthday = ''
+    datetalk_year_user_birthday = ''
 
     "\h\s[0]\u\s[16]1\w2.\w2.\w2.2の.\w2.\w2.\w2ポカン!\w9\n\w9\n佐野伊織は%(username)の誕生日をきれいにわすれた！\w9\s[10]\nそして！\w9\s[11]\n佐野伊織はあたらしくパブロ・ピカソのフルネームを覚え…\w5…\w5\w9\w9\h\s[7]ません！！"
     --
@@ -212,4 +231,11 @@ On_UserBirthday_menu_erase_chancel
     '\n'
     --
     On_Menu_0_setting_footer
+}
+
+On_UserBirthday_input_decide_today
+{
+    '\u\s[10]\h\s[2]…\w5…\w5今日じゃないか誕生日！\w9\w9\uなんというタイミング！\w9\w9\h\s[3]\n\nえと、\w5あと、\w5ちょっと待っててくれ！\w9\w9\u\s[-1]\h\s[-1]\n\n…\w5…\w5…\w5…\w5。\x\c'
+    --
+    OnBoot_talk_date_user_birthday_first
 }

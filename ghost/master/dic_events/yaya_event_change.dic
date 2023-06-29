@@ -1,13 +1,12 @@
-//******************************************************************************
+// ******************************************************************************
 // YAYA　ゴーストテンプレート
 // 切り替えトーク辞書
-//******************************************************************************
+// ******************************************************************************
 
-//******************************************************************************
-// ゴースト切り替え 
-//******************************************************************************
-/*
-関数は以下の形で記載します。
+// ******************************************************************************
+// ゴースト切り替え
+// ******************************************************************************
+/* 関数は以下の形で記載します。
 [イベント] + [ゴースト名]
 イベントは、以下のものがあります。
 イベントによっては該当する関数が無ければOnCloseやOnBootになります。
@@ -26,13 +25,13 @@ OnGhostCallComplete	他のゴーストを呼び出して、呼び出されたゴ
 
 OnOtherGhostBooted	他のゴーストが呼び出されて、呼び出されたゴーストの起動が完了したとき
 OnOtherGhostClosed	他のゴーストが終了したとき
-OnOtherGhostChanged	他のゴーストが他のゴーストに 切り替わって、切り替わり先のゴーストの起動が完了したとき
-*/
+OnOtherGhostChanged	他のゴーストが他のゴーストに 切り替わって、切り替わり先のゴーストの起動が完了したとき */
 
 // -------------------------------------------------------------------
 // 自分へ
 // -------------------------------------------------------------------
-OnGhostChanged_佐野伊織 {
+OnGhostChanged_佐野伊織
+{
     '\u\s[10]\h\s[0]リロード完了。\w9\w9\uリロード中何かあった？\w9\w9'
     --
     '\h\s[6]\n\nそれは一瞬の出来事であった。\w9\n佐野伊織を襲った謎の眠気。\w9\nそれは、\w5これから始まる奇怪な事件の序章に過ぎなかったのだ…\w5…\w5。\w9\w9\u\n\n実際には？\w9\w9\h\s[8]\n\n何もなかったです。\w9はい。'
@@ -40,7 +39,8 @@ OnGhostChanged_佐野伊織 {
     '\h\s[31]\n\n一瞬ですが、\w5眠りました。\w9\w9\u\s[11]\n\n本当に！？'
 }
 
-OnGhostChanging_佐野伊織 {
+OnGhostChanging_佐野伊織
+{
     '\h\s[0]\u\s[11]リ\w2ロ\w2ー\w2ー\w2ー\w2ー\w2ド\w2ッ！！\w9\w9\h\s[6]そこまでのことだろうか？'
     '\u\s[10]\h\s[6]リロード開始。'
     '\h\s[0]\u\s[10]リロードしまーす！'
@@ -49,9 +49,17 @@ OnGhostChanging_佐野伊織 {
 // -------------------------------------------------------------------
 // Other
 // -------------------------------------------------------------------
-OnGhostChangedOther {
+OnGhostChangedOther
+{
+    // user_birthdayがあり、datetalk_year_user_birthdayが今年でなかったら優先
+    if user_birthday != '' && datetalk_year_user_birthday != year {
+        if month == user_birthday[1] && day == user_birthday[2] {
+            OnBoot_talk_date_user_birthday_first
+            return
+        }
+    }
     // OnBoot_talk_date_日付_first 関数があり、今年はやってなかったら優先
-    if (ISFUNC("OnBoot_talk_date_%(month)_%(day)_first") &&  EVAL("datetalk_year_%(month)_%(day)") != year ) {
+    if (ISFUNC("OnBoot_talk_date_%(month)_%(day)_first") && EVAL("datetalk_year_%(month)_%(day)") != year) {
         EVAL("OnBoot_talk_date_%(month)_%(day)_first")
         return
     }
@@ -60,54 +68,54 @@ OnGhostChangedOther {
     "\u\s[10]\h\s[6]%(_s)さんからの交代だ。\w9\w9\uありがとうございました。"
 }
 
-OnGhostChangingOther {
+OnGhostChangingOther
+{
     _s = SHIORI3FW.EscapeAllTags(reference[0])
     "\u\s[10]\h\s[0]%(_s)さんへ交代だ。\w9\w9\n\n\u\s[10]よろしくお願いします。"
 }
 
-
-//******************************************************************************
-//この下は切り替えトーク処理用
-//通常はいじる必要はありませんが、必要に応じて適宜変更してください。
-//AYATEMPLATE.ではじまる関数は _tmpl_util.dic にあります。
-//******************************************************************************
+// ******************************************************************************
+// この下は切り替えトーク処理用
+// 通常はいじる必要はありませんが、必要に応じて適宜変更してください。
+// AYATEMPLATE.ではじまる関数は _tmpl_util.dic にあります。
+// ******************************************************************************
 
 OnGhostChanging
 {
-	AYATEMPLATE.ExecuteChangeCallTalk("OnGhostChanging","OnClose")
+    AYATEMPLATE.ExecuteChangeCallTalk("OnGhostChanging", "OnClose")
 }
 
 OnGhostChanged
 {
-	AYATEMPLATE.ExecuteChangeCallTalk("OnGhostChanged","OnBoot")
+    AYATEMPLATE.ExecuteChangeCallTalk("OnGhostChanged", "OnBoot")
 }
 
 OnGhostCalling
 {
-	AYATEMPLATE.ExecuteChangeCallTalk("OnGhostCalling")
+    AYATEMPLATE.ExecuteChangeCallTalk("OnGhostCalling")
 }
 
 OnGhostCalled
 {
-	AYATEMPLATE.ExecuteChangeCallTalk("OnGhostCalled","OnBoot")
+    AYATEMPLATE.ExecuteChangeCallTalk("OnGhostCalled", "OnBoot")
 }
 
 OnGhostCallComplete
 {
-	AYATEMPLATE.ExecuteChangeCallTalk("OnGhostCallComplete")
+    AYATEMPLATE.ExecuteChangeCallTalk("OnGhostCallComplete")
 }
 
 OnOtherGhostClosed
 {
-	AYATEMPLATE.ExecuteChangeCallTalk("OnOtherGhostClosed")
+    AYATEMPLATE.ExecuteChangeCallTalk("OnOtherGhostClosed")
 }
 
 OnOtherGhostBooted
 {
-	AYATEMPLATE.ExecuteChangeCallTalk("OnOtherGhostBooted")
+    AYATEMPLATE.ExecuteChangeCallTalk("OnOtherGhostBooted")
 }
 
 OnOtherGhostChanged
 {
-	AYATEMPLATE.ExecuteChangeCallTalk("OnOtherGhostChanged")
+    AYATEMPLATE.ExecuteChangeCallTalk("OnOtherGhostChanged")
 }
