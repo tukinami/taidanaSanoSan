@@ -1,0 +1,215 @@
+On_UserBirthday_menu
+{
+    if user_birthday == '' {
+        On_UserBirthday_menu_before_input
+    }
+    else {
+        On_UserBirthday_menu_after_input
+    }
+}
+
+On_UserBirthday_menu_before_input
+{
+    "\u\s[10]\h\s[0]もしよかったら、\w5%(username)の誕生日を教えてくれないか？\w9\w9\u\s[11]教えてくれたら、\w5あ\w2ー\w2んなことや\w7こ\w2ー\w2んなことが！\w9\w9\h\s[3]\n\nいや、\w5その、\w5大したことはできないけど…\w5…\w5。"
+    --
+    '\n\n'
+    --
+    FillLine_list_full('教える', 'On_UserBirthday_input_start')
+    --
+    FillLine_list_full('教えない', 'On_UserBirthday_menu_chancel')
+    --
+    On_Menu_0_setting_footer
+}
+
+On_UserBirthday_input_start
+{
+    SHIORI3FW.RegisterTempVar('user_temp_birthday')
+    user_temp_birthday = IARRAY
+    if SHIORI3FW.UserBirthday == '' {
+        user_temp_birthday ,= year - 25
+        user_temp_birthday ,= 6
+        user_temp_birthday ,= 15
+    }
+    else {
+        user_temp_birthday = SHIORI3FW.UserBirthday
+    }
+
+    On_UserBirthday_input
+}
+
+On_UserBirthday_input
+{
+    '\u\s[10]\h\s[0]それじゃあ、\w5誕生日を入力してくれ。'
+    --
+    On_UserBirthday_input_script
+}
+
+On_UserBirthday_input_script
+{
+    if basewarenameex == 'SSP' {
+        "\![open,dateinput,On_UserBirthday_input_date_check,,%(user_temp_birthday[0]),%(user_temp_birthday[1]),%(user_temp_birthday[2])]"
+    }
+    else {
+        '\w9\w9\n'
+        --
+        '\u\s[10]\h\s[0]「20220101」\w9のように、\w5数字8ケタで入力してくれ。'
+        --
+        "\![open,inputbox,On_UserBirthday_input_inputbox_check,,%(user_temp_birthday[0])%(user_temp_birthday[1])%(user_temp_birthday[2])]"
+    }
+}
+
+On_UserBirthday_input_date_check
+{
+    _input_date = SPLIT(reference[0], ',')
+    --
+    _valid_flag = 1
+    for _i = 0; _i < 3; _i++ {
+        _input_date[_i] = TOINT(_input_date[_i])
+        if _input_date[_i] == 0 {
+            _valid_flag = 0
+            break
+        }
+    }
+
+    if _valid_flag == 1 {
+        user_temp_birthday = _input_date
+        "\t\u\s[10]\h\s[0]%(user_temp_birthday[0])年\w5%(user_temp_birthday[1])月%(user_temp_birthday[2])日でいいか？"
+        --
+        '\n\n'
+        --
+        FillLine_list_full('いいよ', 'On_UserBirthday_input_decide')
+        --
+        FillLine_list_full('もう一回', 'On_UserBirthday_input')
+        --
+        FillLine_list_full('やめる', 'On_UserBirthday_menu_chancel')
+    }
+    else {
+        '\u\s[10]\h\s[0]？\w9やめるか？'
+        --
+        '\n\n'
+        --
+        FillLine_list_full('もう一回', 'On_UserBirthday_input')
+        --
+        FillLine_list_full('やめる', 'On_UserBirthday_menu_chancel')
+
+    }
+}
+
+On_UserBirthday_input_inputbox_check
+{
+    _input_temp = IARRAY
+    _input_temp ,= SUBSTR(reference[0], 0, 4)
+    _input_temp ,= SUBSTR(reference[0], 4, 2)
+    _input_temp ,= SUBSTR(reference[0], 6, 2)
+
+    _valid_flag = 1
+    for _i = 0; _i < 3; _i++ {
+        _input_temp[_i] = TOINT(ZEN2HAN(_input_temp[_i]))
+
+        if _input_temp[_i] == 0 {
+            _valid_flag = 0
+            break
+        }
+    }
+
+    if _valid_flag == 0 {
+        _value = SHIORI3FW.EscapeAllTags(reference[0])
+
+        "\t\h\_q入力された文字: %(_value)\n\n\_q"
+        --
+        "\u\s[10]\h\s[34]えっと、\w5何か違ったみたいだ。\w9\w9\s[0]\nもう一回入力してくれるか？"
+        --
+        '\n\n'
+        --
+        FillLine_list_full('いいよ', 'On_UserBirthday_input')
+        --
+        FillLine_list_full('やめる', 'On_UserBirthday_menu_chancel')
+    }
+    else {
+        _value = JOIN(_input_temp, ',')
+        "\![raise,On_UserBirthday_input_date_check,0,%(CHR(0x22))%(_value)%(CHR(0x22))]"
+    }
+}
+
+On_UserBirthday_input_decide
+{
+    user_birthday = user_temp_birthday
+
+    "\h\_q誕生日: %(user_birthday[0])年%(user_birthday[1])月%(user_birthday[2])日\n\n\_q"
+    --
+    if On_UserBirthday_change_flag == 1 {
+        On_UserBirthday_change_flag = 0
+        '\u\s[10]\h\s[0]誕生日を変更した。\w9\w9\u\s[11]…\w5…\w5「誕生日を変更した」って台詞、\w5考えてみると凄い意味…\w5…\w5。\w9\w9\h\s[34]\n\nへ、\w5変更したっていいじゃない！\w9人間だもの！'
+    }
+    else {
+        '\u\s[10]\h\s[5]誕生日を覚えた。\w9教えてくれてありがとな。\w9\w9\u\s[11]ふふふ、\w5楽しみにしてなさいな。\w9\w9\h\s[3]\n\nいや、\w5だから、\w5大したことは…\w5…\w5。'
+    }
+    --
+    '\n'
+    --
+    On_Menu_0_setting_footer
+}
+
+On_UserBirthday_menu_chancel
+{
+    '\u\s[10]\h\s[6]わかった。\w9やめておくよ。'
+    --
+    '\n'
+    --
+    On_Menu_0_setting_footer
+}
+
+On_UserBirthday_menu_after_input
+{
+    '\u\s[10]\h\s[0]ん、\w5どうした？'
+    --
+    '\n\n'
+    --
+    FillLine_list_full('誕生日を変える', 'On_UserBirthday_menu_change')
+    --
+    FillLine_list_full('誕生日忘れて', 'On_UserBirthday_menu_erase')
+    --
+    On_Menu_0_setting_footer
+}
+
+On_UserBirthday_menu_change
+{
+    SHIORI3FW.RegisterTempVar('user_temp_birthday', 'On_UserBirthday_change_flag')
+    user_temp_birthday = user_birthday
+    On_UserBirthday_change_flag = 1
+
+    On_UserBirthday_input
+}
+
+On_UserBirthday_menu_erase
+{
+    '\u\s[10]\h\s[0]平気だけれど、\w5本当に誕生日を忘れて大丈夫か？'
+    --
+    '\n\n'
+    --
+    FillLine_list_full('忘れて', 'On_UserBirthday_menu_erase_deside')
+    --
+    FillLine_list_full('やっぱりやめる', 'On_UserBirthday_menu_erase_chancel')
+    --
+    On_Menu_0_setting_footer
+}
+
+On_UserBirthday_menu_erase_deside
+{
+    user_birthday = ''
+
+    "\h\s[0]\u\s[16]1\w2.\w2.\w2.2の.\w2.\w2.\w2ポカン!\w9\n\w9\n佐野伊織は%(username)の誕生日をきれいにわすれた！\w9\s[10]\nそして！\w9\s[11]\n佐野伊織はあたらしくパブロ・ピカソのフルネームを覚え…\w5…\w5\w9\w9\h\s[7]ません！！"
+    --
+    '\n'
+    --
+    On_Menu_0_setting_footer
+}
+
+On_UserBirthday_menu_erase_chancel
+{
+    '\u\s[10]\h\s[5]そうか。\w9何かあったらまた言ってくれ。'
+    --
+    '\n'
+    --
+    On_Menu_0_setting_footer
+}

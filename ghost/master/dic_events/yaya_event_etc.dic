@@ -1,24 +1,26 @@
 // ===================================================================
 // OnShellChang(ed|ing)
 // ===================================================================
-OnShellChanged {
+OnShellChanged
+{
     _shell = SHIORI3FW.EscapeDangerousTags(reference[0])
     "\u\s[10]\h\s[0]%(_shell)になった。\w9\w9"
     --
     case _shell {
-        when 'master' {
-            '\u\s[10]なんだかんだで、\w5これが落ち着くわね。\w9\w9\h\s[6]\n\nそうかもな。'
-        }
-        when 'master-s' {
-            '\u\s[11]ちっちゃくなっちゃった！！\w9\w9\h\s[6]\n\n遠近法とかじゃないか？\w9\w9\u\s[16]\n\nそんな馬鹿な…\w5…\w5。'
-        }
-        when 'master-l' {
-            '\u\s[11]おっきくなっちゃった！\w9\w9\h\n\n遠近法だろ？\w9\w9\u\s[10]\n\nそれで押し通すつもりね貴方…\w5…\w5。'
-        }
+    when 'master' {
+        '\u\s[10]なんだかんだで、\w5これが落ち着くわね。\w9\w9\h\s[6]\n\nそうかもな。'
+    }
+    when 'master-s' {
+        '\u\s[11]ちっちゃくなっちゃった！！\w9\w9\h\s[6]\n\n遠近法とかじゃないか？\w9\w9\u\s[16]\n\nそんな馬鹿な…\w5…\w5。'
+    }
+    when 'master-l' {
+        '\u\s[11]おっきくなっちゃった！\w9\w9\h\n\n遠近法だろ？\w9\w9\u\s[10]\n\nそれで押し通すつもりね貴方…\w5…\w5。'
+    }
     }
 }
 
-OnShellChanging {
+OnShellChanging
+{
     _shell = SHIORI3FW.EscapeDangerousTags(reference[0])
     "\h\s[0]\u\s[11]妖術！\w9変化%(_shell)の術！！\w9\w9"
     --
@@ -29,14 +31,16 @@ OnShellChanging {
 // ===================================================================
 // OnWindowStateRestore / OnWindowStateMinimize
 // ===================================================================
-OnWindowStateRestore {
+OnWindowStateRestore
+{
     "\u\s[10]\h\s[0]用事は済んだか？\w9\w9\uいつでも用心。\w9\n備えあれば憂いなし。\w9\n\w9\w9\h\s[4]\n\n…\w5…\w5それはどういう意味だ？"
 }
 
 // ===================================================================
 // OnSysResume / OnSysSuspend (only SSP)
 // ===================================================================
-OnSysResume {
+OnSysResume
+{
     ''
     '\u\s[10]\h\s[6]…\w5…\w5\w5\s[31]む\w5に\w5ゃ\w5…\w5…\w5\w9\s[2]はっ！！\w9\w9\u寝てたわね。\w9\w9\h\s[4]\n\nねてました、\w5すいません…\w5…\w5。'
 }
@@ -44,11 +48,13 @@ OnSysResume {
 // ===================================================================
 // OnBasewareUpdating / OnBasewareUpdated (only SSP)
 // ===================================================================
-OnBasewareUpdating {
+OnBasewareUpdating
+{
     "\u\s[10]\h\s[6]ベースウェアの更新だ。"
 }
 
-OnBasewareUpdated {
+OnBasewareUpdated
+{
     _aft = SHIORI3FW.EscapeDangerousTags(reference[1])
 
     "\u\s[10]\h\s[0]%(_aft)に更新完了。"
@@ -58,7 +64,8 @@ OnBasewareUpdated {
 // OnUserInput**
 // ===================================================================
 // for SSP Only
-OnUserInputCancel {
+OnUserInputCancel
+{
     _event = SHIORI3FW.EscapeDangerousTags(reference[0])
     // TODO:
     // 空文字で入力イベントを呼ぶ
@@ -69,174 +76,203 @@ OnUserInputCancel {
 // ===================================================================
 // OnVanished**
 // ===================================================================
-OnVanishSelected {
+OnVanishSelected
+{
     '\u\s[10]\h\s[6]そうか、\w5お別れか…\w5…\w5。\w9\w9\u今まで色々、\w5ありがとうね。\w9\w9\h\s[5]\n\nそれじゃあ、\w5さよなら。\w9\w9\u\s[16]\n\nさようなら。'
 }
 
 // ===================================================================
 // OnSurface**
 // ===================================================================
-OnSurfaceRestore {
+OnSurfaceRestore
+{
     Surface_reset
     return
 }
 
-Surface_reset {
-    '\h\s[0]'                   // 0: さくら側
+Surface_reset
+{
+    '\h\s[0]' // 0: さくら側
     --
-    '\u\s[10]'                  // 1: うにゅう側
+    '\u\s[10]' // 1: うにゅう側
 }
 
 // ===================================================================
 // OnNetworkHeavy
 // ===================================================================
-OnNetworkHeavy {
+OnNetworkHeavy
+{
     '\u\s[10]\h\s[6]…\w5…\w5。\w9\w9\u\s[16]…\w5…\w5。\w9\w9\h\s[4]\n\nネ\w5ッ\w5ト\w5ワ\w5ー\w5ク\w5が\w5重\w5い\w5…\w5…\w5。'
 }
 
 // ===================================================================
 // OnRecommendsiteChoice
 // ===================================================================
-OnRecommendsiteChoice {
+OnRecommendsiteChoice
+{
     _name = SHIORI3FW.EscapeDangerousTags(reference[0])
     _url = SHIORI3FW.EscapeDangerousTags(reference[1])
 
     case _url {
-        // recommend
-        when 'https://github.com/tukinami/taidanaSanoSan' {
-            '\u\s[10]\h\s[0]俺たちの配布場所だ。\w9\w9\u…\w5……\w5\s[11]「俺たちの配布場所」って、\w5凄い台詞…\w5…\w5！！\w9\w9\h\s[3]\n\n…\w5…\w5しかたがない、\w5他にいいようがないだろ。'
+    // recommend
+    when 'https://github.com/tukinami/taidanaSanoSan' {
+        '\u\s[10]\h\s[0]俺たちの配布場所だ。\w9\w9\u…\w5……\w5\s[11]「俺たちの配布場所」って、\w5凄い台詞…\w5…\w5！！\w9\w9\h\s[3]\n\n…\w5…\w5しかたがない、\w5他にいいようがないだろ。'
+    }
+    // portal
+    when 'http://disc2.s56.xrea.com/' {
+        '\u\s[10]\h\s[0]「Disc-2」。\w9\n伺かに関する、\w5様々な情報が投稿されているニュースサイト。'
+    }
+    when 'http://ghosttown.mikage.jp/' {
+        '\u\s[10]\h\s[0]「GHOST/BALLOON TOWN」。\w9\n伺かのゴーストとバルーンのデータベース。'
+    }
+    when 'http://ghost.sakura.tv/' {
+        '\u\s[10]\h\s[0]「Uka-Ni-Sphere」。\w9\n伺かの情報サイトの総合エントランス。\w9ニュースサイト「霊界通信」、\w5感想を投稿する「伺的な感想やレビューのWiki」などがある。'
+    }
+    when 'http://ssp.shillest.net/' {
+        '\u\s[10]\h\s[0]「SSP BUGTRAQ」。\w9\s[6]\nあるいは、\w5「ばぐとら研究所」。\w9\s[0]\n伺かのゴーストを動かす、\w5ベースウェアの一つ、\w5SSPを開発しているサイト。'
+        --
+        if basewarenameex == 'SSP' {
+            '\w9\w9\uと、\w5言うより、\w5今起動している、\w9\s[11]\nコレ\w9\s[10]\nよ、\w9\s[11]\nコレ！！\w9\w9\h\s[3]\n\nはっきり言うなぁ、\w5もう。'
         }
-        // portal
-        when 'http://disc2.s56.xrea.com/' {
-            '\u\s[10]\h\s[0]「Disc-2」。\w9\n伺かに関する、\w5様々な情報が投稿されているニュースサイト。'
-        }
-        when 'http://ghosttown.mikage.jp/' {
-            '\u\s[10]\h\s[0]「GHOST/BALLOON TOWN」。\w9\n伺かのゴーストとバルーンのデータベース。'
-        }
-        when 'http://ghost.sakura.tv/' {
-            '\u\s[10]\h\s[0]「Uka-Ni-Sphere」。\w9\n伺かの情報サイトの総合エントランス。\w9ニュースサイト「霊界通信」、\w5感想を投稿する「伺的な感想やレビューのWiki」などがある。'
-        }
-        when 'http://ssp.shillest.net/' {
-            '\u\s[10]\h\s[0]「SSP BUGTRAQ」。\w9\s[6]\nあるいは、\w5「ばぐとら研究所」。\w9\s[0]\n伺かのゴーストを動かす、\w5ベースウェアの一つ、\w5SSPを開発しているサイト。'
-            --
-            if basewarenameex == 'SSP' {
-                '\w9\w9\uと、\w5言うより、\w5今起動している、\w9\s[11]\nコレ\w9\s[10]\nよ、\w9\s[11]\nコレ！！\w9\w9\h\s[3]\n\nはっきり言うなぁ、\w5もう。'
-            }
-        }
-        when 'http://ms.shillest.net/' {
-            '\u\s[10]\h\s[0]「整備班 -The Maintenance Shop-」。\w9\n他の人から預かったゴーストの更新、\w5ゴーストの開発に必須のSHIORIをいくつか更新、\w5開発しているサイト。\w9\w9\uここで配布されている、\w5「はろーYAYAわーるど」を元に、\w5いろいろしたのよね。\w9\w9\h\s[3]\n\n本当、\w5いろいろな。\w9\s[3]\n…\w5…\w5何を、\w5とは言わないが。'
-        }
-        when 'http://emily.shillest.net/ayaya/' {
-            '\u\s[10]\h\s[0]『文Wiki「文屋」』。\w9\nゴーストの動作の大本となるSHIORI、\w5その一つ、\w5「AYA」と、\w5その改造派生である「YAYA」の配布、\w5情報を扱う総合Wiki。\w9\w9\u私たちは「YAYA」にお世話になってます。'
-        }
+    }
+    when 'http://ms.shillest.net/' {
+        '\u\s[10]\h\s[0]「整備班 -The Maintenance Shop-」。\w9\n他の人から預かったゴーストの更新、\w5ゴーストの開発に必須のSHIORIをいくつか更新、\w5開発しているサイト。\w9\w9\uここで配布されている、\w5「はろーYAYAわーるど」を元に、\w5いろいろしたのよね。\w9\w9\h\s[3]\n\n本当、\w5いろいろな。\w9\s[3]\n…\w5…\w5何を、\w5とは言わないが。'
+    }
+    when 'http://emily.shillest.net/ayaya/' {
+        '\u\s[10]\h\s[0]『文Wiki「文屋」』。\w9\nゴーストの動作の大本となるSHIORI、\w5その一つ、\w5「AYA」と、\w5その改造派生である「YAYA」の配布、\w5情報を扱う総合Wiki。\w9\w9\u私たちは「YAYA」にお世話になってます。'
+    }
     }
 }
 
 // ===================================================================
 // OnNekodorif**
 // ===================================================================
-OnNekodorifObjectEmerge {
+OnNekodorifObjectEmerge
+{
     _object = SHIORI3FW.TranslateSystemChar(reference[0])
     if ISFUNC("OnNekodorifObjectEmerge_%(_object)") {
         EVAL("OnNekodorifObjectEmerge_%(_object)")
-    } elseif ISFUNC("OnNekodorifObjectEmerge_target_%(reference[4])") {
+    }
+    elseif ISFUNC("OnNekodorifObjectEmerge_target_%(reference[4])") {
         EVAL("OnNekodorifObjectEmerge_target_%(reference[4])")
     }
 }
 
-OnNekodorifObjectHit {
+OnNekodorifObjectHit
+{
     _object = SHIORI3FW.TranslateSystemChar(reference[0])
     if ISFUNC("OnNekodorifObjectHit_%(_object)") {
         EVAL("OnNekodorifObjectHit_%(_object)")
-    } elseif ISFUNC("OnNekodorifObjectHit_target_%(reference[4])") {
+    }
+    elseif ISFUNC("OnNekodorifObjectHit_target_%(reference[4])") {
         EVAL("OnNekodorifObjectHit_target_%(reference[4])")
     }
 }
 
-OnNekodorifObjectDrop {
+OnNekodorifObjectDrop
+{
     _object = SHIORI3FW.TranslateSystemChar(reference[0])
     if ISFUNC("OnNekodorifObjectDrop_%(_object)") {
         EVAL("OnNekodorifObjectDrop_%(_object)")
-    } elseif ISFUNC("OnNekodorifObjectDrop_target_%(reference[4])") {
+    }
+    elseif ISFUNC("OnNekodorifObjectDrop_target_%(reference[4])") {
         EVAL("OnNekodorifObjectDrop_target_%(reference[4])")
     }
 }
 
-OnNekodorifObjectVanish {
+OnNekodorifObjectVanish
+{
     _object = SHIORI3FW.TranslateSystemChar(reference[0])
     if ISFUNC("OnNekodorifObjectVanish_%(_object)") {
         EVAL("OnNekodorifObjectVanish_%(_object)")
-    } elseif ISFUNC("OnNekodorifObjectVanish_target_%(reference[4])") {
+    }
+    elseif ISFUNC("OnNekodorifObjectVanish_target_%(reference[4])") {
         EVAL("OnNekodorifObjectVanish_target_%(reference[4])")
     }
 }
 
-OnNekodorifObjectDodge {
+OnNekodorifObjectDodge
+{
     _object = SHIORI3FW.TranslateSystemChar(reference[0])
     if ISFUNC("OnNekodorifObjectDodge_%(_object)") {
         EVAL("OnNekodorifObjectDodge_%(_object)")
-    } elseif ISFUNC("OnNekodorifObjectDodge_target_%(reference[4])") {
+    }
+    elseif ISFUNC("OnNekodorifObjectDodge_target_%(reference[4])") {
         EVAL("OnNekodorifObjectDodge_target_%(reference[4])")
     }
 }
 
 // 猫どりふ・汎用
 // -------------------------------------------------------------------
-OnNekodorifObjectEmerge_target_佐野伊織 {
+OnNekodorifObjectEmerge_target_佐野伊織
+{
     '\u\s[10]\h\s[0]ん？\w9なんだ？'
 }
 
-OnNekodorifObjectHit_target_佐野伊織 {
+OnNekodorifObjectHit_target_佐野伊織
+{
     '\u\s[10]\h\s[4]いてっ！'
 }
 
-OnNekodorifObjectDrop_target_佐野伊織 {
+OnNekodorifObjectDrop_target_佐野伊織
+{
     '\u\s[10]\h\s[34]ててて…\w5…\w5。'
 }
 
-OnNekodorifObjectVanish_target_佐野伊織 {
+OnNekodorifObjectVanish_target_佐野伊織
+{
     '\u\s[10]\h\s[3]一体全体なんだ…\w5…\w5？'
 }
 
-OnNekodorifObjectDodge_target_佐野伊織 {
+OnNekodorifObjectDodge_target_佐野伊織
+{
     '\u\s[10]\h\s[4]ほっ…\w5…\w5。'
     '\u\s[10]\h\s[3]…\w5…\w5？'
 }
 
-OnNekodorifObjectEmerge_target_きぬ {
+OnNekodorifObjectEmerge_target_きぬ
+{
     '\h\s[0]\u\s[10]？？'
 }
 
-OnNekodorifObjectHit_target_きぬ {
+OnNekodorifObjectHit_target_きぬ
+{
     '\h\s[0]\u\s[11]！！'
 }
 
-OnNekodorifObjectDrop_target_きぬ {
+OnNekodorifObjectDrop_target_きぬ
+{
     '\h\s[0]\u\s[16]っ…\w5…\w5！！'
 }
 
-OnNekodorifObjectVanish_target_きぬ {
+OnNekodorifObjectVanish_target_きぬ
+{
     '\h\s[0]\u\s[11]き、\w5効かぬ！！\w9\w9\h\s[2]マジで？！'
 }
 
-OnNekodorifObjectDodge_target_きぬ {
+OnNekodorifObjectDodge_target_きぬ
+{
     '\h\s[0]\u\s[10]？\w9来なかったわね。'
 }
 
 // -------------------------------------------------------------------
-OnNekodorifObjectEmerge_love_letter {
+OnNekodorifObjectEmerge_love_letter
+{
     '\u\s[10]\h\s[0]ん？\w9なんだ？'
 }
 
-OnNekodorifObjectHit_love_letter {
+OnNekodorifObjectHit_love_letter
+{
     '\u\s[10]\h\s[2]こ、\w5これは…\w5…\w5！\w9\w9\u\s[11]もしかして…\w5…\w5ラブレター！？\w9\w9\h\s[3]\n\nよ、\w5読んでも？\w9\w9\u\s[10]\n\nもちろん。'
 }
 
-OnNekodorifObjectDrop_love_letter {
+OnNekodorifObjectDrop_love_letter
+{
     '\u\s[10]\h\s[0]…\w5…\w5。\w9\w9\u\s[16]…\w5…\w5。'
 }
 
-OnNekodorifObjectVanish_love_letter {
+OnNekodorifObjectVanish_love_letter
+{
     '\u\s[10]\h\s[0]内容は、\w9\w9\uうん。\w9\w9\h\s[3]\n\n'
     --
     '「佐野さんはいうほど怠惰っぽくないので、\w9\n『食いしん坊な佐野さん』に改名したほうが\w9\nいいと思います。」'
@@ -248,57 +284,68 @@ OnNekodorifObjectVanish_love_letter {
     'より。\w9\w9\u\n\nあ、\w5はい、\w5ご意見ありがとうございます…\w5…\w5。'
 }
 
-OnNekodorifObjectDodge_love_letter {
+OnNekodorifObjectDodge_love_letter
+{
     '\u\s[10]\h\s[3]…\w5…\w5？'
 }
 
 // -------------------------------------------------------------------
-OnNekodorifObjectEmerge_かえる {
+OnNekodorifObjectEmerge_かえる
+{
     '\u\s[10]\h\s[0]ん？\w9なんだ？'
 }
 
-OnNekodorifObjectHit_かえる {
+OnNekodorifObjectHit_かえる
+{
     '\u\s[10]\h\s[0]おっ、\w5カエルだ。\w9\w9\u\s[11]ゲコゲコゲーコ。\w9\w9\h\s[3]\n\nカエル語？'
 }
 
-OnNekodorifObjectDrop_かえる {
+OnNekodorifObjectDrop_かえる
+{
     '\u\s[10]\h\s[5]じゃあな、\w5カエル。\w9\w9\uゲコゲーコ！\w9\w9\h\s[3]\n\n…\w5…\w5。'
 }
 
-OnNekodorifObjectVanish_かえる {
+OnNekodorifObjectVanish_かえる
+{
     '\u\s[10]\h\s[0]どこから来たんだろうな。\w9\w9\uさぁ…\w5…\w5？'
 }
 
-OnNekodorifObjectDodge_かえる {
+OnNekodorifObjectDodge_かえる
+{
     '\u\s[10]\h\s[3]…\w5…\w5？'
 }
 
 // -------------------------------------------------------------------
-OnNekodorifObjectEmerge_さくら {
+OnNekodorifObjectEmerge_さくら
+{
     '\u\s[10]\h\s[0]ん？\w9なんだ？'
 }
 
-OnNekodorifObjectHit_さくら {
+OnNekodorifObjectHit_さくら
+{
     '\u\s[10]\h\s[5]お、\w5さくらだ。'
 }
 
-OnNekodorifObjectDrop_さくら {
+OnNekodorifObjectDrop_さくら
+{
     '\u\s[10]\h\s[5]…\w5…\w5。\w9\w9\u\s[16]…\w5…\w5。'
 }
 
-OnNekodorifObjectVanish_さくら {
+OnNekodorifObjectVanish_さくら
+{
     '\u\s[10]\h\s[5]風流だな。\w9\w9\u\s[16]風流ね。'
 }
 
-OnNekodorifObjectDodge_さくら {
+OnNekodorifObjectDodge_さくら
+{
     '\u\s[10]\h\s[3]…\w5…\w5？'
 }
-
 
 // ===================================================================
 // OnRequestValues (only for SSP)
 // ===================================================================
-OnRequestValues {
+OnRequestValues
+{
     if reference[0] == 'ごーすとじてん' {
         _property = ''
         _temp_prop = ''
@@ -312,103 +359,129 @@ OnRequestValues {
     }
 }
 
-Ghostbook_property {
+Ghostbook_property
+{
     case _argv[0] {
-        // -----------------------------------------------------------
-        when '0name', '0キャラクター名' {
-            '佐野伊織'
-        }
-        when '0LIFE' {           // 体力
-            9
-        }
-        when '0STR' {            // 腕力(物理攻撃力)
-            6
-        }
-        when '0DEX' {            // 器用(物理攻撃命中率)
-            12
-        }
-        when '0AGL' {            // 敏捷(物理攻撃回避率)
-            6
-        }
-        when '0MIN' {            // 精神(精神攻撃力)
-            9
-        }
-        when '0INT' {            // 知力(精神攻撃命中率)
-            10
-        }
-        when '0SEN' {            // 感性(精神攻撃回避率)
-            10
-        }
-        when '0年齢層', '0世代' { //子供/若者/大人/老人/不明 のいずれか
-            '若者'
-        }
-        when '0性別' {           // 男性/女性/雌雄同体/不明 のいずれか
-            '男性'
-        }
-        when '0種族' {           // 任意項目
-            '人間'
-        }
-        when '0種族タイプ' {     // 人型/獣型/植物型/不定形型/無機物型 のいずれか
-            '人型'
-        }
-        when '0行動タイプ' {     // 物理攻撃/精神攻撃 のいずれか
-            '物理攻撃'
-        }
-        when '0プロフィール' {
-            'めんどうくさがりな青少年。食べ物と睡眠が好き。'
-        }
-        // when '0カード画像パス' {
-        // }
-        // -----------------------------------------------------------
-        when '1name', '1キャラクター名' {
-            'きぬ'
-        }
-        when '1LIFE' {           // 体力
-            10
-        }
-        when '1STR' {            // 腕力(物理攻撃力)
-            7
-        }
-        when '1DEX' {            // 器用(物理攻撃命中率)
-            8
-        }
-        when '1AGL' {            // 敏捷(物理攻撃回避率)
-            11
-        }
-        when '1MIN' {            // 精神(精神攻撃力)
-            12
-        }
-        when '1INT' {            // 知力(精神攻撃命中率)
-            11
-        }
-        when '1SEN' {            // 感性(精神攻撃回避率)
-            13
-        }
-        when '1年齢層', '1世代' { //子供/若者/大人/老人/不明 のいずれか
-            '不明'
-        }
-        when '1性別' {           // 男性/女性/雌雄同体/不明 のいずれか
-            '女性'
-        }
-        when '1種族' {           // 任意項目
-            '猫又'
-        }
-        when '1種族タイプ' {     // 人型/獣型/植物型/不定形型/無機物型 のいずれか
-            '獣型'
-        }
-        when '1行動タイプ' {     // 物理攻撃/精神攻撃 のいずれか
-            '精神攻撃'
-        }
-        when '1プロフィール' {
-            '佐野家に住み着く猫又。伊織に突っ込みを入れたり、突っ込みされたり。妖術を使用できると自称する。'
-        }
-        // when '1カード画像パス' {
-        // }
-        when '-1NOB' {          // 戦闘参加人数 0/1/2
-             '2'
-        }
-        others {
-            ''
-        }
+    // -----------------------------------------------------------
+    when '0name', '0キャラクター名' {
+        '佐野伊織'
+    }
+    when '0LIFE' {
+        // 体力
+        9
+    }
+    when '0STR' {
+        // 腕力(物理攻撃力)
+        6
+    }
+    when '0DEX' {
+        // 器用(物理攻撃命中率)
+        12
+    }
+    when '0AGL' {
+        // 敏捷(物理攻撃回避率)
+        6
+    }
+    when '0MIN' {
+        // 精神(精神攻撃力)
+        9
+    }
+    when '0INT' {
+        // 知力(精神攻撃命中率)
+        10
+    }
+    when '0SEN' {
+        // 感性(精神攻撃回避率)
+        10
+    }
+    when '0年齢層', '0世代' {
+        // 子供/若者/大人/老人/不明 のいずれか
+        '若者'
+    }
+    when '0性別' {
+        // 男性/女性/雌雄同体/不明 のいずれか
+        '男性'
+    }
+    when '0種族' {
+        // 任意項目
+        '人間'
+    }
+    when '0種族タイプ' {
+        // 人型/獣型/植物型/不定形型/無機物型 のいずれか
+        '人型'
+    }
+    when '0行動タイプ' {
+        // 物理攻撃/精神攻撃 のいずれか
+        '物理攻撃'
+    }
+    when '0プロフィール' {
+        'めんどうくさがりな青少年。食べ物と睡眠が好き。'
+    }
+    // when '0カード画像パス' {
+    // }
+    // -----------------------------------------------------------
+    when '1name', '1キャラクター名' {
+        'きぬ'
+    }
+    when '1LIFE' {
+        // 体力
+        10
+    }
+    when '1STR' {
+        // 腕力(物理攻撃力)
+        7
+    }
+    when '1DEX' {
+        // 器用(物理攻撃命中率)
+        8
+    }
+    when '1AGL' {
+        // 敏捷(物理攻撃回避率)
+        11
+    }
+    when '1MIN' {
+        // 精神(精神攻撃力)
+        12
+    }
+    when '1INT' {
+        // 知力(精神攻撃命中率)
+        11
+    }
+    when '1SEN' {
+        // 感性(精神攻撃回避率)
+        13
+    }
+    when '1年齢層', '1世代' {
+        // 子供/若者/大人/老人/不明 のいずれか
+        '不明'
+    }
+    when '1性別' {
+        // 男性/女性/雌雄同体/不明 のいずれか
+        '女性'
+    }
+    when '1種族' {
+        // 任意項目
+        '猫又'
+    }
+    when '1種族タイプ' {
+        // 人型/獣型/植物型/不定形型/無機物型 のいずれか
+        '獣型'
+    }
+    when '1行動タイプ' {
+        // 物理攻撃/精神攻撃 のいずれか
+        '精神攻撃'
+    }
+    when '1プロフィール' {
+        '佐野家に住み着く猫又。伊織に突っ込みを入れたり、突っ込みされたり。妖術を使用できると自称する。'
+    }
+    // when '1カード画像パス' {
+    // }
+    when '-1NOB' {
+        // 戦闘参加人数 0/1/2
+        '2'
+    }
+    others {
+        ''
+    }
     }
 }

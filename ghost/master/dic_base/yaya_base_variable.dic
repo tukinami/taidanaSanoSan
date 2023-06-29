@@ -2,46 +2,60 @@
 // variables
 // ===================================================================
 // 時報の有無
-On_V.timesignal {
+On_V.timesignal
+{
     timesignal
 }
 
 // plugin menu をメニューから呼び出したか
-On_V.call_from_menu {
+On_V.call_from_menu
+{
     call_from_menu
 }
 
 // バルーンの行の最大値
-On_V.balloon_line_max {
+On_V.balloon_line_max
+{
     balloon_line_max
 }
 
 // 起動回数
-On_V.boot_times {
+On_V.boot_times
+{
     boot_times
+}
+
+// ユーザーの誕生日
+On_V.user_birthday
+{
+    user_birthday
 }
 
 // \h
 // -------------------------------------------------------------------
 // 満腹度
-On_V.p0_s_fullness {
+On_V.p0_s_fullness
+{
     p0_s_fullness
 }
 
 // 誇り
-On_V.p0_s_pride {
+On_V.p0_s_pride
+{
     p0_s_pride
 }
 
 // 最初にもらったおやつ
-On_V.p0_s_feeding_first_item {
+On_V.p0_s_feeding_first_item
+{
     p0_s_feeding_first_item
 }
 
 // ===================================================================
 // 初期化
 // ===================================================================
-On_InitVar {
+On_InitVar
+{
     _vars = GETFUNCLIST("On_InitVar.")
 
     foreach _vars; _v {
@@ -51,42 +65,56 @@ On_InitVar {
 }
 // 個別
 // -------------------------------------------------------------------
-On_InitVar.username {
-    username =  "ユーザー"
+On_InitVar.username
+{
+    username = "ユーザー"
 }
 
-On_InitVar.timesignal {
+On_InitVar.timesignal
+{
     timesignal = 1
 }
 
-On_InitVar.boot_times {
+On_InitVar.boot_times
+{
     boot_times = 0
 }
 
-On_InitVar.balloon_line_max {
+On_InitVar.user_birthday
+{
+    user_birthday = ''
+}
+
+On_InitVar.balloon_line_max
+{
     balloon_line_max = 46
 }
 
-On_InitVar.call_from_menu {
+On_InitVar.call_from_menu
+{
     call_from_menu = 0
 }
 
-On_InitVar.p0_s_fullness {
+On_InitVar.p0_s_fullness
+{
     On_Status.fullness.p0.reset
 }
 
-On_InitVar.p0_s_pride {
+On_InitVar.p0_s_pride
+{
     p0_s_pride = 0
 }
 
-On_InitVar.p0_s_feeding_first_item {
+On_InitVar.p0_s_feeding_first_item
+{
     p0_s_feeding_first_item = ''
 }
 
 // ===================================================================
 // 終了時消去
 // ===================================================================
-On_U.eraseVar : void {
+On_U.eraseVar : void
+{
     ERASEVAR('communicate_ghost')
     ERASEVAR('call_from_menu')
     ERASEVAR('paging_header')

@@ -64,9 +64,13 @@ On_Menu_0_lastTalk_finalize
 // ===================================================================
 On_Menu_0_setting
 {
-    // _secStr        = Time_sec_toString(aitalkinterval)
     _secStr = Time_sec_toString(aitalkinterval)
     _timeSignalFlg = Bool.toOnOffStr(timesignal)
+    _birthday = user_birthday
+    if _birthday != '' {
+        _birthday = "%(_birthday[0])年%(_birthday[1])月%(_birthday[2])日"
+    }
+
     "\h\s[0]どの設定を変更するんだ？\n\n"
     --
     FillLine_list_full("喋り頻度を変更（%(_secStr)）", 'On_Menu_0_talkInterval')
@@ -74,6 +78,13 @@ On_Menu_0_setting
     FillLine_list_full("名前を変更（%(username)）", 'On_Menu_0_username')
     --
     FillLine_list_full("時報の設定（%(_timeSignalFlg)）", 'On_Menu_0_timeSignal')
+    --
+    if _birthday == '' {
+        FillLine_list_full('誕生日を教える', 'On_UserBirthday_menu')
+    }
+    else {
+        FillLine_list_full("誕生日を変更（%(_birthday)）", 'On_UserBirthday_menu')
+    }
     --
     FillLine_list_full("メニューアイテムの長さを調整 (%(balloon_line_max)) ", 'On_Menu_0_balloon_line')
     --

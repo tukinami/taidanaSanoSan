@@ -1,3 +1,4 @@
 dic, yaya_plugin.dic            // プラグイン
 dic, yaya_menu.dic              // メニュー
 dic, yaya_feeding.dic           // おやつ
+dic, yaya_user_birthday.dic     // ユーザーの誕生日
