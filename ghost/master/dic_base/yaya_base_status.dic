@@ -8,12 +8,13 @@
 #define P0_S_FULLNESS_HUNGER_OVER 0
 #define P0_S_FULLNESS_HUNGER 180
 
-
-On_Status.fullness.p0.decrease {
+On_Status.fullness.p0.decrease
+{
     p0_s_fullness -= P0_S_FULLNESS_DECREASE
 }
 
-On_Status.fullness.p0.judge {
+On_Status.fullness.p0.judge
+{
     if p0_s_fullness > P0_S_FULLNESS_FULL_OVER {
         2
         return
@@ -27,20 +28,21 @@ On_Status.fullness.p0.judge {
         return
     }
     elseif p0_s_fullness > P0_S_FULLNESS_HUNGER {
-            -1
+        -1
         return
     }
     elseif p0_s_fullness > P0_S_FULLNESS_HUNGER_OVER {
-            -2
+        -2
         return
     }
     else {
-            -3
+        -3
         return
     }
 }
 
-On_Status.fullness.p0.reset {
+On_Status.fullness.p0.reset
+{
     _passage = ((hour % 6) * 60) + minute
     _passage = _passage * P0_S_FULLNESS_DECREASE
     p0_s_fullness = P0_S_FULLNESS_FULL - _passage
@@ -55,7 +57,8 @@ On_Status.fullness.p0.reset {
 #define P0_S_PRIDE_MAX 120
 #define P0_S_PRIDE_MIN 0
 
-On_Status.pride.p0.decrease {
+On_Status.pride.p0.decrease
+{
     _n = TOINT(_argv[0])
     p0_s_pride -= _n
     if p0_s_pride < P0_S_PRIDE_MIN {
@@ -63,7 +66,8 @@ On_Status.pride.p0.decrease {
     }
 }
 
-On_Status.pride.p0.increase {
+On_Status.pride.p0.increase
+{
     _n = TOINT(_argv[0])
     p0_s_pride += _n
     if p0_s_pride > P0_S_PRIDE_MAX {
@@ -74,40 +78,43 @@ On_Status.pride.p0.increase {
 // ===================================================================
 // AI graph
 // ===================================================================
-On_getaistate {
+On_getaistate
+{
     _list = GETFUNCLIST('On_Status.set.aigraph.')
     _recent = (IARRAY)
     _label = (IARRAY)
     _add = (IARRAY)
     _max = (IARRAY)
 
-    for _i = 0; _i < ARRAYSIZE(_list); _i ++ {
+    for _i = 0; _i < ARRAYSIZE(_list); _i++ {
         _v = EVAL(_list[_i])
         _recent ,= _v[0]
-        _label  ,= _v[1]
-        _add    ,= _v[2]
-        _max    ,= _v[3]
+        _label ,= _v[1]
+        _add ,= _v[2]
+        _max ,= _v[3]
     }
 
-    _recent = JOIN(_recent , ',')
-    _label  = JOIN(_label  , ',')
-    _add    = JOIN(_add    , ',')
-    _max    = JOIN(_max    , ',')
+    _recent = JOIN(_recent, ',')
+    _label = JOIN(_label, ',')
+    _add = JOIN(_add, ',')
+    _max = JOIN(_max, ',')
 
     _b1 = CHR(1)
     _recent + _b1 + _label + _b1 + _add + _b1 + _max
 }
 
-On_Status.aigraph.recent {
+On_Status.aigraph.recent
+{
     aigraph_recent = (TOINT(p0_s_fullness), TOINT(p0_s_pride))
     aigraph_recent = JOIN(aigraph_recent, ',')
 }
 
-On_Status.set.aigraph.p0_s_fullness : array {
+On_Status.set.aigraph.p0_s_fullness : array
+{
     _recent = 0
-    _label  = 'fullness'
-    _add    = 0
-    _max    = 0
+    _label = 'fullness'
+    _add = 0
+    _max = 0
 
     _aigraph_recent = TOINT(aigraph_recent[0])
     _p0_s_fullness = TOINT(p0_s_fullness)
@@ -128,14 +135,12 @@ On_Status.set.aigraph.p0_s_fullness : array {
         _max = P0_S_FULLNESS_FULL_OVER
     }
 
-    (_recent,_label,_add,_max)
+    (_recent, _label, _add, _max)
 }
 
-On_Status.set.aigraph.talk : array {
-    _talk_array = RandomTalk_NormalSize
-    _len = 0
-
-    _len = ARRAYSIZE(_talk_array)
+On_Status.set.aigraph.talk : array
+{
+    _len = RandomTalk_NormalSize
 
     _recent = _len
     _label = 'talks'
@@ -144,11 +149,12 @@ On_Status.set.aigraph.talk : array {
     (_recent, _label, _add, _max)
 }
 
-On_Status.set.aigraph.p0_s_pride : array {
+On_Status.set.aigraph.p0_s_pride : array
+{
     _recent = TOINT(aigraph_recent[1])
-    _label  = 'pride'
-    _add    = TOINT(p0_s_pride) - _recent
-    _max    = P0_S_PRIDE_MAX
+    _label = 'pride'
+    _add = TOINT(p0_s_pride) - _recent
+    _max = P0_S_PRIDE_MAX
 
-    (_recent,_label,_add,_max)
+    (_recent, _label, _add, _max)
 }
