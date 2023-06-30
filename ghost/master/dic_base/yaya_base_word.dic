@@ -1,21 +1,24 @@
-//******************************************************************************
+// ******************************************************************************
 // YAYA　ゴーストテンプレート
 // 単語辞書
-//******************************************************************************
+// ******************************************************************************
 
 // ===================================================================
 // 食事
 // ===================================================================
-me {
+me
+{
     Meal_name_random
     Word_snack
 }
 
-Word_meal_staple :array {
+Word_meal_staple : array
+{
     '御飯|235|ja'
     'トースト|239|eu'
 }
-Word_meal_maindish : array {
+Word_meal_maindish : array
+{
     'カレー南蛮うどん|516|ja'
     'オムライス|784|eu'
     'ポークカレー|761|eu'
@@ -25,7 +28,8 @@ Word_meal_maindish : array {
     'ドリア|810|eu'
 }
 
-Word_meal_sidedish : array {
+Word_meal_sidedish : array
+{
     '里芋とにんじんの煮物|130|ja'
     '肉じゃが|528|ja'
     '卵焼き|90|ja'
@@ -33,42 +37,51 @@ Word_meal_sidedish : array {
     '白身魚のカルパッチョ|220|eu'
 }
 
-Word_meal_light : array {
+Word_meal_light : array
+{
     '高菜と明太子のお握り|179|ja'
     'ピーナッツバターサンド|180|eu'
     'カツサンド|154|eu'
+    '焼きおにぎり|180|ja'
+    '鮭茶漬け|280|ja'
 }
 
-Word_meal_soup : array {
+Word_meal_soup : array
+{
     'お味噌汁|58|ja'
     'コーンポタージュ|172|eu'
     '野菜コンソメスープ|90|eu'
 }
 
-Word_meal_sweets : array {
+Word_meal_sweets : array
+{
     'ティラミス|250|eu'
     'モンブラン|364|eu'
     'ホットケーキ|564|eu'
+    '羊羹|148|ja'
+    'どらやき|165|ja'
 }
 
-Meal_genre {
+Meal_genre
+{
     case _argv[0] {
-        when 'eu' {
-            '洋風'
-            return
-        }
-        when 'ja' {
-            '和風'
-            return
-        }
-        others {
-            'よくわからない'
-            return
-        }
+    when 'eu' {
+        '洋風'
+        return
+    }
+    when 'ja' {
+        '和風'
+        return
+    }
+    others {
+        'よくわからない'
+        return
+    }
     }
 }
 
-Meal_array : array {
+Meal_array : array
+{
     _class = SHIORI3FW.EscapeAllTags(_argv[0])
     if RE_MATCH(_class, '^Word_meal_.+') == 0 {
         _class = 'Word_meal_' + _class
@@ -78,13 +91,15 @@ Meal_array : array {
     _meal
 }
 
-Meal_name_random {
+Meal_name_random
+{
     _meal_f = GETFUNCLIST('Word_meal_')
     _meal = Meal_array(ANY(_meal_f))
     _meal[0]
 }
 
-Word_snack {
+Word_snack
+{
     '固いコーラ・グミ'
     '一個が当たりというかハズレのガム'
     'その野菜の味がしないスナック'
@@ -99,7 +114,8 @@ Word_snack {
     Word_snack_energy
 }
 // 栄養食品
-Word_snack_energy {
+Word_snack_energy
+{
     'メープル味の栄養スナック'
     '一本で満足しちゃうバー'
     '10秒で補給できるゼリー'
@@ -109,12 +125,14 @@ Word_snack_energy {
 // ===================================================================
 // 人名
 // ===================================================================
-ms {
+ms
+{
     Word_ghost_installed
     Word_person_rand_ja
 }
 
-Word_ghost_installed {
+Word_ghost_installed
+{
     // _ary = (IARRAY, installedsakuralist)
     // _s = ASEARCH(sakuraname, _ary)
     // _ary[_s] = IARRAY
@@ -123,12 +141,14 @@ Word_ghost_installed {
     ANY(SHIORI3FW.SakuraNameList)
 }
 
-Word_person_rand_ja {
+Word_person_rand_ja
+{
     _f = Word_person_rand_ja_family
     _n = Word_person_rand_ja_first
     _f + _n
 }
-Word_person_rand_ja_family : nonoverlap {
+Word_person_rand_ja_family : nonoverlap
+{
     '佐藤'
     '鈴木'
     '高橋'
@@ -164,7 +184,8 @@ Word_person_rand_ja_family : nonoverlap {
     '佐野'
 }
 
-Word_person_rand_ja_first : nonoverlap {
+Word_person_rand_ja_first : nonoverlap
+{
     '伊織'
     '藤馬'
     'きぬ'
@@ -215,7 +236,8 @@ Word_person_rand_ja_first : nonoverlap {
 // ===================================================================
 // 無機物
 // ===================================================================
-mz {
+mz
+{
     Word_tool_IT
     Word_tool_stationery
     Word_tool_gardening
@@ -224,18 +246,21 @@ mz {
     'デジカメ'
     'パスケース'
 }
-Word_tool_IT {
+Word_tool_IT
+{
     'スマートフォン'
     'パソコン'
     'キーボード'
 }
-Word_tool_stationery {
+Word_tool_stationery
+{
     'シャープペンシル'
     '消しゴム'
     '手帳'
 }
 
-Word_tool_gardening {
+Word_tool_gardening
+{
     'スコップ'
     'シャベル'
     '如雨露'
@@ -245,7 +270,8 @@ Word_tool_gardening {
 // ===================================================================
 // 集合
 // ===================================================================
-ml {
+ml
+{
     '人類'
     '世界'
     '生きとし生けるもの'
@@ -253,7 +279,8 @@ ml {
 // ===================================================================
 // 社名
 // ===================================================================
-mc {
+mc
+{
     '越後屋'
     'アンブレラ'
     '民明書房'
@@ -266,7 +293,8 @@ mc {
 // ===================================================================
 // 店名
 // ===================================================================
-mh {
+mh
+{
     'サトーココノカドー'
     'KEIBU'
     'ドクマナルド'
@@ -276,7 +304,8 @@ mh {
 // ===================================================================
 // 技
 // ===================================================================
-mt {
+mt
+{
     'バックドロップ'
     'ジャーマンスープレックス'
     'ファイナル・イオリ・ライド'
@@ -290,12 +319,14 @@ mt {
 // ===================================================================
 // 地名
 // ===================================================================
-mp {
+mp
+{
     Word_place_ramen
     Word_place_country
 }
 // ラーメンが美味しい場所
-Word_place_ramen  {
+Word_place_ramen
+{
     '札幌'
     '旭川'
     '函館'
@@ -326,7 +357,8 @@ Word_place_ramen  {
     // '別府'
     // '宮崎'
 }
-Word_place_country {
+Word_place_country
+{
     'アメリカ'
     'アイスランド'
     'ノルウェー'
@@ -334,7 +366,8 @@ Word_place_country {
     // '日本'
 }
 
-dms {
+dms
+{
     '腹筋をしているライオン'
     'オレンジジュースを吐いているマーライオン'
     '犬に肩叩きしている猫'
@@ -345,14 +378,16 @@ dms {
 // ===================================================================
 // 植物
 // ===================================================================
-Word_plant {
+Word_plant
+{
     Word_plant_vegetable
     Word_plant_flower
     Word_plant_tree
 }
 
 // 野菜
-Word_plant_vegetable {
+Word_plant_vegetable
+{
     'じゃがいも'
     'ミニトマト'
     '大葉'
@@ -361,7 +396,8 @@ Word_plant_vegetable {
     '小松菜'
 }
 
-Word_plant_flower {
+Word_plant_flower
+{
     'あじさい'
     '水仙'
     '鈴蘭'
@@ -370,7 +406,8 @@ Word_plant_flower {
     'チューリップ'
 }
 
-Word_plant_tree {
+Word_plant_tree
+{
     '藤'
     '桜'
     '梅'
@@ -378,7 +415,8 @@ Word_plant_tree {
     Word_plant_fruit
 }
 
-Word_plant_fruit {
+Word_plant_fruit
+{
     '柿'
     '桃'
     '蜜柑'
@@ -389,7 +427,8 @@ Word_plant_fruit {
 // ===================================================================
 // 伺か関連
 // ===================================================================
-Word_uka_archive : nonoverlap {
+Word_uka_archive : nonoverlap
+{
     "ゴースト"
     "シェル"
     "バルーン"
@@ -398,51 +437,51 @@ Word_uka_archive : nonoverlap {
     "サプリメント"
 }
 
-//******************************************************************************
-//単語取得イベント
-//******************************************************************************
+// ******************************************************************************
+// 単語取得イベント
+// ******************************************************************************
 
 On_\ms
 {
-	ms
+    ms
 }
 
 On_\mz
 {
-	mz
+    mz
 }
 
 On_\ml
 {
-	ml
+    ml
 }
 
 On_\mc
 {
-	mc
+    mc
 }
 
 On_\mh
 {
-	mh
+    mh
 }
 
 On_\mt
 {
-	mt
+    mt
 }
 
 On_\me
 {
-	me
+    me
 }
 
 On_\mp
 {
-	mp
+    mp
 }
 
 On_\dms
 {
-	dms
+    dms
 }
