@@ -15,6 +15,10 @@ RandomTalk
 // ------------------------------------------------------------------------------
 RandomTalkEx : nonoverlap
 {
+    if lastTalk_flag != '' {
+        lastTalk_flag = 0
+    }
+
     _hunger_flag = On_Status.fullness.p0.judge
 
     // 空腹が酷い場合は有無を言わさず食事
