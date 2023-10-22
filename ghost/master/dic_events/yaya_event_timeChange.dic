@@ -1,24 +1,27 @@
 // ===================================================================
 // On***Change & OnHourTimeSignal
 // ===================================================================
-OnMinuteChange {
+OnMinuteChange
+{
     On_Status.fullness.p0.decrease
     --
     // 時報系イベント
-    if timesignal > 0  && basewarenameex != 'SSP' {
+    if timesignal > 0 && basewarenameex != 'SSP' {
         if TOINT(minute) % 60 == 0 {
             On_TimeSignal(hour)
         }
     }
 }
 
-OnHourTimeSignal {
+OnHourTimeSignal
+{
     if timesignal > 0 {
         On_TimeSignal(hour)
     }
 }
 
-On_TimeSignal {
+On_TimeSignal
+{
     _t = TOINT(_argv[0])
 
     if ISFUNC("On_TimeSignal_%(_t)") {
@@ -32,54 +35,63 @@ On_TimeSignal {
 // ===================================================================
 // On_TimeSignal_*
 // ===================================================================
-On_TimeSignal_0 {
+On_TimeSignal_0
+{
     '\u\s[10]\h\s[6]午前0時。\w9\s[0]\n新しい日の始まりだ。\w9\w9\uア \w5ハッピーニューデイ！\w9\w9\h\s[3]\n\nそこまでか？\e'
 }
 
-On_TimeSignal_1 {
+On_TimeSignal_1
+{
     '\u\s[10]\h\s[0]午前1時だ。\w9\s[8]\n0時まで、\w5と思っていると、\w5だいたいこの時間まで起きてることが多いな。\w9\w9\u夜ってなんだか、\w5あっという間よね。\e'
 }
 
-On_TimeSignal_2 {
+On_TimeSignal_2
+{
     '\u\s[10]\h\s[0]午前2時。\w9\s[4]\nたまにテレビ見てると、\w5このくらいまで起きちゃうんだよな。\w9\w9\u3時くらいまでは、\w5どこかの局で何かしらやってるわね。\e'
 }
 
-On_TimeSignal_3 {
+On_TimeSignal_3
+{
     '\u\s[10]\h\s[0]午前3時。\w9\w9\u\s[11]草木も眠る丑三つ時よ。\w9\w9\h\s[2]\n\n急にどうした？\w9\w9\u\n\nこれから私が出会ってきた妖怪たちの話を…\w5…\w5。\w9\w9\h\s[7]\n\n眠れなくなりそうだからやめろ！\e'
 }
 
-On_TimeSignal_4 {
+On_TimeSignal_4
+{
     '\u\s[10]\h\s[0]午前4時。\w9\s[6]\nこれくらいまでが、\w5「昨日」って言われて納得できる時間かな。\w9\w9\u深夜28時にこんばんは。\w9\w9\h\s[8]\n\nその言い方はちょっと。\e'
 }
 
-On_TimeSignal_5 {
+On_TimeSignal_5
+{
     '\u\s[10]\h\s[0]午前5時。\w9\s[5]\nこのあたりから起きていると、\w5朝焼けが見れるな。\w9\w9\u\s[11]もしくは、\w5この時間まで起きているか。\w9\w9\h\s[4]\n\nいや、\w5そうだけど…\w5…\w5。\e'
 }
 
-On_TimeSignal_6 {
+On_TimeSignal_6
+{
     '\u\s[10]\h\s[0]午前6時。\w9\s[4]\n俺はこの時間あたりが早起きの限界だ。\w9\w9\u旅行のときとかどうするのよ。\e'
 }
 
-On_TimeSignal_7 {
+On_TimeSignal_7
+{
     '\u\s[10]\h\s[0]午前7時になった。\w9\s[5]\n今、\w5外を見ていい天気だと、\w5気分がいい。\w9\w9\u悪い天気だと？\w9\w9\h\s[4]\n\n言わすもがな。\e'
 }
 
-On_TimeSignal_8 {
+On_TimeSignal_8
+{
     _hunger = On_Status.fullness.p0.judge
     if _hunger < 1 {
         _str = '\u\s[10]\h\s[0]午前8時。\w9\s[5]\n朝食にしよう。\w9\w9\u今日は、\w5'
         case RAND(2) {
-            when 0 {
-                p0_s_fullness += (58 + 235)
-                _str += '御飯とお味噌汁'
-            }
-            when 1 {
-                p0_s_fullness += (239 + 172)
-                _str += 'トーストとコーンポタージュ'
-            }
-            others {
-                _str += '霞'
-            }
+        when 0 {
+            p0_s_fullness += (58 + 235)
+            _str += '御飯とお味噌汁'
+        }
+        when 1 {
+            p0_s_fullness += (239 + 172)
+            _str += 'トーストとコーンポタージュ'
+        }
+        others {
+            _str += '霞'
+        }
         }
         _str += 'よ。\w9\w9\h\s[6]\n\nん。\w9おいしい。'
         _str
@@ -89,7 +101,8 @@ On_TimeSignal_8 {
     }
 }
 
-On_TimeSignal_9 {
+On_TimeSignal_9
+{
     _week = Time_week_toString
     if (_week == '月' || _week == '木' || _week == '金') && RAND(10) < 2 {
         "\u\s[10]\h\s[0]午前9時。\w9\s[6]\n…\w5…\w5\s[2]あっ！\w9\w9\uどうしたの？\w9\w9\h\n\n\h\s[-1]ごみ出し忘れたー！！\w9\w9\u\n\n…\w5…\w5人間って大変ね。\e:chain=On_TimeSignal_9_chain"
@@ -99,95 +112,103 @@ On_TimeSignal_9 {
     }
 }
 
-On_TimeSignal_10 {
+On_TimeSignal_10
+{
     '\u\s[10]\h\s[0]午前10時。\w9\s[4]\n…\w5…\w5本当はこのあたりに起きたい。\w9\w9\u\s[11]何。\e'
 }
 
-On_TimeSignal_11 {
+On_TimeSignal_11
+{
     '\u\s[10]\h\s[0]午前11時。\w9\s[5]\n今あたりが一番作業しやすい。\w9\w9\uお腹も減ってくるけどね。\e'
 }
 
-On_TimeSignal_12 {
+On_TimeSignal_12
+{
     "\u\s[10]\h\s[0]午前12時。\w9正午だ。\w9\s[6]\nお昼ご飯。\w9\w9\u今日は、\w5"
     --
     case RAND(2) {
-        when 0 {
-            _joke = On_TimeSignal_12_joke
-            "\u\s[11]%(_joke[0])"
-            --
-            "\u\s[10]、\w5よ。\w9\w9\h\s[2]\n\nどういう意味だそれ！！\w9\w9"
-            --
-            "\u\s[10]\n\n%(_joke[1])のことよ。\w9\w9\h\s[4]\n\nそれならそうと言えよ…\w5…\w5。\e"
-            return
-        }
-        when 1 {
-            "%(On_TimeSignal_12_delicious)"
-            --
-            "\u\s[10]よ。\w9\w9\h\s[6]\n\nん、\w5うまい。\e"
-            return
-        }
+    when 0 {
+        _joke = On_TimeSignal_12_joke
+        "\u\s[11]%(_joke[0])"
+        --
+        "\u\s[10]、\w5よ。\w9\w9\h\s[2]\n\nどういう意味だそれ！！\w9\w9"
+        --
+        "\u\s[10]\n\n%(_joke[1])のことよ。\w9\w9\h\s[4]\n\nそれならそうと言えよ…\w5…\w5。\e"
+        return
+    }
+    when 1 {
+        "%(On_TimeSignal_12_delicious)"
+        --
+        "\u\s[10]よ。\w9\w9\h\s[6]\n\nん、\w5うまい。\e"
+        return
+    }
     }
 }
 // 食べ物とんち
-On_TimeSignal_12_joke : array {
+On_TimeSignal_12_joke : array
+{
     case RAND(2) {
-        when 0 {
-            p0_s_fullness += 516
-            ('小麦の練り物煮、カレー風味のおでんつゆをそえて', "カレー南蛮うどん")
-            return
-        }
-        when 1 {
-            p0_s_fullness += 784
-            ('御飯の卵とじ、トマト風味', "オムライス")
-            return
-        }
+    when 0 {
+        p0_s_fullness += 516
+        ('小麦の練り物煮、カレー風味のおでんつゆをそえて', "カレー南蛮うどん")
+        return
+    }
+    when 1 {
+        p0_s_fullness += 784
+        ('御飯の卵とじ、トマト風味', "オムライス")
+        return
+    }
     }
 }
 // おいしいもの
-On_TimeSignal_12_delicious {
+On_TimeSignal_12_delicious
+{
     case RAND(3) {
-        when 0 {
-            p0_s_fullness += 180
-            'ピーナッツバターサンド'
-            return
-        }
-        when 1 {
-            p0_s_fullness += 179
-            '高菜と明太子のお握り'
-            return
-        }
-        when 2 {
-            p0_s_fullness += (130 + 100)
-            '里芋とにんじんの煮物'
-            return
-        }
+    when 0 {
+        p0_s_fullness += 180
+        'ピーナッツバターサンド'
+        return
+    }
+    when 1 {
+        p0_s_fullness += 179
+        '高菜と明太子のお握り'
+        return
+    }
+    when 2 {
+        p0_s_fullness += (130 + 100)
+        '里芋とにんじんの煮物'
+        return
+    }
     }
 }
 
-On_TimeSignal_13 {
+On_TimeSignal_13
+{
     _season = Time_month_toSeason
 
     case _season {
-        when '春' {
-            '\u\s[10]\h\s[0]13時になった。\w9\s[5]\nこの時間はあったかくっていいな。\w9\w9\u夏場はきっと逆のことを言うと思う。\w9\w9\h\s[3]\n\nそりゃそうだよ。\e'
-        }
-        when '夏' {
-            '\u\s[10]\h\s[4]13時になった。\w9\s[4]\n…\w5…\w5暑い…\w5…\w5。\w9\w9\u夏場はこれからが耐え時よ。\e'
-        }
-        when '冬' {
-            '\u\s[10]\h\s[0]13時になった。\w9\s[4]\nああ、\w5これから…\w5…\w5。\w9\w9\u日が沈むから、\w5寒くなるわね。\w9\w9\h\s[3]\n\n言わないでくれ…\w5…\w5。\e'
-        }
-        others {
-            '\h\s[0]13時になった。\e'
-        }
+    when '春' {
+        '\u\s[10]\h\s[0]13時になった。\w9\s[5]\nこの時間はあったかくっていいな。\w9\w9\u夏場はきっと逆のことを言うと思う。\w9\w9\h\s[3]\n\nそりゃそうだよ。\e'
+    }
+    when '夏' {
+        '\u\s[10]\h\s[4]13時になった。\w9\s[4]\n…\w5…\w5暑い…\w5…\w5。\w9\w9\u夏場はこれからが耐え時よ。\e'
+    }
+    when '冬' {
+        '\u\s[10]\h\s[0]13時になった。\w9\s[4]\nああ、\w5これから…\w5…\w5。\w9\w9\u日が沈むから、\w5寒くなるわね。\w9\w9\h\s[3]\n\n言わないでくれ…\w5…\w5。\e'
+    }
+    others {
+        '\h\s[0]13時になった。\e'
+    }
     }
 }
 
-On_TimeSignal_14 {
+On_TimeSignal_14
+{
     '\u\s[10]\h\s[0]14時になった。\w9\s[4]\n眠い…\w5…\w5。\w9\w9\uほら、\w5起きなさいな。\e'
 }
 
-On_TimeSignal_15 {
+On_TimeSignal_15
+{
     _hunger = On_Status.fullness.p0.judge
 
     if _hunger < 0 {
@@ -195,18 +216,18 @@ On_TimeSignal_15 {
         _str += '\uしょうがないわね。\w9お茶にしましょう。\w9\s[16]\n今日の御茶請けは、\w5'
 
         case _hunger {
-            when -1 {
-                p0_s_fullness += 250
-                _str += 'ティラミス'
-            }
-            when -2 {
-                p0_s_fullness += 367
-                _str += 'モンブラン'
-            }
-            others {
-                p0_s_fullness += 564
-                _str += 'ホットケーキ'
-            }
+        when -1 {
+            p0_s_fullness += 250
+            _str += 'ティラミス'
+        }
+        when -2 {
+            p0_s_fullness += 367
+            _str += 'モンブラン'
+        }
+        others {
+            p0_s_fullness += 564
+            _str += 'ホットケーキ'
+        }
         }
 
         _str += 'よ。\w9\w9\h\s[6]\n\nおいし。'
@@ -217,11 +238,13 @@ On_TimeSignal_15 {
     }
 }
 
-On_TimeSignal_16 {
+On_TimeSignal_16
+{
     '\u\s[10]\h\s[0]16時になった。\w9\s[4]\nもうそろそろおなかが減ってくるな…\w5…\w5。\w9\w9\u\s[11]早くない！？\e'
 }
 
-On_TimeSignal_17 {
+On_TimeSignal_17
+{
     if Time_month_toSeason == '秋' {
         // 「赤とんぼ」 三木露風:作詞・山田耕筰:作曲
         '\u\s[10]\h\s[25]ゆ\w7う\w7や\w9\w3ー\w9\w3け\w7 '
@@ -237,6 +260,7 @@ On_TimeSignal_17 {
         ' み\w7た\w7の\w8ー\w7は\w8ー\w8'
         --
         '\s[25]\nい\w7つ\w7の\w8ー\w7ひ\w8ー\w7か\w8ー\w9♪'
+        --
         {
             ''
             '\e:chain=On_TimeSignal_17_chain'
@@ -261,11 +285,13 @@ On_TimeSignal_17 {
     }
 }
 
-On_TimeSignal_18 {
+On_TimeSignal_18
+{
     '\u\s[10]\h\s[0]18時になった。\w9\s[6]\nこの時間になると、\w5外では夕飯のにおいが…\w5…\w5\w9\s[4]\n…\w5…\w5は\w2ら\w2へ\w2っ\w2た\w2…\w5…\w5。\w9\w9\uもうちょっとだから我慢なさいな。'
 }
 
-On_TimeSignal_19 {
+On_TimeSignal_19
+{
     '\u\s[10]\h\s[0]19時になった。\w9\s[5]\n夕飯にしよう。\w9今日は、\w5'
     --
     On_TimeSignal_19_dinner
@@ -277,52 +303,57 @@ On_TimeSignal_19 {
     '\h\s[5]\n\nそれでは、\w5いただきます。'
 }
 
-On_TimeSignal_19_dinner {
+On_TimeSignal_19_dinner
+{
     case RAND(3) {
-        when 0 {
-            p0_s_fullness += 761
-            'ポークカレー'
-            return
-        }
-        when 1 {
-            p0_s_fullness += (528 + 235)
-            '肉じゃが'
-            return
-        }
-        when 2 {
-            p0_s_fullness += 569
-            '親子丼'
-            return
-        }
+    when 0 {
+        p0_s_fullness += 761
+        'ポークカレー'
+        return
+    }
+    when 1 {
+        p0_s_fullness += (528 + 235)
+        '肉じゃが'
+        return
+    }
+    when 2 {
+        p0_s_fullness += 569
+        '親子丼'
+        return
+    }
     }
 }
 
-On_TimeSignal_20 {
+On_TimeSignal_20
+{
     '\u\s[10]\h\s[0]20時になった。\w9\s[30]\nも\w2う\w2ね\w2む\w2い\w2…\w5…\w5。\w9\w9\u良い子か。'
 }
 
-On_TimeSignal_21 {
+On_TimeSignal_21
+{
     '\u\s[10]\h\s[0]21時になった。\w9\s[6]\n夜、\w5と言うと、\w5この位を思い浮べる。\w9\w9\u\s[11]まだまだ夜はこれからよー！\w9\w9\h\s[3]\n\nお前が言うのかよ。'
 }
 
-On_TimeSignal_22 {
+On_TimeSignal_22
+{
     '\u\s[10]\h\s[0]22時になった。\w9\w9\u\s[11]にゃんにゃーっ！\w9なぁぁお！\w9\w9\h\s[2]\n\n急にどうした？\w9\w9\u\s[10]\n\n何って、\w5「22」でしょ。\w9\s[16]\n「にゃんにゃん」の時間よ。\w9\s[10]\nにゃんにゃーん！！\w9\w9\h\n\n…\w5…\w5\w9\s[6]午後10時になった。\w9\w9\u\s[11]\n\n言い直さないでよ！！'
 }
 
-On_TimeSignal_23 {
+On_TimeSignal_23
+{
     '\u\s[10]\h\s[0]23時になった。\w9\s[6]\n今日もあと1時間。\w9\w9\u\s[16]明日がいい日でありますように。'
 }
-
 
 // ===================================================================
 // TimeSignal に関連したトーク
 // ===================================================================
 On_TimeSignal_9_chain
 {{CHAIN
-  On_TimeSignal_9_chain_body
- }}CHAIN
+    On_TimeSignal_9_chain_body
+}}CHAIN
 
-On_TimeSignal_9_chain_body {
+On_TimeSignal_9_chain_body
+{
     '\h\s[4]\u\s[10]さっきの、大丈夫だった？\w9\w9'
     --
     '\h\s[4]…\w5…\w5なんとか…\w5…\w5。'
@@ -335,10 +366,10 @@ On_TimeSignal_9_chain_body {
 On_TimeSignal_17_chain
 {{CHAIN
     On_TimeSignal_17_chain_body
- }}CHAIN
+}}CHAIN
 
-
-On_TimeSignal_17_chain_body {
+On_TimeSignal_17_chain_body
+{
     '\h\s[0]\u\s[10]この地域では、\w5夕方に曲が流れるけど、\w5そもそも夕方に曲が流れない地域もあるわよ。\w9\w9\h\s[3]へぇ、\w5それは困ったな。\w9\w9\u\n\nん？\w9どうして？\w9\w9\h\s[8]\n\n小さいころは、\w5曲を聞いたらダッシュで家に帰ってたから…\w5…\w5。\w9\w9\u\s[11]\n\nもしかして、\w5門限に帰り始めてる？！\e:chain=end'
     {
         '\h\s[0]\u\s[10]この地域では、\w5'
