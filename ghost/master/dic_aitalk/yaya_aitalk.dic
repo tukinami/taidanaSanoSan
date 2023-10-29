@@ -35,8 +35,21 @@ RandomTalkEx : nonoverlap
         parallel Talk_eat
     }
     others {
-        RandomTalk_Normal
+        RandomTalk_NormalEx
     }
+    }
+}
+
+RandomTalk_NormalEx: nonoverlap
+{
+    _additional_talk = 4
+    _talk_flag = RAND(RandomTalk_NormalSize + _additional_talk)
+
+    if _talk_flag <= _additional_talk {
+        // ワード使用トーク。配列ではない。
+        Talk_usingWord
+    } else {
+        RandomTalk_Normal
     }
 }
 
@@ -79,8 +92,6 @@ RandomTalk_NormalBody : array
 
     // 通常トーク
     _talk_array ,= Talk_default
-    // ワード使用トーク。これだけ配列ではない。
-    _talk_array = (_talk_array, Talk_usingWord)
     // チェイントーク
     _talk_array ,= Talk_chain
 
