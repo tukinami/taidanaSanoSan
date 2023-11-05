@@ -3,7 +3,7 @@ file,ghost/master/descript.txte4c70aba39406e13e3c6c40fde5fb076size=350date=20
 file,ghost/master/dic_aitalk/_loading_order.txtdf652206c7767c975d193208b16bed3bsize=164date=2012-12-21T00:00:00
 file,ghost/master/dic_aitalk/yaya_aitalk.dic9bbbaec224a556ce00895812c0f7356esize=2551date=2012-12-21T00:00:00
 file,ghost/master/dic_aitalk/yaya_aitalk_date.dic26b64273852e671a03eadfbd982fe261size=24819date=2012-12-21T00:00:00
-file,ghost/master/dic_aitalk/yaya_aitalk_default.dic492c1a1bff5122e857c99879bb5d6b35size=48952date=2012-12-21T00:00:00
+file,ghost/master/dic_aitalk/yaya_aitalk_default.dic5a9b88ce49786f643e905c0987c74642size=49789date=2012-12-21T00:00:00
 file,ghost/master/dic_base/_loading_order.txt930511a8cca19c0b28e5661417904a2esize=261date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_function.dic31a8be1ce11c51b1f0d036fd7be5917esize=13197date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_status.dic330cb534d9b643708f22ed70b2e66f8bsize=3615date=2012-12-21T00:00:00
@@ -23,7 +23,7 @@ file,ghost/master/dic_events/yaya_event_etc.dicb94f96ad23840cd37f63529ecaf9d493
 file,ghost/master/dic_events/yaya_event_feature.dic2d66d22f4fa0f2d7d8148d49be8759e1size=21164date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_mouse.dic6a1fb4b887a83e820b69ad8eb7730c22size=6669date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_timeChange.dica7960c6b09fafaf429f4397ce02d6aacsize=13775date=2012-12-21T00:00:00
-file,ghost/master/dic_events/yaya_event_update.dic7e36f911a586e17c8b7d0f147b59c4f1size=9420date=2012-12-21T00:00:00
+file,ghost/master/dic_events/yaya_event_update.dicef349fcb54db1c2f32018838f212b66fsize=9464date=2012-12-21T00:00:00
 file,ghost/master/explorer2/character_descript.txt5ae2818a2df95789de8789568435d9c7size=587date=2012-12-21T00:00:00
 file,ghost/master/icon.icoc39a9f642b9e16f2c3815b6406887d4asize=1406date=2012-12-21T00:00:00
 file,ghost/master/stamp.pngdb6568b9b56eec66a691fd166740b3e5size=1831date=2012-12-21T00:00:00
