@@ -118,15 +118,24 @@ OnRecommendsiteChoice
     when 'https://github.com/tukinami/taidanaSanoSan' {
         '\u\s[10]\h\s[0]俺たちの配布場所だ。\w9\w9\u…\w5……\w5\s[11]「俺たちの配布場所」って、\w5凄い台詞…\w5…\w5！！\w9\w9\h\s[3]\n\n…\w5…\w5しかたがない、\w5他にいいようがないだろ。'
     }
+    when 'https://peing.net/ja/tukinami_seika' {
+        '\u\s[10]\h\s[0]感想・報告など、\w5何かあればこちらの質問箱へ。\w9\w9\u返信は多分、\w5下にあった「Mastodon」ですると思うわ。'
+    }
+    when 'https://fedibird.com/@tukinami_seika' {
+        '\u\s[10]\h\s[0]作者のMastodon、\w5いわゆる「マイクロブログSNS」だ。\w9\n作者の日常の他、\w5更新などの情報を流している。\w9\w9\u質問箱の内容への回答もここで行なうと思うわ。'
+    }
     // portal
-    when 'http://disc2.s56.xrea.com/' {
-        '\u\s[10]\h\s[0]「Disc-2」。\w9\n伺かに関する、\w5様々な情報が投稿されているニュースサイト。'
+    when 'https://feed.ukagaka.net' {
+        '\u\s[10]\h\s[0]「うかフィード」。\w9\n伺かに関する、\w5様々な情報が投稿されているニュースサイトだ。'
     }
     when 'http://ghosttown.mikage.jp/' {
         '\u\s[10]\h\s[0]「GHOST/BALLOON TOWN」。\w9\n伺かのゴーストとバルーンのデータベース。'
     }
     when 'http://ghost.sakura.tv/' {
         '\u\s[10]\h\s[0]「Uka-Ni-Sphere」。\w9\n伺かの情報サイトの総合エントランス。\w9ニュースサイト「霊界通信」、\w5感想を投稿する「伺的な感想やレビューのWiki」などがある。'
+    }
+    when 'http://buynowforsale.shillest.net/ghosts/' {
+        '\u\s[10]\h\s[0]「ゴーストキャプターさくら」。\w9\nゴースト更新情報リスト。'
     }
     when 'http://ssp.shillest.net/' {
         '\u\s[10]\h\s[0]「SSP BUGTRAQ」。\w9\s[6]\nあるいは、\w5「ばぐとら研究所」。\w9\s[0]\n伺かのゴーストを動かす、\w5ベースウェアの一つ、\w5SSPを開発しているサイト。'
@@ -140,6 +149,9 @@ OnRecommendsiteChoice
     }
     when 'http://emily.shillest.net/ayaya/' {
         '\u\s[10]\h\s[0]『文Wiki「文屋」』。\w9\nゴーストの動作の大本となるSHIORI、\w5その一つ、\w5「AYA」と、\w5その改造派生である「YAYA」の配布、\w5情報を扱う総合Wiki。\w9\w9\u私たちは「YAYA」にお世話になってます。'
+    }
+    when 'http://ssp.shillest.net/ukadoc/manual/' {
+        '\u\s[10]\h\s[0]「UKADOC」。\w9\n伺か関連の仕様を文書化したサイト。\w9\w9\uゴースト作成のとき、\w5細かい所が分からなかったらここを頼りにしています。'
     }
     }
 }
