@@ -187,42 +187,82 @@ OnUpdate.OnMD5CompareFailure
 
 OnUpdateOtherBegin
 {
-    "\![raise,OnUpdateBegin,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+    _ref = IARRAY
+    foreach reference; _r {
+        _ref ,= '"' + SHIORI3FW.EscapeAllTags(_r) + '"'
+    }
+
+    "\![raise,OnUpdateBegin,%(_ref[0]),%(_ref[1]),%(_ref[2]),%(_ref[3]),%(_ref[4])]"
 }
 
 OnUpdateOtherReady
 {
-    "\![raise,OnUpdateReady,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+    _ref = IARRAY
+    foreach reference; _r {
+        _ref ,= '"' + SHIORI3FW.EscapeAllTags(_r) + '"'
+    }
+
+    "\![raise,OnUpdateReady,%(_ref[0]),%(_ref[1]),%(_ref[2]),%(_ref[3]),%(_ref[4])]"
 }
 
 OnUpdateOtherComplete
 {
-    "\![raise,OnUpdateComplete,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+    _ref = IARRAY
+    foreach reference; _r {
+        _ref ,= '"' + SHIORI3FW.EscapeAllTags(_r) + '"'
+    }
+
+    "\![raise,OnUpdateComplete,%(_ref[0]),%(_ref[1]),%(_ref[2]),%(_ref[3]),%(_ref[4])]"
 }
 
 OnUpdateOtherFailure
 {
-    "\![raise,OnUpdateFailure,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+    _ref = IARRAY
+    foreach reference; _r {
+        _ref ,= '"' + SHIORI3FW.EscapeAllTags(_r) + '"'
+    }
+
+    "\![raise,OnUpdateFailure,%(_ref[0]),%(_ref[1]),%(_ref[2]),%(_ref[3]),%(_ref[4])]"
 }
 
 OnUpdateOther.OnDownloadBegin
 {
-    "\![raise,OnUpdate.OnDownloadBegin,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+    _ref = IARRAY
+    foreach reference; _r {
+        _ref ,= '"' + SHIORI3FW.EscapeAllTags(_r) + '"'
+    }
+
+    "\![raise,OnUpdate.OnDownloadBegin,%(_ref[0]),%(_ref[1]),%(_ref[2]),%(_ref[3]),%(_ref[4])]"
 }
 
 OnUpdateOther.OnMD5CompareBegin
 {
-    "\![raise,OnUpdate.OnMD5CompareBegin,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+    _ref = IARRAY
+    foreach reference; _r {
+        _ref ,= '"' + SHIORI3FW.EscapeAllTags(_r) + '"'
+    }
+
+    "\![raise,OnUpdate.OnMD5CompareBegin,%(_ref[0]),%(_ref[1]),%(_ref[2]),%(_ref[3]),%(_ref[4])]"
 }
 
 OnUpdateOther.OnMD5CompareComplete
 {
-    "\![raise,OnUpdate.OnMD5CompareComplete,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+    _ref = IARRAY
+    foreach reference; _r {
+        _ref ,= '"' + SHIORI3FW.EscapeAllTags(_r) + '"'
+    }
+
+    "\![raise,OnUpdate.OnMD5CompareComplete,%(_ref[0]),%(_ref[1]),%(_ref[2]),%(_ref[3]),%(_ref[4])]"
 }
 
 OnUpdateOther.OnMD5CompareFailure
 {
-    "\![raise,OnUpdate.OnMD5CompareFailure,%(reference[0]),%(reference[1]),%(reference[2]),%(reference[3]),%(reference[4])]"
+    _ref = IARRAY
+    foreach reference; _r {
+        _ref ,= '"' + SHIORI3FW.EscapeAllTags(_r) + '"'
+    }
+
+    "\![raise,OnUpdate.OnMD5CompareFailure,%(_ref[0]),%(_ref[1]),%(_ref[2]),%(_ref[3]),%(_ref[4])]"
 }
 
 On_Update_log

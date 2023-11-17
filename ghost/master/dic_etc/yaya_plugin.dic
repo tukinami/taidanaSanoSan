@@ -111,7 +111,7 @@ On_Plugin_stamp_begin
 
 OnStampInfo : void
 {
-    stamp_info_is_exist = reference[1]
+    stamp_info_is_exist = TOINT(reference[1])
 }
 
 On_Plugin_stamp_menu

@@ -139,21 +139,25 @@ InstallComplete_change_and_call
 
 OnInstallComplete_change
 {
+    _type = SHIORI3FW.EscapeAllTags(reference[0])
+    _target = SHIORI3FW.EscapeAllTags(reference[1])
     if basewarename == 'SSP' {
-        "\![change,%(reference[0]),lastinstalled]"
+        "\![change,%(_type),lastinstalled]"
     }
     else {
-        "\![change,%(reference[0]),%(reference[1])]"
+        "\![change,%(_type),%(_target)]"
     }
 }
 
 OnInstallComplete_call
 {
+    _type = SHIORI3FW.EscapeAllTags(reference[0])
+    _target = SHIORI3FW.EscapeAllTags(reference[1])
     if basewarename == 'SSP' {
-        "\![call,%(reference[0]),lastinstalled]"
+        "\![call,%(_type),lastinstalled]"
     }
     else {
-        "\![call,%(reference[0]),%(reference[1])]"
+        "\![call,%(_type),%(_target)]"
     }
 }
 
@@ -208,14 +212,16 @@ OnInstallRefuse
 
 OnInstallRefuse_ghostcall
 {
-    "\![call,ghost,%(reference[0])]"
+    _target = SHIORI3FW.EscapeAllTags(reference[0])
+    "\![call,ghost,%(_target)]"
 }
 
 // SSPのみ
 OnInstallReroute
 {
-    "\u\s[10]\h\s[6]%(reference[0])さんへパス。"
-    "\h\s[0]\u\s[10]妖術！\w9物体転移の術！\w9\w9\h\s[3]%(reference[0])さんに渡しただけだろ…\w5…\w5。"
+    _target = SHIORI3FW.EscapeAllTags(reference[0])
+    "\u\s[10]\h\s[6]%(_target)さんへパス。"
+    "\h\s[0]\u\s[10]妖術！\w9物体転移の術！\w9\w9\h\s[3]%(_target)さんに渡しただけだろ…\w5…\w5。"
 }
 
 // ===================================================================
@@ -371,7 +377,7 @@ OnBIFFComplete
         _header += "新着メールはなかったが、既存のメールが%(_num)件ある。"
         _footer = BIFF_close
 
-        BIFF_makeList(_header, _footer, reference[4])
+        BIFF_makeList(_header, _footer, SHIORI3FW.EscapeDangerousTags(reference[4]))
     }
     else {
         // 新着メール有
@@ -385,7 +391,7 @@ OnBIFFComplete
                 _header += "\h\s[3]\n\nいいのか、\w5それで。\w9\_q"
             }
             _footer = BIFF_close
-            BIFF_makeList(_header, _footer, reference[4])
+            BIFF_makeList(_header, _footer, SHIORI3FW.EscapeDangerousTags(reference[4]))
         }
     }
 }
@@ -405,7 +411,7 @@ OnBIFF2Complete
         _header += "\h\s[3]\n\nいいのかなぁ。\w9\_q"
     }
     _footer = BIFF_close
-    BIFF_makeList(_header, _footer, reference[4])
+    BIFF_makeList(_header, _footer, SHIORI3FW.EscapeDangerousTags(reference[4]))
 }
 
 BIFF_makeList
