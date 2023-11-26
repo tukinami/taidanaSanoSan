@@ -2,8 +2,8 @@ charset,UTF-8
 file,ghost/master/descript.txte4c70aba39406e13e3c6c40fde5fb076size=350date=2012-12-21T00:00:00
 file,ghost/master/dic_aitalk/_loading_order.txtdf652206c7767c975d193208b16bed3bsize=164date=2012-12-21T00:00:00
 file,ghost/master/dic_aitalk/yaya_aitalk.dic9bbbaec224a556ce00895812c0f7356esize=2551date=2012-12-21T00:00:00
-file,ghost/master/dic_aitalk/yaya_aitalk_date.dic26b64273852e671a03eadfbd982fe261size=24819date=2012-12-21T00:00:00
-file,ghost/master/dic_aitalk/yaya_aitalk_default.dic4d98fd2fccbd0ef236e96a0a78de93bdsize=51205date=2012-12-21T00:00:00
+file,ghost/master/dic_aitalk/yaya_aitalk_date.dic5927cde15e99e60635d4b7d0ca326a92size=26448date=2012-12-21T00:00:00
+file,ghost/master/dic_aitalk/yaya_aitalk_default.dic77551862403759a6aca44d40314b097dsize=51729date=2012-12-21T00:00:00
 file,ghost/master/dic_base/_loading_order.txt930511a8cca19c0b28e5661417904a2esize=261date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_function.dic31a8be1ce11c51b1f0d036fd7be5917esize=13197date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_status.dic330cb534d9b643708f22ed70b2e66f8bsize=3615date=2012-12-21T00:00:00
@@ -23,7 +23,7 @@ file,ghost/master/dic_events/yaya_event_etc.dice1039652f5f30b7353d5cfdc15f2b40d
 file,ghost/master/dic_events/yaya_event_feature.dic170d276cba7490b82d6ee8e8c1a3f1b2size=21518date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_mouse.dic6a1fb4b887a83e820b69ad8eb7730c22size=6669date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_timeChange.dica7960c6b09fafaf429f4397ce02d6aacsize=13775date=2012-12-21T00:00:00
-file,ghost/master/dic_events/yaya_event_update.dic5f14e57235ed246e2beada2ed87fbef2size=10390date=2012-12-21T00:00:00
+file,ghost/master/dic_events/yaya_event_update.dic150ca6590e53ffdc53540272be65a639size=10502date=2012-12-21T00:00:00
 file,ghost/master/explorer2/character_descript.txt5ae2818a2df95789de8789568435d9c7size=587date=2012-12-21T00:00:00
 file,ghost/master/icon.ico19122ac40d6e45add065b4dcc2cace71size=21550date=2012-12-21T00:00:00
 file,ghost/master/stamp.pngdb6568b9b56eec66a691fd166740b3e5size=1831date=2012-12-21T00:00:00
@@ -32,9 +32,9 @@ file,ghost/master/system/yaya_base/_loading_order.txt9c350c2c9c08f635bff5eaae14
 file,ghost/master/system/yaya_base/compatible.dic4f8b1e8c8c08dc44e70b1bd4f52a1affsize=4297date=2012-12-21T00:00:00
 file,ghost/master/system/yaya_base/config.dic1e16cc194c0dbd360cf2a6f36ce2a550size=2588date=2012-12-21T00:00:00
 file,ghost/master/system/yaya_base/optional.dicff4da728a656a8aa6a38939e654c51f2size=9953date=2012-12-21T00:00:00
-file,ghost/master/system/yaya_base/shiori3.dic18b395e9ffcd3fb772ded9046ed4b57csize=54846date=2012-12-21T00:00:00
+file,ghost/master/system/yaya_base/shiori3.dic03d892b84cb33d77167ccb74308ebb37size=55026date=2012-12-21T00:00:00
 file,ghost/master/system_config.txtd6ccd5f35461888f5599c9ef9961b4e3size=691date=2012-12-21T00:00:00
-file,ghost/master/yaya.dll56e3af56c88e696cea1f39d53b239cefsize=880640date=2012-12-21T00:00:00
+file,ghost/master/yaya.dll49b388973209005e5586f9e54b008bb1size=880640date=2012-12-21T00:00:00
 file,ghost/master/yaya.txtb025cbe057088167744dfe04c1ca0e3bsize=2290date=2012-12-21T00:00:00
 file,ghost/master/yaya_emerg.txt6397331574847c81714a16de772194dcsize=1143date=2012-12-21T00:00:00
 file,ghost/master/yaya_emerg_dic.txtad3acbe6d14807394717bc1320936228size=797date=2012-12-21T00:00:00
