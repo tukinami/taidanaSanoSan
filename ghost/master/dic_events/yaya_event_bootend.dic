@@ -318,6 +318,12 @@ OnBoot_talk_date_3_14_first
     }
 }
 
+OnBoot_talk_date_12_13_first
+{
+    datetalk_year_12_13 = year
+    "\u\s[10]\h\s[35]今日は俺たちの「公開日」なんだって！\w9\w9\uいきなりのメタ発言。\w9\w9\h\s[36]\n\nなんかあるのかな？\w9特別な何かがもらえたり？\w9\w9\u\n\n特にないそうですよ。\w9\w9\h\s[2]\n\n…\w5…\w5えっ。\w9\w9\u\n\n通常通りの進行で、\w5と申し付かっております。\w9\w9\h\s[3]\n\nえっ、\w5あの。\w9\w9\u\n\nはい、\w5では始まりまーす。\w9\w9\h\s[2]\n\nえーっ！？"
+}
+
 OnBoot_talk_date_user_birthday_first
 {
     datetalk_year_user_birthday = year
