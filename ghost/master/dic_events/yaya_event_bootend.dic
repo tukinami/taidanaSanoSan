@@ -339,7 +339,7 @@ OnClose
     --
     OnClose_talk
     --
-    "\-"
+    "\w9\w9\-"
 }
 
 OnClose_talk : nonoverlap
