@@ -324,6 +324,25 @@ OnBoot_talk_date_12_13_first
     "\u\s[10]\h\s[35]今日は俺たちの「公開日」なんだって！\w9\w9\uいきなりのメタ発言。\w9\w9\h\s[36]\n\nなんかあるのかな？\w9特別な何かがもらえたり？\w9\w9\u\n\n特にないそうですよ。\w9\w9\h\s[2]\n\n…\w5…\w5えっ。\w9\w9\u\n\n通常通りの進行で、\w5と申し付かっております。\w9\w9\h\s[3]\n\nえっ、\w5あの。\w9\w9\u\n\nはい、\w5では始まりまーす。\w9\w9\h\s[2]\n\nえーっ！？"
 }
 
+OnBoot_talk_date_12_24_first
+{
+    datetalk_year_12_24 = year
+    "\u\s[10]\h\s[35]\u\s[11]\_sメ\w2リ\w2ー\w2ク\w2リ\w2ス\w2マ\w2ー\w2ス\w2！！\_s\w9\w9\h\s[8]\n\n特にクリスマスに関係あるやつじゃないんだけどな、\w5俺。\w9\w9\u\s[11]\n\n「祝えることは祝っとけ」の精神で！\w9\n「毎日がクリスマス」の精神で！\w9\w9\h\s[3]\n\n後半おかしいだろ。\w9\s[5]\nまあ、\w5今日の%(username)に、\w5いいことがありますように。\w9\w9\u\s[16]\n\nように！！"
+}
+
+OnBoot_talk_date_12_25_first
+{
+    datetalk_year_12_25 = year
+
+    if datetalk_year_12_24 == year {
+        '\u\s[10]\h\s[35]\u\s[11]\_sメ\w2リ\w2ー\w2ク\w2リ\w2ス\w2マ\w2ー\w2ス\w2！！\_s\w9\w9\h\s[3]\n\n…\w5…\w5昨日もやらなかったかこれ？\w9\w9\u\s[10]\n\n今日が本番なんだけれど。\w9\s[11]\n…\w5…\w5「祝えることは祝っとけ」の精神で！\w9\w9\h\s[4]\n\nわかったわかった。\w9\s[0]\nまぁ、\w5いつもどおりいこう。\w9\w9\u\n\nOK！'
+    }
+    else {
+        // クリスマス・イブの起動トークをしていなかったら通常トーク
+        OnBoot_talkEx
+    }
+}
+
 OnBoot_talk_date_user_birthday_first
 {
     datetalk_year_user_birthday = year
