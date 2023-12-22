@@ -1,0 +1,11 @@
+//meta info
+type,ghost
+name,怠惰な佐野さん
+craftman,月波 清火
+craftmanurl,https://github.com/tukinami/taidanaSanoSan
+uuid,w+cf4pDVBOrS3DmEvy9aaA==
+languages,Japanese
+sakura.name,佐野伊織
+kero.name,きぬ
+homeurl,https://raw.githubusercontent.com/tukinami/taidanaSanoSan/main/
+icon,https://raw.githubusercontent.com/tukinami/taidanaSanoSan/main/.ukagaka/icon.png
