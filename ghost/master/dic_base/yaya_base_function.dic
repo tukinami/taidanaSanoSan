@@ -237,6 +237,18 @@ Time_hour_toSlot
     }
 }
 
+/* UNIX TIMEから第2引数日経過後の日付の汎用配列を返す。
+  @param int 基準となる時間。UNIX TIME(秒)
+  @param int 経過させたい日数。日
+  @return array 日付を表す汎用配列。(GETTIME関数の返り値と同じ) */
+Time_after_day : array
+{
+    _base = TOINT(_argv[0])
+    _target = TOINT(_argv[1]) * 60 * 60 * 24
+
+    GETTIME(_base + _target)
+}
+
 // ===================================================================
 // 配列出力
 // ===================================================================

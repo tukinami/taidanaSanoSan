@@ -112,6 +112,11 @@ OnFirstBoot_inputUserName_decide
 // ===================================================================
 OnBoot
 {
+    Plugin_MailBox_BootScript('OnBootEx')
+}
+
+OnBootEx
+{
     Surface_reset
     --
     On_Status.fullness.p0.reset
@@ -354,6 +359,8 @@ OnBoot_talk_date_user_birthday_first
 // ===================================================================
 OnClose
 {
+    On_Plugin_MailBox_sendMails
+    --
     Surface_reset
     --
     OnClose_talk

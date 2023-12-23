@@ -82,10 +82,17 @@ OnGhostChangingOther
 
 OnGhostChanging
 {
+    On_Plugin_MailBox_sendMails
+    --
     AYATEMPLATE.ExecuteChangeCallTalk("OnGhostChanging", "OnClose")
 }
 
 OnGhostChanged
+{
+    Plugin_MailBox_BootScript('OnGhostChangedEx')
+}
+
+OnGhostChangedEx
 {
     AYATEMPLATE.ExecuteChangeCallTalk("OnGhostChanged", "OnBoot")
 }
@@ -96,6 +103,11 @@ OnGhostCalling
 }
 
 OnGhostCalled
+{
+    Plugin_MailBox_BootScript('OnGhostCalledEx')
+}
+
+OnGhostCalledEx
 {
     AYATEMPLATE.ExecuteChangeCallTalk("OnGhostCalled", "OnBoot")
 }

@@ -244,3 +244,224 @@ OnRecieveGetWindowTitle_talk
         parallel Talk_default
     }
 }
+
+// ===================================================================
+// MailBox
+// ===================================================================
+On_Plugin_MailBox_start
+{
+    plugin_MailBox_flag = 1
+}
+
+On_Plugin_MailBox_stop
+{
+    plugin_MailBox_flag = 0
+
+    On_Plugin_MailBox_deleteAllMails
+}
+
+On_Plugin_MailBox_checkMails
+{
+    _s = ''
+    _ids = IARRAY
+    _funcs = GETFUNCLIST('Plugin_MailBox_Mail_body_')
+
+    foreach _funcs; _fn {
+        _mail_data = EVAL(_fn)
+        if ARRAYSIZE(_mail_data) > 1 {
+            _ids ,= _mail_data[0]
+        }
+    }
+    _ids_str = JOIN(_ids, ':')
+    "\![raiseplugin,MailBox,OnStatusMails,%(_ids_str)]"
+}
+
+On_Plugin_MailBox_resetMails
+{
+    _s = ''
+    _vars = GETVARLIST('plugin_MailBox_mailStatus_')
+
+    foreach _vars; _var {
+        _mail_id = TOINT(REPLACE(_var, 'plugin_MailBox_mailStatus_', ''))
+        _s += "\![notiyplugin,MailBox,OnDeleteMailNotArrive,%(_mail_id)]"
+    }
+
+    _s
+}
+
+On_Plugin_MailBox_sendMails
+{
+    if plugin_MailBox_flag == 0 {
+        return
+    }
+
+    _s = ''
+    _funcs = GETFUNCLIST('Plugin_MailBox_Mail_body_')
+
+    foreach _funcs; _fn {
+        _mail_data = EVAL(_fn)
+
+        if ARRAYSIZE(_mail_data) > 1 {
+            _mail_data_str = JOIN(_mail_data, ',')
+            _s += "\![notifyplugin,MailBox,OnSendMailNotArrive,%(_mail_data_str)]"
+        }
+    }
+    _s
+}
+
+On_Plugin_MailBox_deleteAllMails
+{
+    _s = ''
+    _ids = IARRAY
+    _vars = GETVARLIST('plugin_MailBox_mailStatus_')
+
+    foreach _vars; _var {
+        _mail_id = TOINT(REPLACE(_var, 'plugin_MailBox_mailStatus_', ''))
+        _s += Plugin_MailBox_Mail_delete_fromId(_mail_id)
+    }
+    _s
+}
+
+Plugin_MailBox_BootScript
+{
+    _refs = IARRAY
+    // CHR(34) -> ", CHR(39) -> '
+    foreach reference; _r {
+        _refs ,= CHR(34) + REPLACE(_r, CHR(34), CHR(39)) + CHR(34)
+    }
+    _ref = JOIN(_refs, ',')
+    '\![embed,On_Plugin_MailBox_checkMails]'
+    --
+    '\![embed,On_Plugin_MailBox_resetMails]'
+    --
+    "\![embed,%(_argv[0]),%(_refs)]"
+}
+
+Plugin_MailBox_Mail_delete_fromId
+{
+    _mail_id = TOINT(_argv[0])
+    EVAL("plugin_MailBox_mailStatus_%(_mail_id)=0")
+    "\![notifyplugin,MailBox,OnDeleteMail,%(_mail_id)]"
+}
+
+OnMailsStatus
+{
+    _mail_ids = SPLIT(reference[0], ':')
+    _mail_statuses = SPLIT(reference[1], ':')
+
+    _len = ARRAYSIZE(_mail_ids)
+    for _i = 0; _i < _len; _i++ {
+        _mail_id = TOINT(_mail_ids[_i])
+        _status = TOINT(_mail_statuses[_i])
+        EVAL("plugin_MailBox_mailStatus_%(_mail_id)=%(_status)")
+    }
+}
+
+// -------------------------------------------------------------------
+// Plugin_MailBox_Mail_body_*
+// -------------------------------------------------------------------
+// 条件つきで、条件に当て嵌らないときは空配列を返す
+Plugin_MailBox_Mail_body_0 : array
+{
+    _id = 0
+
+    // 半年後
+    _date_raw = Time_after_day(GETSECCOUNT(), 180)
+    _sender = '佐野 伊織'
+    _title = '久し振り'
+    _contents = "久し振り。元気にしてたか？\n\nこっちはいつも通りだよ。きぬも、俺も。\n長いこと%(username)に会えてないのは、ちょっと、寂しい、かな。\nもし、よかったらでいいから、会いに来てくれると、うれしい、なんて。\n……がらにもなかったかな。\nそれじゃあ、元気で。"
+
+    _id
+    _date_raw[0]
+    _date_raw[1]
+    _date_raw[2]
+    _sender
+    _title
+    _contents
+}
+
+Plugin_MailBox_Mail_body_1 : array
+{
+    _id = 1
+
+    _date_raw = GETTIME()
+    _sender = '佐野 伊織'
+    _title = '初めてのメール'
+    _contents = "こんにちは、%(username)。\n\nちゃんと届いているかテスト送信してみた。\nこういうの慣れてないが、まぁ、それなりにやるよ。\n\nそれじゃあな。"
+
+    _id
+    _date_raw[0]
+    _date_raw[1]
+    _date_raw[2]
+    _sender
+    _title
+    _contents
+}
+
+Plugin_MailBox_Mail_body_2 : array
+{
+    if plugin_MailBox_mailStatus_1 != 3 {
+        return
+    }
+    --
+    _id = 2
+
+    _date_raw = Time_after_day(GETSECCOUNT(), 1)
+    _sender = '佐野 伊織'
+    _title = 'ちょっとしたこと'
+    _contents = "こんにちは、%(username)。\nちょっとしたことがあったのでメールしてみた。\n\n%(username)は「アブラボウズ」って知ってるか？\n深海魚で、おいしいけれど、油がすごくて、大量に食べるとおなかを壊すやつ。\nそれが、近所の魚屋で売っていたんだ。\n買いたかったんだが、あいにく手持ちがなくて……。\n気になる……%(username)は食べたことあるか？\n\nそれじゃあな。"
+
+    _id
+    _date_raw[0]
+    _date_raw[1]
+    _date_raw[2]
+    _sender
+    _title
+    _contents
+}
+
+Plugin_MailBox_Mail_body_3 : array
+{
+    if plugin_MailBox_mailStatus_2 != 3 {
+        IARRAY
+        return
+    }
+
+    _id = 3
+
+    _date_raw = Time_after_day(GETSECCOUNT(), 1)
+    _sender = '佐野 伊織'
+    _title = 'ちょっとしたこと その2'
+    _contents = "こんにちは、%(username)。\nまたちょっとしたことがあったのでメールしてみた。\n\n近所の商店街で買い物をしていたら、花屋さんで、小さな青い花、「わすれなぐさ」が咲いていたんだ。\n実物をまじまじ見ることがなかったから、こういう花なんだ、って思ったよ。\n聞いたら、本来は年を越せるんだけれど、日本では夏が厳しいんだって。\n……ちょっとせつないよな。\n\nそれじゃあな。"
+
+    _id
+    _date_raw[0]
+    _date_raw[1]
+    _date_raw[2]
+    _sender
+    _title
+    _contents
+}
+
+Plugin_MailBox_Mail_body_4 : array
+{
+    if plugin_MailBox_mailStatus_3 != 3 {
+        IARRAY
+        return
+    }
+
+    _id = 4
+
+    _date_raw = Time_after_day(GETSECCOUNT(), 1)
+    _sender = 'きぬ'
+    _title = 'こんにちは'
+    _contents = "こんにちは、%(username)。きぬよ。\n伊織に代わりに入力してもらっているわ。\nたまには伊織もすなるメールというものを、私もしてみんとて、と思ってね。\n\nまあ私も何があったわけじゃないんだけど。\n%(username)が元気なら良いわ。\n\nじゃあ、またね！"
+
+    _id
+    _date_raw[0]
+    _date_raw[1]
+    _date_raw[2]
+    _sender
+    _title
+    _contents
+}

@@ -487,6 +487,10 @@ On_Menu_0_plugin
         _flag = Bool.toOnOffStr(Plugin_should_GetWindowTitle)
         _body += FillLine_list_full("GetWindowTitle（%(_flag)）", 'On_Menu_0_plugin_GetWindowTitle')
     }
+    if AYATEMPLATE.IsPluginExist('cfagffgf-ffdc-ccff-faca-gafg0cfaaagf') == 1 {
+        _flag = Bool.toOnOffStr(plugin_MailBox_flag)
+        _body += FillLine_list_full("MailBox (%(_flag))", 'On_Menu_0_plugin_MailBox')
+    }
 
     if _body == '' {
         '\u\s[10]\h\s[0]対応しているプラグインはないようだ。\w9\w9\u「十徳ナイフ」や「スタンプ帳」、\w5「GetWindowTitle」に対応しているから、\w5気になったらダウンロードしてみてね。'
@@ -533,7 +537,7 @@ On_Menu_0_plugin_GetWindowTitle
     --
     '\h\n'
     --
-    On_Menu_0_plugin_GetWindowTitle_footer
+    On_Menu_0_plugin_footer
 }
 
 On_Menu_0_plugin_GetWindowTitle_toOn
@@ -543,7 +547,7 @@ On_Menu_0_plugin_GetWindowTitle_toOn
     --
     '\h\n\n'
     --
-    On_Menu_0_plugin_GetWindowTitle_footer
+    On_Menu_0_plugin_footer
 }
 
 On_Menu_0_plugin_GetWindowTitle_toOff
@@ -553,10 +557,55 @@ On_Menu_0_plugin_GetWindowTitle_toOff
     --
     '\h\n\n'
     --
-    On_Menu_0_plugin_GetWindowTitle_footer
+    On_Menu_0_plugin_footer
 }
 
-On_Menu_0_plugin_GetWindowTitle_footer
+On_Menu_0_plugin_MailBox
+{
+    _flag = Bool.toOnOffStr(plugin_MailBox_flag)
+    "\u\s[10]\h\s[0]プラグイン、\w5「MailBox」を使って、\w5手紙を送ってもいいか？\w9\n今は%(_flag)だ。"
+    --
+    '\h\n\n'
+    --
+    FillLine_list_full('いいよ', 'On_Menu_0_plugin_MailBox_toOn')
+    --
+    FillLine_list_full('やめておいて', 'On_Menu_0_plugin_MailBox_toOff')
+    --
+    FillLine_list_full('メールを見せて', 'On_Menu_0_plugin_MailBox_OpenMenu')
+    --
+    '\h\n'
+    --
+    On_Menu_0_plugin_footer
+}
+
+On_Menu_0_plugin_MailBox_toOn
+{
+    '\u\s[10]\h\s[5]わかった。\w9大したことは書けないが、\w5待っていてくれ。'
+    --
+    '\h\n\n'
+    --
+    On_Menu_0_plugin_footer
+    --
+    On_Plugin_MailBox_start
+}
+
+On_Menu_0_plugin_MailBox_toOff
+{
+    '\u\s[10]\h\s[6]わかった、\w5やめておく。'
+    --
+    '\h\n\n'
+    --
+    On_Menu_0_plugin_footer
+    --
+    On_Plugin_MailBox_stop
+}
+
+On_Menu_0_plugin_MailBox_OpenMenu
+{
+    '\![raiseplugin,MailBox,OnMenuExec]'
+}
+
+On_Menu_0_plugin_footer
 {
     FillLine_list_half('メインメニューヘ', 'On_Menu_0', 'プラグインへ', 'On_Menu_0_plugin')
     --
