@@ -348,6 +348,12 @@ OnBoot_talk_date_12_25_first
     }
 }
 
+OnBoot_talk_date_12_31_first
+{
+    datetalk_year_12_31 = year
+    "\u\s[10]\h\s[0]大みそか、\w5今年最後の日か。\w9\w9\u\s[16]良かった年も、\w5良くなかった年も、\w5もうすく終わり。\w9\s[10]\n来年が良い年になるように祈っていきましょ。\w9\w9\h\s[6]\n\nそうだな。\w9\s[5]\nそれじゃあ、\w5いつも通りに。\w9\w9\u\n\nそ、\w5いつも通りに。"
+}
+
 OnBoot_talk_date_user_birthday_first
 {
     datetalk_year_user_birthday = year
