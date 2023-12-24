@@ -283,7 +283,7 @@ On_Plugin_MailBox_resetMails
 
     foreach _vars; _var {
         _mail_id = TOINT(REPLACE(_var, 'plugin_MailBox_mailStatus_', ''))
-        _s += "\![notiyplugin,MailBox,OnDeleteMailNotArrive,%(_mail_id)]"
+        _s += "\![notifyplugin,MailBox,OnDeleteMailNotArrive,%(_mail_id)]"
     }
 
     _s
