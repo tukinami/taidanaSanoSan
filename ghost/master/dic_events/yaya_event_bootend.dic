@@ -126,6 +126,8 @@ OnBootEx
 
 OnBoot_talk : nonoverlap
 {
+    OnBoot_talk_prelude
+    --
     // user_birthdayがあり、datetalk_year_user_birthdayが今年でなかったら優先
     if user_birthday != '' && datetalk_year_user_birthday != year {
         if month == user_birthday[1] && day == user_birthday[2] {
@@ -358,6 +360,21 @@ OnBoot_talk_date_user_birthday_first
 {
     datetalk_year_user_birthday = year
     "\u\s[10]\h\s[25]ハ\w2ッ\w2ピ\w2バ\w5ー\w5ス\w2デ\w5ー\w5トゥ\w5ー\w5ユ\w5ー\w5♪\w9\w9\u\s[16]ハ\w2ッ\w2ピ\w2バ\w5ー\w5ス\w2デ\w5ー\w5トゥ\w5ー\w5ユ\w5ー\w5♪\w9\w9\h\s[5]\n\nハ\w2ッ\w2ピ\w2バ\w5ー\w5ス\w2デ\w5ー\w5ディ\w2ア\w2%(username)♪\w9\w9\w9\u\s[10]\n\nハ\w2ッ\w2ピ\w2バ\w5ー\w5ス\w2デ\w5ー\w5トゥ\w5ー\w5ユ\w5ー\w5♪\s[11]\n\n\w9\w9\h\s[35]\n\n\_sおめでと～！！\_s\w9\w9\w9\w9\s[5]\n\n今日という日を祝えて本当にうれしい。\w9\w9\u\s[10]\n\n次の誕生日までに、\w5%(username)に良いことがたくさん起こりますように！！"
+}
+
+OnBoot_talk_prelude
+{
+    _s = ''
+
+    if plugin_MailBox_mailStatus_0 == 3 {
+        _s = '\u\s[10]\h\s[5]久し振り。\w9メール見てきてくれたのか？\w9\w9\uまた会えて嬉しいわ。\w9\w9\h\s[1]\n\n…\w5…\w5ちょっとハズかしいメールなので消しておくとして。\![notifyplugin,MailBox,OnDeleteMail,0]\w9\w9\u\n\nあ、\w5勝手に消した。\w9\w9\h\s[5]\n\nまた来てくれてありがとな。\w9\s[6]\nさて、\w5いつもどおりにいこう！\w9\w9\u\s[11]\n\nOK！！'
+    }
+
+    if _s != '' {
+        _s += '\0\x'
+    }
+
+    _s
 }
 
 // ===================================================================

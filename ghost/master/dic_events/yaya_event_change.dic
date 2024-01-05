@@ -51,6 +51,8 @@ OnGhostChanging_佐野伊織
 // -------------------------------------------------------------------
 OnGhostChangedOther
 {
+    OnBoot_talk_prelude
+    --
     // user_birthdayがあり、datetalk_year_user_birthdayが今年でなかったら優先
     if user_birthday != '' && datetalk_year_user_birthday != year {
         if month == user_birthday[1] && day == user_birthday[2] {
