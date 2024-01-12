@@ -60,6 +60,7 @@ Word_meal_sweets : array
     'ホットケーキ|564|eu'
     '羊羹|148|ja'
     'どらやき|165|ja'
+    '当たりつきアイス|60|junk'
 }
 
 Meal_genre

@@ -192,6 +192,27 @@ Feeding_select_reaction_NORMAL_どらやき : nonoverlap
     "\u\s[10]\h\s[5]どらやきだ、\w5ありがとう、\w5いただきます。\w9\s[6]\nモグモグ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\s[3]\n\n…\w5…\w5きぬ、\w5やっぱりどらやきが好きなのか。\w9\w9\u\s[11]\n\nわたしは某ドラなえもんじゃない！\w9\w9\h\s[35]\n\n…\w5…\w5ごちそうさま。\w9ありがとう、\w5%(username)。"
 }
 
+Feeding_select_reaction_NORMAL_当たりつきアイス : nonoverlap
+{
+    "\u\s[10]\h\s[5]当たりつきアイスだ、\w5ありがとう、\w5%(username)。\w9\n早速いただきます。\w9\s[25]ペロペロ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\s[36]\n\n甘くて冷たくて、\w5美味し～！\w9\s[5]\n…\w5…\w5ごちそうさま。\w9ありがとう、\w5%(username)。"
+    "\u\s[10]\h\s[35]当たりつきアイス！\w9ありがとう、\w5%(username)！\w9\nいただきます！\w9\s[25]ペロペロ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\s[36]\n\nアイスって、\w5幸せの味だよな～。\w9\w9\u\n\nそこまで。\w9\w9\h\s[5]\n\nごちそうさま、\w5ありがとう、\w5%(username)。"
+    --
+    Feeding_select_reaction_ex_当たりつきアイス
+}
+
+Feeding_select_reaction_ex_当たりつきアイス : nonoverlap
+{
+    '\w9\w9\w9\u\s[10]\n\nところで、\w5当たり籤の方はどうだった？\w9\w9\h\s[0]\n\nそうだった、\w5\s[3]え～と…\w5…\w5。'
+    --
+    '\w9\h\n'
+    --
+    '\s[4]う～ん、\w5はずれだ。\w9\w9\u\n\nあら。\w9\w9\h\s[3]\n\n…\w5…\w5願掛けしとくか。\w9これに、\w5こう書いといて。\w9\w9\u\s[11]\n\n「あたれ」\w5って、\w5何？\w9\w9\h\s[6]\n\nよし。\w9\w9\u\n\nよいの！？'
+    '\s[4]う～ん、\w5はずれだ。\w9\w9\u\n\nあら。\w9\w9\h\s[0]\n\nまあ、\w5いつか当たるだろ。\w9\w9\u\n\nポジティブね。'
+    '\s[6]うむ、\w5はずれ。\w9\w9\u\n\nあら。\w9\w9\h\s[5]\n\nまあ、\w5「当たらぬもハッケ」といいますし。\w9\w9\u\n\nそれは違うやつ。'
+    '\s[6]うむ、\w5はずれ。\w9\w9\u\n\nあら。\w9\w9\h\s[0]\n\nこれは節制せよ、\w5という知らせでしょうか？\w9\w9\u\n\nそうかもよ。\w9\w9\h\s[3]\n\n冗談なのに。'
+    '\s[5]お、\w5当たりだ！\w9\w9\u\n\nよかったわね。\w9\w9\h\s[7]\n\nさっそく次のアイスと交換にGO！\w9\w9\u\s[11]\n\n食べ過ぎるので、\w5ダメです。\w9\w9\h\s[3]\n\nちぇ～。'
+}
+
 Feeding_select_reaction_NORMAL_OTHERS : nonoverlap
 {
     _meal = _argv[0]
@@ -226,6 +247,14 @@ Feeding_select_reaction_USER_FAVORITE_どらやき
 {
     "\u\s[10]\h\s[5]どらやきだ。\w9ありがとう、\w5%(username)。\w9\s[6]\n…\w5…\w5。\w9\s[5]\nほら、\w5半分こしよう。\w9\w9\u%(username)はアンコが付いてる皮と付いてない皮、\w5どっちを食べる？\w9\w9\h\s[7]\n\nそんな分け方しない！\w9縦に割るよ、\w5普通に！\w9\s[35]\n…\w5…\w5まぁ、\w5それじゃあ、\w5いただきます！"
     "\u\s[10]\h\s[5]どらやきだ、\w5ありがとう、\w5%(username)！\w9\s[6]\n…\w5…\w5。\w9\s[35]\n%(username)、\w5半分こしよう。\w9\w9\u%(username)はアンコだけと皮だけ、\w5どっちを食べる？\w9\w9\h\s[7]\n\nどらやきとは何だ！？\w9普通に分けるよ！\w9\s[35]\n…\w5…\w5、\w5では、\w5いただきます！"
+}
+
+Feeding_select_reaction_USER_FAVORITE_当たりつきアイス
+{
+    "\u\s[10]\h\s[5]当たりつきアイスだ、\w5ありがとう、\w5%(username)。\w9\s[6]\n―\w5―\w5…\w5…\w5\w9\s[7]半分にするのが面倒なので、\w9\n%(username)に全部あげます！\w9\w9\uはいはい、\w5お皿とナイフを使いましょうね～。\w9\w9\h\s[4]\n\nかたじけない。\w9\s[5]\nじゃあ、\w5これ、\w5%(username)の分。\w9\s[6]\nそれでは、\w5いただきます！"
+    "\u\s[10]\h\s[5]当たりつきアイス、\w5ありがとう、\w5%(username)。\w9\s[6]\n…\w5…\w5この系統って、\w5半分にするのが大変だよな。\w9\w9\u横着せず、\w5お皿とナイフを使いましょう。\w9\w9\h\s[4]\n\nは～い。\w9\s[5]\n…\w5…\w5はい、\w5これ、\w5%(username)の分。\w9\w9\s[35]\nそれでは、\w5いただきます！"
+    --
+    Feeding_select_reaction_ex_当たりつきアイス
 }
 
 On_Feeding_select_events_1_OTHERS
@@ -356,6 +385,21 @@ Feeding_user_like_1_select_どらやき_dislike
 Feeding_user_like_1_select_どらやき_normal
 {
     "\u\s[10]\h\s[0]そうか、\w5普通か。\w9\nなら俺がどらやき好きそうってことかな？\w9\w9\uふふ、\w5猫の私よりも某ドラなえもんに近いのは伊織のようね！\w9\w9\h\s[3]\n\nどらやきだけだろ。"
+}
+
+Feeding_user_like_1_select_当たりつきアイス_like
+{
+    "\u\s[10]\h\s[5]そうか、\w5%(username)は当たりつきアイスが好きなんだな。\w9\n俺も好きだよ、\w5当たりつきアイス。\w9\nおいしいし、\w5お得感がある！\w9\w9\u主婦みたいなことを言い出した。\w9\w9\h\s[3]\n\nそう言うなよ。"
+}
+
+Feeding_user_like_1_select_当たりつきアイス_dislike
+{
+    "\u\s[10]\h\s[0]そうか、\w5%(username)は当たりつきアイスが好きじゃないんだな。\w9\s[5]\n今度出てきたら、\w5俺に任せてくれ。\w9\n代わりに食べるから。\w9\w9\uそしてお腹を壊す、\w5と。\w9\w9\h\s[3]\n\nオチをつけないでくれ。"
+}
+
+Feeding_user_like_1_select_当たりつきアイス_normal
+{
+    "\u\s[10]\h\s[0]そうか、\w5普通か。\w9\s[5]\nじゃあ、\w5俺が当たりつきアイス好きそうってことかな。\w9\s[6]\n確かに。\w9もう一本アイスが食べられるやつが好きだな。\w9\w9\uここでも食い気か。"
 }
 
 Feeding_user_like_1_select_OTHERS_like
