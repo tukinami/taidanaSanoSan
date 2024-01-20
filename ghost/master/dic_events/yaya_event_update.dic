@@ -265,6 +265,72 @@ OnUpdateOther.OnMD5CompareFailure
     "\![raise,OnUpdate.OnMD5CompareFailure,%(_ref[0]),%(_ref[1]),%(_ref[2]),%(_ref[3]),%(_ref[4])]"
 }
 
+OnUpdateResultEx
+{
+    if ARRAYSIZE(reference) == 1 {
+        return
+    }
+
+    _s = ''
+    foreach reference; _reference {
+        _items = SPLIT(_reference, CHR(1))
+
+        _name = SHIORI3FW.EscapeAllTags(_items[0])
+        _type = On_Update_targetList(_items[1])
+
+        _status = '失敗 原因: '
+        if _items[2] == 'OK' {
+            if TOINT(_items[3]) == 0 {
+                _status = '更新なし'
+            }
+            else {
+                _status = '更新成功'
+            }
+        }
+        else {
+            case _items[3] {
+            when 'timeout' {
+                _status += '時間切れ'
+            }
+            when 'too slow' {
+                _status += '回線速度'
+            }
+            when 'md5 miss' {
+                _status += 'ファイル破損の可能性'
+            }
+            when 'artificial' {
+                _status += '中断'
+            }
+            when 'fileio' {
+                _status += '容量不足'
+            }
+            when 'readonly' {
+                _status += '読取専用'
+            }
+            others {
+                if TOINT(_items[3]) != 0 {
+                    _status += "ステータスコード: %(TOINT(_items[3]))"
+                }
+                else {
+                    _status += '不明なエラー'
+                }
+            }
+            }
+        }
+        _s += "@@l%(_type): %(_name)\n %(_status)\n"
+    }
+
+    '\h\s[0]\_q更新が完了した。\n'
+    --
+    _s
+    --
+    '\_q\n\n'
+    --
+    FillLine_list_full('このゴーストの更新履歴', 'On_Update_log')
+    --
+    FillLine_list_full('閉じる', 'CLOSE_NOTALK')
+}
+
 On_Update_log
 {
     _header = '\_q' + On_Update_log_header() + '\_q'
