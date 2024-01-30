@@ -61,6 +61,10 @@ Word_meal_sweets : array
     '羊羹|148|ja'
     'どらやき|165|ja'
     '当たりつきアイス|60|junk'
+    if month == 2 && day == 14 ; array : {
+        'フォンダンショコラ|475|eu'
+        'ザッハトルテ|498|eu'
+    }
 }
 
 Meal_genre

@@ -35,7 +35,7 @@ On_Feeding_start
 
     _header = Feeding_intro
     _footer = Feeding_close
-    Paging_begin(_header, _footer, 7, 2, 0, _paging_body)
+    Paging_begin(_header, _footer, 15, 2, 0, _paging_body)
 }
 
 Feeding_intro : nonoverlap
@@ -213,6 +213,24 @@ Feeding_select_reaction_ex_当たりつきアイス : nonoverlap
     '\s[5]お、\w5当たりだ！\w9\w9\u\n\nよかったわね。\w9\w9\h\s[7]\n\nさっそく次のアイスと交換にGO！\w9\w9\u\s[11]\n\n食べ過ぎるので、\w5ダメです。\w9\w9\h\s[3]\n\nちぇ～。'
 }
 
+Feeding_select_reaction_NORMAL_フォンダンショコラ : nonoverlap
+{
+    "\u\s[10]\h\s[35]フォンダンショコラだ！\w9ありがとう、\w5%(username)！\w9\w9\nいただきます。\w9\s[6]モグモグ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\s[36]\n\n中からとろとろとろけるチョコレート！\w9\nおいしー！！\w9\w9\s[5]\n…\w5…\w5ごちそうさまでした。\w9ありがとう、\w5%(username)。"
+    "\u\s[10]\h\s[5]フォンダンショコラ！\w9ありがとう！\w9\nさっそくいただきます。\w9\s[6]モグモグ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\s[36]\n\nふわっとした生地の中から出てくる、\w9\nとろっとしたチョコレート！\w9\n甘くておいしー！！\w9\w9\s[35]\n…\w5…\w5ごちそうさまでした。\w9ありがとう、\w5%(username)。"
+    if month == 2 && day == 14 {
+        "\u\s[10]\h\s[36]フォンダンショコラ！\w9ありがとう！\w9\nさっそくいただきます。\w9\s[6]モグモグ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\s[36]\n\nう～ん、\w5このトロっと感！\w9\nバレンタインに食べるとさらにおいしい！！\w9\w9\s[5]\n…\w5…\w5ごちそうさまでした。\w9ありがとう、\w5%(username)。"
+    }
+}
+
+Feeding_select_reaction_NORMAL_ザッハトルテ : nonoverlap
+{
+    "\u\s[10]\h\s[35]ザッハトルテ！\w9ありがとう、\w5%(username)！\w9\nいただきます！\w9\s[6]モグモグ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\s[36]\n\nチョコレートとあんずジャムの相性が最高！\w9\nとってもおいしい！\w9\s[5]\n…\w5…\w5ごちそうさまでした。\w9\nありがとう、\w5%(username)。"
+    "\u\s[10]\h\s[5]ザッハトルテだ！\w9ありがとう、\w5%(username)！\w9\nさっそくいただきます！\w9\s[6]モグモグ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\s[36]\n\nう～ん、\w5おいしー！\w9\nさすがは「チョコレートケーキの王様」！\w9\s[35]\n…\w5…\w5ごちそうさまでした。\w9\nありがとう、\w5%(username)。"
+    if month == 2 && day == 14 {
+        "\u\s[10]\h\s[35]ザッハトルテだ！\w9ありがとう、\w5%(username)！\w9\nさっそくいただきます！\w9\s[6]モグモグ…\w5…\w5。\w9\w9\uどう？\w9\w9\h\s[36]\n\nチョコレートとあんずの組み合わせがいいんだよな。\w9\nさらに、\w5バレンタインに食べると格別だ。\w9\nおいしい！\w9\s[5]\n…\w5…\w5ごちそうさまでした。\w9\nありがとう、\w5%(username)。"
+    }
+}
+
 Feeding_select_reaction_NORMAL_OTHERS : nonoverlap
 {
     _meal = _argv[0]
@@ -255,6 +273,18 @@ Feeding_select_reaction_USER_FAVORITE_当たりつきアイス
     "\u\s[10]\h\s[5]当たりつきアイス、\w5ありがとう、\w5%(username)。\w9\s[6]\n…\w5…\w5この系統って、\w5半分にするのが大変だよな。\w9\w9\u横着せず、\w5お皿とナイフを使いましょう。\w9\w9\h\s[4]\n\nは～い。\w9\s[5]\n…\w5…\w5はい、\w5これ、\w5%(username)の分。\w9\w9\s[35]\nそれでは、\w5いただきます！"
     --
     Feeding_select_reaction_ex_当たりつきアイス
+}
+
+Feeding_select_reaction_USER_FAVORITE_フォンダンショコラ
+{
+    "\u\s[10]\h\s[5]フォンダンショコラだ、\w5ありがとう、\w5%(username)！\w9\s[6]\n…\w5…\w5。\s[5]ほら、\w5半分こしよう。\w9こっちが%(username)の分。\w9\w9\u生地の部分とチョコレートの部分で分けるの？\w9\w9\h\s[7]\n\nそんな分け方あるか！\w9\s[35]\n…\w5…\w5それじゃあ、\w5いただきます！"
+    "\u\s[10]\h\s[35]フォンダンショコラ！\w9ありがとう、\w5%(username)！\w9\s[6]\n…\w5…\w5。\s[5]ほら、\w5半分こしよう。\w9こっちが%(username)の分。\w9\n合わせるのは紅茶かな？\w9コーヒーかな？\w9\s[35]\n…\w5…\w5それじゃあ、\w5いただきます！"
+}
+
+Feeding_select_reaction_USER_FAVORITE_ザッハトルテ
+{
+    "\u\s[10]\h\s[35]ザッハトルテだ！\w9ありがとう、\w5%(username)！\w9\n\w9\s[6]…\w5…\w5。\w9\s[5]はい、\w5%(username)。\w9半分こしよう。\w9\nこっちが%(username)の分。\w9\w9\u付け合わせの甘くない生クリームも忘れずにね。\w9\w9\h\s[6]\n\n当然。\w9\s[5]\nそれでは、\w5いただきます！"
+    "\u\s[10]\h\s[5]ザッハトルテ！\w9ありがとう、\w5%(username)！\w9\n\w9\s[6]…\w5…\w5。\w9\s[5]はい、\w5%(username)。\w9半分こしよう。\w9\nこっちが%(username)の分。\w9\w9\uあんずジャムが付いている方と付いてない方…\w5…\w5。\w9\w9\h\s[3]\n\nどうやって分けるんだよ、\w5それ。\w9\n普通に縦半分だよ。\w9\s[35]\n…\w5…\w5それでは、\w5いただきます！"
 }
 
 On_Feeding_select_events_1_OTHERS
@@ -400,6 +430,36 @@ Feeding_user_like_1_select_当たりつきアイス_dislike
 Feeding_user_like_1_select_当たりつきアイス_normal
 {
     "\u\s[10]\h\s[0]そうか、\w5普通か。\w9\s[5]\nじゃあ、\w5俺が当たりつきアイス好きそうってことかな。\w9\s[6]\n確かに。\w9もう一本アイスが食べられるやつが好きだな。\w9\w9\uここでも食い気か。"
+}
+
+Feeding_user_like_1_select_フォンダンショコラ_like
+{
+    "\u\s[10]\h\s[5]そうか、\w5%(username)はフォンダンショコラが好きなんだな。\w9\n俺も好きだ、\w5フォンダンショコラ。\w9\s[6]\nふわっとした生地からトロっとしたチョコレートが出てくるのがいいんだよな。\w9\w9\uトロっとした生地からフワっとしたチョコレートが？\w9\w9\h\s[3]\n\n逆にするな逆に。"
+}
+
+Feeding_user_like_1_select_フォンダンショコラ_dislike
+{
+    "\u\s[10]\h\s[0]そうか、\w5%(username)はフォンダンショコラが好きじゃないんだな。\w9\s[5]\nじゃあ、\w5フォンダンショコラが出てきたときは俺に任せてくれ。\w9\n代わりに食べるから。\w9\w9\uカロリー結構あるけど大丈夫？\w9\w9\h\s[3]\n\nだ、\w5大丈夫だ、\w5問題ない、\w5と思う！\w9\w9\u\s[16]\n\n心配ね…\w5…\w5。"
+}
+
+Feeding_user_like_1_select_フォンダンショコラ_normal
+{
+    "\u\s[10]\h\s[6]そうか、\w5普通か。\w9\s[0]\nじゃあ、\w5俺がフォンダンショコラが好きそうってことかな。\w9\s[5]\n確かに好きだ、\w5フォンダンショコラ。\w9\n何個でも…\w5…\w5。\w9\w9\u…\w5…\w5。\w9\w9\h\s[4]\n\n…\w5…\w5は流石に無理だけど。"
+}
+
+Feeding_user_like_1_select_ザッハトルテ_like
+{
+    "\u\s[10]\h\s[5]そうか、\w5%(username)はザッハトルテが好きなんだな。\w9\w9\s[35]\n俺もザッハトルテが好きだ。\w9\n濃厚な味わいが魅力的だよな。\w9\w9\uあんずジャムは中にも塗る派？\w9塗らない派？\w9\w9\h\s[6]\n\nおいしければどっちでもいい派。\w9\w9\u\n\nうん、\w5分かってたけど。"
+}
+
+Feeding_user_like_1_select_ザッハトルテ_dislike
+{
+    "\u\s[10]\h\s[0]そうか、\w5%(username)はザッハトルテが好きじゃないんだな。\w9\w9\s[5]\nなら、\w5ザッハトルテが出てきたら、\w5俺が代わりに食べるから、\w5任せてくれ。\w9\w9\uカロリー大丈夫？\w9\w9\h\s[6]\n\n些細なことです。\w9\w9\u\n\nさ、\w5さいですか…\w5…\w5。"
+}
+
+Feeding_user_like_1_select_ザッハトルテ_normal
+{
+    "\u\s[10]\h\s[0]そうか、\w5ふつうか。\w9\nじゃあ、\w5俺がザッハトルテ好きそうってことかな。\w9\w9\s[5]\n好きだぞ、\w5ザッハトルテ。\w9\nこれぞチョコレートケーキ、\w5という感じがして。\w9\w9\uなるほど、\w5王道ってことね。\w9\s[11]\n…\w5…\w5つまり覇道のチョコレートケーキがあると？\w9\w9\h\s[3]\n\nわ、\w5わかんないけど、\w5探せばあるんじゃないか？"
 }
 
 Feeding_user_like_1_select_OTHERS_like
