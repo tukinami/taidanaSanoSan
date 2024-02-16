@@ -53,16 +53,9 @@ OnGhostChangedOther
 {
     OnBoot_talk_prelude
     --
-    // user_birthdayがあり、datetalk_year_user_birthdayが今年でなかったら優先
-    if user_birthday != '' && datetalk_year_user_birthday != year {
-        if month == user_birthday[1] && day == user_birthday[2] {
-            OnBoot_talk_date_user_birthday_first
-            return
-        }
-    }
-    // OnBoot_talk_date_日付_first 関数があり、今年はやってなかったら優先
-    if (ISFUNC("OnBoot_talk_date_%(month)_%(day)_first") && EVAL("datetalk_year_%(month)_%(day)") != year) {
-        EVAL("OnBoot_talk_date_%(month)_%(day)_first")
+    _temp = OnBoot_talk_priority
+    if _temp != '' {
+        _temp
         return
     }
 

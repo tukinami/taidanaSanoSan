@@ -128,6 +128,17 @@ OnBoot_talk : nonoverlap
 {
     OnBoot_talk_prelude
     --
+    _temp = OnBoot_talk_priority
+    if _temp != '' {
+        _temp
+        return
+    }
+
+    OnBoot_talkEx
+}
+
+OnBoot_talk_priority
+{
     // user_birthdayがあり、datetalk_year_user_birthdayが今年でなかったら優先
     if user_birthday != '' && datetalk_year_user_birthday != year {
         if month == user_birthday[1] && day == user_birthday[2] {
@@ -140,8 +151,6 @@ OnBoot_talk : nonoverlap
         EVAL("OnBoot_talk_date_%(month)_%(day)_first")
         return
     }
-
-    OnBoot_talkEx
 }
 
 OnBoot_talkEx : nonoverlap
