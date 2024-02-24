@@ -335,6 +335,8 @@ Plugin_MailBox_BootScript
     '\![embed,On_Plugin_MailBox_resetMails]'
     --
     "\![embed,%(_argv[0]),%(_refs)]"
+    --
+    '\e'
 }
 
 Plugin_MailBox_Mail_delete_fromId
