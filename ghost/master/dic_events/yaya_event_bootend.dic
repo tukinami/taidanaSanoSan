@@ -276,7 +276,7 @@ OnBoot_talk_eat_func
     }
 
     if ISFUNC("OnBoot_talk_eat_%(_hunger)") {
-        "OnBoot_talk_eat_%(_hunger)"
+        EVAL("OnBoot_talk_eat_%(_hunger)")
     }
     else {
         ''
