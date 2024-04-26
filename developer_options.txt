@@ -33,6 +33,9 @@ lazy_cats_blue_stone/,noupdate
 lazy_cats_blue_stone/profile/,nonar,noupdate
 
 
+.repo-images/,nonar,noupdate
+readme.md,nonar,noupdate
+
 .gitignore,nonar,noupdate
 .git/,nonar,noupdate
 .github/,nonar,noupdate
