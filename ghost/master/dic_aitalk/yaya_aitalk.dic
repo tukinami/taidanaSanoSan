@@ -4,7 +4,7 @@ RandomTalk
 {
     Surface_reset
     --
-    TOSTR(EVAL(CHR(0x22) + RandomTalkEx() + CHR(0x22)))
+    TOSTR(EVAL(CHR(0x22) + REPLACE(RandomTalkEx(), CHR(0x22), CHR(0x22) + CHR(0x22)) + CHR(0x22)))
 }
 
 // ------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ RandomTalkEx : nonoverlap
     }
 }
 
-RandomTalk_NormalEx: nonoverlap
+RandomTalk_NormalEx : nonoverlap
 {
     _additional_talk = 4
     _talk_flag = RAND(RandomTalk_NormalSize + _additional_talk)
@@ -48,7 +48,8 @@ RandomTalk_NormalEx: nonoverlap
     if _talk_flag <= _additional_talk {
         // ワード使用トーク。配列ではない。
         Talk_usingWord
-    } else {
+    }
+    else {
         RandomTalk_Normal
     }
 }
