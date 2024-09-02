@@ -16,6 +16,9 @@ OnShellChanged
     when 'master-l' {
         '\u\s[11]おっきくなっちゃった！\w9\w9\h\n\n遠近法だろ？\w9\w9\u\s[10]\n\nそれで押し通すつもりね貴方…\w5…\w5。'
     }
+    when '店員イチオシのコートセット' {
+        '\h\s[1]\nに、\w5似合っているかな？\w9\w9\uまぁ、\w5「馬子にも衣装」の言葉もあるし？\w9\w9\h\s[6]\n\n…\w5…\w5「猫にも衣装」。\w9\w9\u\s[16]\n\nどういう返しよ。'
+    }
     }
 }
 
@@ -26,6 +29,71 @@ OnShellChanging
     --
     '\h\s[3]そこまで気合入れなくても…\w5…\w5。'
     '\h\s[4]妖術…\w5…\w5なのか？'
+}
+
+// ===================================================================
+// OnDressupChanged
+// ===================================================================
+OnDressupChanged
+{
+    // ユーザーが切り替えたときのみ発生
+    if reference[4] != 'user' {
+        return
+    }
+
+    _func_name = 'On_DressupChanged_'
+    _func_name += SHIORI3FW.TranslateSystemChar(SHIORI3FW.ShellName) + '_'
+    _func_name += 'p' + TOINT(reference[0]) + '_'
+    if TOINT(reference[2]) == 1 {
+        _func_name += 'show'
+    }
+    else {
+        _func_name += 'hide'
+    }
+
+    if ISFUNC(_func_name) {
+        EVAL(_func_name)
+    }
+}
+
+On_DressupChanged_店員イチオシのコートセット_p0_show
+{
+    case reference[3] {
+    when '帽子' {
+        case reference[1] {
+        when '中折れ帽子' {
+            '\u\s[10]\h\s[7]帽子があれば毛がハネていても文句言われない！\w9\w9\u姉たちがせっせと髪をセットしてたのに？\w9\w9\h\s[34]\n\nあっ。'
+        }
+        }
+    }
+    when 'マフラー' {
+        case reference[1] {
+        when 'マフラー' {
+            '\u\s[10]\h\s[5]ヒラヒラしたものがあると、\w5風にたなびいていいよな。\w9\w9\uそういう風がふく外には？\w9\w9\h\s[6]\n\n出たくないです。\w9\w9\u\n\nでしょうね。'
+        }
+        }
+    }
+    }
+}
+
+On_DressupChanged_店員イチオシのコートセット_p1_show
+{
+    case reference[3] {
+    when '帽子' {
+        case reference[1] {
+        when 'キャノチェ' {
+            '\u\s[10]\h\s[3]耳、\w5出てますけど。\w9\w9\u\s[11]そこがオシャレポイント！\w9\w9\h\s[34]\n\nそ、\w5そうですか。'
+        }
+        }
+    }
+    when 'おもちゃ' {
+        case reference[1] {
+        when '葉巻' {
+            '\h\s[0]\u\s[11]またたび、\w5美味！\w9\w9\h\s[3]あまり噛むなよ…\w5…\w5。'
+        }
+        }
+    }
+    }
 }
 
 // ===================================================================
