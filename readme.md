@@ -26,7 +26,15 @@
 
 バルーン「怠惰な猫の青い石」を同梱してます。
 
+## 追加シェル
+
+他の方が作成された「怠惰な佐野さん」の追加シェルです。ありがとうございます。
+
+- [店員イチオシのコートセット](https://cherry.narnaloader.ukagaka.net/ghost.php?ghost=set_of_coats) - netai98 さん
+
 ## 関連制作物
+
+自作の追加シェルなどです。
 
 - [master-l](https://github.com/tukinami/taidanaSanoSan_shell_master-l) : 追加シェル。masterの全身版です。
 

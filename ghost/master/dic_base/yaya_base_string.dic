@@ -33,9 +33,9 @@ On_sakura.portalsites_EX : array
     "-||"
     "■伺か開発■     | | "
     "-||"
-    "[ベースウェア]   SSP BUGTRAQ | http://ssp.shillest.net/         | "
-    "[各種開発]    整備班 -The Maintenance Shop-| http://ms.shillest.net/| "
-    "[SHIORI(YAYA)]  文Wiki「文屋」 | http://emily.shillest.net/ayaya/ | "
+    "[ベースウェア] SSP BUGTRAQ | http://ssp.shillest.net/         | "
+    "[各種開発] 整備班 -The Maintenance Shop-| http://ms.shillest.net/| "
+    "[SHIORI(YAYA)] 文Wiki「文屋」 | http://emily.shillest.net/ayaya/ | "
     "[伺か関連仕様] UKADOC | http://ssp.shillest.net/ukadoc/manual/"
 }
 
@@ -44,7 +44,7 @@ On_sakura.portalsites_EX : array
 // ------------------------------------------------------------------------------
 On_recommendrootbutton.caption
 {
-    "配布場所・連絡先"
+    "連絡先・追加シェル"
 }
 
 // ------------------------------------------------------------------------------
@@ -59,6 +59,10 @@ On_sakura.recommendsites_EX : array
     "-||"
     "Peing質問箱 | https://peing.net/ja/tukinami_seika"
     "作者のMastodon(fedibird) | https://fedibird.com/@tukinami_seika"
+    "-||"
+    "■追加シェル■ | |"
+    "[netai98 さん] 店員イチオシのコートセット | https://cherry.narnaloader.ukagaka.net/ghost.php?ghost=set_of_coats"
+    "[自作] master-l | https://github.com/tukinami/taidanaSanoSan_shell_master-l"
 }
 
 // ------------------------------------------------------------------------------
