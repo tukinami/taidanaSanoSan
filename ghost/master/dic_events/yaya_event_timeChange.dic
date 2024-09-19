@@ -247,7 +247,7 @@ On_TimeSignal_17
 {
     if Time_month_toSeason == '秋' {
         // 「赤とんぼ」 三木露風:作詞・山田耕筰:作曲
-        '\u\s[10]\h\s[25]\_qゆ\w8う\w8や\w8\w4ー\w8\w4け\w8こ\w8や\w8け\w8え\w8の♪\w8\w8\nあ\w8か\w8と\w8ー\w8ん\w8ー\w9ぼ\w8ー\w8♪\_q\w9\w9\u\_q佐野伊織が、午後5時をお知らせいたします。\_q\w7\w7\h\n\n\_qお\w8わ\w8れ\w8\w4ー\w8\w4て\w8\w4 み\w8た\w8の\w8ー\w8は\w8ー\w8\nい\w8つ\w8の\w8ー\w8ひ\w8ー\w9か\w8ー\w8♪\_q'
+        '\u\s[10]\h\s[25]\![quicksection,true]ゆ\w8う\w8や\w8\w4ー\w8\w4け\w8こ\w8や\w8け\w8え\w8の♪\w8\w8\nあ\w8か\w8と\w8ー\w8ん\w8ー\w9ぼ\w8ー\w8♪\![quicksection,false]\w9\w9\u\![quicksection,true]佐野伊織が、午後5時をお知らせいたします。\![quicksection,false]\w7\w7\h\n\n\![quicksection,true]お\w8わ\w8れ\w8\w4ー\w8\w4て\w8\w4 み\w8た\w8の\w8ー\w8は\w8ー\w8\nい\w8つ\w8の\w8ー\w8ひ\w8ー\w9か\w8ー\w8♪\![quicksection,false]'
         --
         {
             ''
@@ -256,7 +256,7 @@ On_TimeSignal_17
     }
     else {
         // 故郷（ふるさと） 高野辰之:作詞・岡野貞一:作曲
-        '\u\s[10]\h\s[25]\_qう\w7ー\w7さ\w7ー\w7ぎ\w7ー\w7 お\w7\w7ー\w7\w3い\w7し♪\w7\w7\w3\nか\w7ー\w7の\w7ー\w7や\w7ー\w7ま\w7ー♪\w7\w7\_q\u\_q佐野伊織が、午後5時をお知らせいたします。\_q\w7\w7\w7\w7\h\n\n\_qこ\w7ー\w7ぶ\w7ー\w7な\w7ー\w7 つ\w7\w7ー\w7\w3り\w7し♪\w7\w7\w3\nか\w7ー\w7の\w7ー\w7か\w7ー\w7わ\w7ー♪\_q'
+        '\u\s[10]\h\s[25]\![quicksection,true]う\w7ー\w7さ\w7ー\w7ぎ\w7ー\w7 お\w7\w7ー\w7\w3い\w7し♪\w7\w7\w3\nか\w7ー\w7の\w7ー\w7や\w7ー\w7ま\w7ー♪\w7\w7\![quicksection,false]\u\![quicksection,true]佐野伊織が、午後5時をお知らせいたします。\![quicksection,false]\w7\w7\w7\w7\h\n\n\![quicksection,true]こ\w7ー\w7ぶ\w7ー\w7な\w7ー\w7 つ\w7\w7ー\w7\w3り\w7し♪\w7\w7\w3\nか\w7ー\w7の\w7ー\w7か\w7ー\w7わ\w7ー♪\![quicksection,false]'
         --
         {
             '\e:chain=On_TimeSignal_17_chain'
