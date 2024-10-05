@@ -23,7 +23,7 @@ RandomTalkEx : nonoverlap
 
     // 空腹が酷い場合は有無を言わさず食事
     if _hunger_flag < -2 {
-        parallel Talk_eat
+        parallel RandomTalk_eat
         return
     }
 
@@ -32,7 +32,7 @@ RandomTalkEx : nonoverlap
 
     case _talk_flag {
     when 0-TALK_EAT_RATIO {
-        parallel Talk_eat
+        parallel RandomTalk_eat
     }
     others {
         RandomTalk_NormalEx

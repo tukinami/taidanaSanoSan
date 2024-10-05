@@ -372,7 +372,7 @@ Talk_timeSlot_深夜 : array
 // ===================================================================
 // 食事トーク
 // ===================================================================
-Talk_eat : array
+RandomTalk_eat : array
 {
     _hunger_flag = On_Status.fullness.p0.judge
 
