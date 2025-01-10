@@ -467,3 +467,431 @@ Plugin_MailBox_Mail_body_4 : array
     _title
     _contents
 }
+
+// ===================================================================
+// Inventory
+// ===================================================================
+#define INVENTORY_ITEM_COUNT_PREFIX_ plugin_inventory_count_item_
+#define INVENTORY_RECIPE_FUNC_PREFIX_ Plugin_Inventory_Recipe_
+#define INVENTORY_CREATE_FUNC_PREFIX_ On_Plugin_Inventory_Create_
+#define INVENTORY_COMMUNICATE_FUNC_PREFIX_ On_Plugin_Inventory_Communicate_Func_
+On_Plugin_Inventory_RecipeMenu_start
+{
+    _s = ''
+
+    _items = Plugin_Inventory_Item_list()
+    foreach _items; _item {
+        _s += '\![embed,On_Plugin_Inventory_Item_check,' + _item + ']'
+    }
+    _recipes = GETFUNCLIST('INVENTORY_RECIPE_FUNC_PREFIX_')
+    foreach _recipes; _recipe {
+        _name = REPLACE(_recipe, 'INVENTORY_RECIPE_FUNC_PREFIX_', '')
+        _s += '\![embed,On_Plugin_Inventory_Item_check,' + _name + ']'
+    }
+
+    _s
+    --
+    '\![embed,On_Plugin_Inventory_RecipeMenu_open]'
+}
+
+On_Plugin_Inventory_Item_check
+{
+    "\![raiseplugin,Inventory,OnCheckItem,%(reference[0])]"
+}
+
+On_Plugin_Inventory_Item_init : void
+{
+    SHIORI3FW.RegisterTempVar('plugin_inventory_items')
+    plugin_inventory_items = IARRAY()
+    _current_list = IARRAY()
+    _recipes = GETFUNCLIST('INVENTORY_RECIPE_FUNC_PREFIX_')
+    foreach _recipes; _recipe {
+        _materials = EVAL(_recipe)
+        _current_list = (_current_list, _materials)
+    }
+    plugin_inventory_items = ARRAYDEDUP(_current_list)
+}
+
+Plugin_Inventory_Item_list : array
+{
+    if plugin_inventory_items == '' {
+        On_Plugin_Inventory_Item_init()
+    }
+    plugin_inventory_items
+    // ----------------------------------------
+    // 現在対応しているもの
+    // ----------------------------------------
+    // '缶詰'
+    // 'キャベツ'
+    // 'レタス'
+    // 'パスタ'
+    // '小麦粉'
+    // '松茸'
+    // 'タケノコ'
+    // '猪肉'
+    // 'フォアグラ'
+    // 'トリュフ'
+    // '茶碗蒸し'
+    // '寒天（プリン味）'
+    // 'プリンチョコ'
+
+    // 'パン'
+}
+
+OnInventoryResult
+{
+    _name = reference[0]
+    _count = TOINT(reference[1])
+    _varname = 'INVENTORY_ITEM_COUNT_PREFIX_' + _name
+    SHIORI3FW.RegisterTempVar(_varname)
+    LETTONAME(_varname, _count)
+}
+
+On_Plugin_Inventory_RecipeMenu_open
+{
+    _current_list = Plugin_Inventory_RecipeMenu_list()
+    if ARRAYSIZE(_current_list) > 0 {
+        _header = Plugin_Inventory_RecipeMenu_header()
+        _footer = Plugin_Inventory_RecipeMenu_footer()
+
+        Paging_begin(_header, _footer, 12, 2, 0, _current_list)
+    }
+    else {
+        '\u\s[10]\h\s[4]んー、\w5今は何も作れなさそうだ。\w9\w9\u材料が必要ね。\w9\nどこかから調達できればいいんだけど。'
+        --
+        '\0\n\n[half]'
+        --
+        Plugin_Inventory_RecipeMenu_footer()
+    }
+}
+
+Plugin_Inventory_RecipeMenu_list : array
+{
+    _current_list = IARRAY()
+    _funcs = GETFUNCLIST('INVENTORY_RECIPE_FUNC_PREFIX_')
+
+    foreach _funcs; _func {
+        _materials = EVAL(_func)
+        _material_list = ''
+        _is_clear = 0
+        foreach _materials; _material {
+            if Plugin_Inventory_item_exists(_material) {
+                _is_clear++
+                _material_list += ',' + _material
+                continue
+            }
+            _is_clear = 0
+            break
+        }
+
+        if _is_clear > 0 {
+            _name = REPLACE(_func, 'INVENTORY_RECIPE_FUNC_PREFIX_', '')
+            _select = "\q[%(_name),On_Plugin_Inventory_Result,%(_name)%(_material_list)]"
+            if Plugin_Inventory_item_exists(_name) > 0 {
+                _current_list ,= _select
+            }
+            else {
+                _current_list ,= "@@font_bold" + _select + "@@font_bold_default"
+            }
+        }
+    }
+
+    _current_list
+}
+
+Plugin_Inventory_item_exists
+{
+    if ISVAR('INVENTORY_ITEM_COUNT_PREFIX_' + _argv[0]) {
+        _count = EVAL('INVENTORY_ITEM_COUNT_PREFIX_' + _argv[0])
+        if _count > 0 {
+            1
+            return
+        }
+    }
+    0
+}
+
+Plugin_Inventory_RecipeMenu_header : nonoverlap
+{
+    '\u\s[10]\h\s[6]よし、\w5何か作るか。'
+    '\u\s[10]\h\s[5]そうだな、\w5何か作ろう。'
+    '\h\s[0]\u\s[11]何になるかな、\w5何になるかな？\w9\w9\h\s[3]作るの俺だが？'
+}
+
+Plugin_Inventory_RecipeMenu_footer
+{
+    FillLine_list_full('「Inventory」のメニュー', 'On_Plugin_Inventory_call_menu')
+    --
+    FillLine_list_half('メインメニュー', 'On_Menu_0', 'プラグインメニュー', 'On_Menu_0_plugin')
+    --
+    FillLine_list_full('閉じる', 'CLOSE_NOTALK')
+}
+
+On_Plugin_Inventory_call_menu
+{
+    '\![raiseplugin,Inventory,OnMenuExec]'
+}
+
+On_Plugin_Inventory_Result
+{
+    if ARRAYSIZE(reference) < 1 {
+        '\h\s[0]\u\s[11]むむっ！！\w9\w9\h\s[4]…\w5…\w5何かがおかしいなようだ。\w9\n「Inventory」のときに何か起こっていると作者に伝えてくれ。'
+        return
+    }
+
+    _s = "\![notifyplugin,Inventory,OnIncrementItem,%(reference[0])]"
+    for _i = 1; _i < ARRAYSIZE(reference); _i++ {
+        _s += "\![notifyplugin,Inventory,OnDecrementItem,%(reference[_i])]"
+    }
+    _s
+    --
+    Plugin_Inventory_Result_header_func(reference[0])
+    --
+    if ISFUNC('INVENTORY_CREATE_FUNC_PREFIX_' + reference[0]) {
+        EVAL('INVENTORY_CREATE_FUNC_PREFIX_' + reference[0])
+    }
+    else {
+        _name = SHIORI3FW.EscapeAllTags(reference[0])
+        "\u\s[10]\h\s[6]…\w5…\w5\w9\s[7]よし！\w9%(_name)が作れたぞ！\w9\w9\uYeah！！\w9\w9\h\s[5]\n\n「Inventory」に入れておくから、\w9\n使いたい場合はプラグインを呼んでくれ。"
+    }
+    --
+    Plugin_Inventory_Result_footer
+}
+
+Plugin_Inventory_Result_header_func
+{
+    "\0\_q@@font_bold" + SHIORI3FW.EscapeAllTags(_argv[0]) + "@@font_bold_default\_q\n"
+}
+
+Plugin_Inventory_Result_footer
+{
+    '\0\n\n[half]'
+    --
+    FillLine_list_full('もう一回作る', 'On_Plugin_Inventory_RecipeMenu_start')
+    --
+    Plugin_Inventory_RecipeMenu_footer()
+}
+
+INVENTORY_RECIPE_FUNC_PREFIX_パン : array
+{
+    '小麦粉'
+}
+
+INVENTORY_RECIPE_FUNC_PREFIX_キャベツとツナのパスタ : array
+{
+    '缶詰'
+    'キャベツ'
+    'パスタ'
+}
+
+INVENTORY_RECIPE_FUNC_PREFIX_タケノコと松茸の茶碗蒸し : array
+{
+    'タケノコ'
+    '松茸'
+    '茶碗蒸し'
+}
+
+INVENTORY_RECIPE_FUNC_PREFIX_フォアグラ・パテのパン : array
+{
+    'パン'
+    'フォアグラ'
+}
+
+INVENTORY_RECIPE_FUNC_PREFIX_猪肉のステーキ（フォアグラとトリュフを添えて） : array
+{
+    'フォアグラ'
+    'トリュフ'
+    '猪肉'
+}
+
+INVENTORY_RECIPE_FUNC_PREFIX_レタスと猪肉のパスタ : array
+{
+    'パスタ'
+    'レタス'
+    '猪肉'
+}
+
+INVENTORY_RECIPE_FUNC_PREFIX_プリンアラモード？ : array
+{
+    '寒天（プリン味）'
+    'プリンチョコ'
+    '缶詰'
+}
+
+INVENTORY_RECIPE_FUNC_PREFIX_ペペロンチーノ（素） : array
+{
+    'パスタ'
+}
+
+INVENTORY_CREATE_FUNC_PREFIX_パン
+{
+    '\u\s[10]\h\s[6]小麦粉に塩とか水とか色々入れまして。\w9\w9\u色々て。\w9\w9\h\n\n寝かしたり、\w5型に入れて焼いたりしますと…\w5…\w5。\w9\s[35]\nおーし！\w9パンが焼けたぞ！\w9\w9\u\n\n時間がすっとんだ。\w9\w9\h\s[8]\n\n気にしない。'
+}
+
+INVENTORY_CREATE_FUNC_PREFIX_キャベツとツナのパスタ
+{
+    '\u\s[10]\h\s[6]茹でたパスタに、\w5キャベツとツナで作ったソースを絡めて…\w5…\w5と。\w9\s[5]\nできた。\w9キャベツとツナのパスタ。\w9\w9\uなんだかヘルシーじゃない。\w9\w9\h\s[35]\n\nもちろん、\w5おいしい！\w9\w9\u\n\n重要。'
+}
+
+INVENTORY_CREATE_FUNC_PREFIX_タケノコと松茸の茶碗蒸し
+{
+    '\u\s[10]\h\s[6]茶碗蒸しにタケノコと松茸をのせて温めなおして、\w5と。\w9\w9\u\s[11]載せただけ！？\w9\w9\h\s[3]\n\nいいじゃないか、\w5おいしいぞ。'
+}
+
+INVENTORY_CREATE_FUNC_PREFIX_フォアグラ・パテのパン
+{
+    '\u\s[10]\h\s[6]フォアグラで作ったパテをパンにのせて、\w5と。\w9\w9\u贅沢～。'
+}
+
+INVENTORY_CREATE_FUNC_PREFIX_猪肉のステーキ（フォアグラとトリュフを添えて）
+{
+    '\u\s[10]\h\s[6]今回は思いっきりぜいたくします！\w9\s[9]\nこの分厚い猪肉にフォアグラとトリュフをトッピング！\w9\w9\uおお～。\w9\w9\h\s[36]\n\nへへ、\w5とてもおいしそう。'
+}
+
+INVENTORY_CREATE_FUNC_PREFIX_レタスと猪肉のパスタ
+{
+    '\u\s[10]\h\s[6]お肉とレタスは相性がいいです。\w9\s[5]\nなので、\w5今回は猪肉と合わせてパスタにしました。\w9\w9\uおおー。\w9\w9\h\s[35]\n\n味は保証できます。\w9おいしい。\w9\w9\u\n\n味見済み。'
+}
+
+INVENTORY_CREATE_FUNC_PREFIX_プリンアラモード？
+{
+    '\u\s[10]\h\s[9]き、\w5きっとプリン味の寒天ならいけるはずだ！\w9\n缶詰のフルーツものせたし！\w9\w9\u本当に？\w9\w9\h\s[4]\n\n食えないものにはなっていない、\w5はず！'
+}
+
+INVENTORY_CREATE_FUNC_PREFIX_ペペロンチーノ（素）
+{
+    '\u\s[10]\h\s[6]パスタ以外何もないときの強い味方。\w9\n素のペペロンチーノ。\w9\w9\u但し、\w5油、\w5ニンニク、\w5唐辛子は家にあるものとする。\w9\w9\h\s[3]\n\n言うなよ…\w5…\w5。'
+}
+
+// -------------------------------------------------------------------
+// OnCommunicate from ReplyToPlugin
+Plugin_Inventory_Communicate_check_reference
+{
+    STRSTR(reference[1], 'use:', 0) == 0
+}
+
+Plugin_Inventory_Communicate_Main
+{
+    _item_name = REPLACE(reference[1], 'use:', '')
+    if ISFUNC('INVENTORY_COMMUNICATE_FUNC_PREFIX_' + _item_name) {
+        EVAL('INVENTORY_COMMUNICATE_FUNC_PREFIX_' + _item_name)
+    }
+    else {
+        _name = SHIORI3FW.EscapeAllTags(_item_name)
+        "\u\s[10]\h\s[0]おー、\w5%(_name)か。\w9\n\w9\w9\u私たちには使い道がないけれど、\w5他の人ならあるいは、\w5ね。"
+    }
+    --
+    '\0\n\n[half]'
+    --
+    Plugin_Inventory_Communicate_footer()
+}
+
+Plugin_Inventory_Communicate_footer
+{
+    Plugin_Inventory_RecipeMenu_footer()
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_缶詰
+{
+    '\u\s[10]\h\s[2]なんだか色々な缶詰があるな。\w9\w9\uこれって、\w5料理に使える？\w9\w9\h\s[0]\n\n確かに、\w5いろいろできそうだ。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_キャベツ
+{
+    '\u\s[10]\h\s[6]キャベツはいい。\w9煮ても焼いても、\w5生でもうまい。\w9\w9\u料理できる？\w9\w9\h\s[5]\n\n材料さえ揃えば、\w5もちろん。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_レタス
+{
+    '\u\s[10]\h\s[7]レタスは生の印象が強いが、\w5火をいれてもいけるぞ！\w9\w9\u力いっぱい。\w9\w9\h\s[6]\n\nもちろん、\w5料理に使えます。\w9\w9\u\n\n急に説明的。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_パスタ
+{
+    '\u\s[10]\h\s[0]パスタは忙しいときの心強い味方です。\w9\w9\u忙しくなくても？\w9\w9\h\s[6]\n\n料理しておいしくいただけます。\w9\w9\u\s[16]\n\nそうなんだけどさ。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_小麦粉
+{
+    '\u\s[10]\h\s[0]この小麦粉はパン用っぽいな。\w9\s[6]\nパン、\w5作るか。\w9\w9\u私の手伝えるやつね。\w9\w9\h\s[3]\n\n？？\w9\w9\u\s[11]\n\n猫とは生粋のパンこね職人なのよ！\w9\w9\h\s[4]\n\n初耳だよそんなの。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_松茸
+{
+    '\u\s[10]\h\s[9]松茸！\w9高級食材だ！\w9\w9\u佐野家では、\w5これを湯水のように料理に使っています。\w9\w9\h\s[3]\n\n嘘をつくな、\w5嘘を。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_タケノコ
+{
+    '\u\s[10]\h\s[5]タケノコか。\w9おいしいよな、\w5タケノコ。\w9\s[35]\n先の方は柔らかく、\w5根本の方はコリコリ食感がいい。\w9\n料理に使いがいがある。\w9\w9\uつまり、\w5これを使って何かを？\w9\w9\h\s[0]\n\nそうだな、\w5何か作れると思う。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_猪肉
+{
+    '\u\s[10]\h\s[0]猪の肉は、\w5豚肉に似ている。\w9\nそして、\w5豚より味が濃い。\w9\w9\u日本でも外国でも食べられているわね。\w9\w9\h\s[5]\n\n調理に工夫は必要だが、\w5おいしい肉だからな。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_フォアグラ
+{
+    '\u\s[10]\h\s[9]フォ、\w5フォアグラ！？\w9高級食材だ！\w9\w9\u佐野家では、\w5これを湯水のように料理に使っています。\w9\w9\h\s[34]\n\nそんな訳ない！\w9\nほぼ口に入ったこともない！！'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_トリュフ
+{
+    '\u\s[10]\h\s[2]おお、\w5トリュフだ！\w9高級食材じゃないか！\w9\w9\uたまにトリュフ入りのポテトチップスとかあるわよね。\w9\w9\h\s[8]\n\nその手のものでしか食べたことないかもな。\w9\s[6]\n使うなら、\w5どんな料理ができるだろう。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_茶碗蒸し
+{
+    '\u\s[10]\h\s[35]茶碗蒸しか。\w9食べるとほっとできていい。\w9\w9\u具材の種類で色々楽しめたりもするわね。\w9\w9\h\s[5]\n\nなかなかアレンジしがいがあったりするな。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_寒天（プリン味）
+{
+    '\u\s[10]\h\s[0]プリン味の寒天か。\w9\s[4]\nこう、\w5プリンだと思わなければおいしい、\w5と思うんだが、\w5見た目がプリンなので損をしている気がするな。\w9\w9\u何かと組み合わせれば、\w5よくなるんじゃない？\w9\w9\h\s[3]\n\nそうかも。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_プリンチョコ
+{
+    '\u\s[10]\h\s[0]プリン味のチョコレートか。\w9\s[6]\n結構カスタードの風味がする。\w9\n俺はいけるな。\w9\w9\u何かと組み合わせればもっとよくなるかも？\w9\w9\h\s[5]\n\nそうかもな。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_パン
+{
+    '\u\s[10]\h\s[6]パンは単体でもおいしいが、\w5いろいろアレンジできるのもいいよな。\w9\w9\uジャムとか塗ったり？\w9\w9\h\s[5]\n\nそうだな。\w9\n肉とかのせてもおいしいし。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_キャベツとツナのパスタ
+{
+    '\u\s[10]\h\s[35]キャベツとツナの黄金コンビに、\w5パスタが合わさって、\w5美味！\w9\w9\uヘルシーさもあって、\w5いいわよね。\w9\w9\h\s[7]\n\nこんなに健康的な料理です！\w9\nいくら食べてもよい！\w9\w9\u\n\nそれは違う。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_タケノコと松茸の茶碗蒸し
+{
+    '\u\s[10]\h\s[5]やわらかい茶碗蒸しに、\w5タケノコの食感と松茸の香りが加わって、\w5いい感じだ。\w9\w9\u具が加わると、\w5華やかになるわね。\w9\w9\h\s[7]\n\n今！\w9三人の力が合わさり！\w9\n皆に幸せ運ぶ強き力が目覚める…\w5…\w5！\w9\w9\u\n\n何の話よ、\w5何の。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_フォアグラ・パテのパン
+{
+    '\u\s[10]\h\s[6]パンにフォアグラのパテをのせる。\w9\nこんな贅沢があっていいのだろうか。\w9\w9\uフランスではよく食べられているそうよ。\w9\w9\h\s[2]\n\nフランスすごいな！？'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_猪肉のステーキ（フォアグラとトリュフを添えて）
+{
+    "\u\s[10]\h\s[36]分厚い猪肉に、\w5フォアグラとトリュフを合わせる日が来るとは…\w5…\w5！\w9\w9\uすごい贅沢よね。\w9\w9\h\s[6]\n\n%(username)のなので、\w5俺は食べません。\w9\w9\u\n\nおっ。\w9\w9\h\s[3]\n\n匂いだけで、\w5我慢します。\w9\w9\u\n\nお、\w5おぅ。"
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_レタスと猪肉のパスタ
+{
+    '\u\s[10]\h\s[5]お肉とレタスを一緒に食べるとおいしいよな。\w9\s[35]\nそして、\w5その風味でもってパスタを食べる…\w5…\w5。\w9\s[6]\nいい…\w5…\w5。\w9\w9\u何この流れ。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_プリンアラモード？
+{
+    '\u\s[10]\h\s[4]うん、\w5悪くはない、\w5悪くはないんだが。\w9\w9\uこれがプリンアラモードかと言われると？\w9\w9\h\s[3]\n\nなんだろう。\w9\nやはりプリンではないから、\w5別物として食べたほうが幸せだな。'
+}
+
+INVENTORY_COMMUNICATE_FUNC_PREFIX_ペペロンチーノ（素）
+{
+    '\u\s[10]\h\s[35]おいしいペペロンチーノは、\w5素でもおいしい。\w9\w9\u妙なトートロジー。\w9\w9\h\s[3]\n\nとー…\w5…\w5何？\w9\w9\u\s[16]\n\nいえ、\w5なんでもないわ。'
+}

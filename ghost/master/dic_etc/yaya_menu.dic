@@ -492,9 +492,12 @@ On_Menu_0_plugin
         _flag = Bool.toOnOffStr(plugin_MailBox_flag)
         _body += FillLine_list_full("MailBox (%(_flag))", 'On_Menu_0_plugin_MailBox')
     }
+    if AYATEMPLATE.IsPluginExist('Inventory') == 1 {
+        _body += FillLine_list_full("Inventory から何かを作成", 'On_Menu_0_plugin_Inventory')
+    }
 
     if _body == '' {
-        '\u\s[10]\h\s[0]対応しているプラグインはないようだ。\w9\w9\u「十徳ナイフ」や「スタンプ帳」、\w5「GetWindowTitle」に対応しているから、\w5気になったらダウンロードしてみてね。'
+        '\u\s[10]\h\s[0]対応しているプラグインはないようだ。\w9\w9\u「十徳ナイフ」や「スタンプ帳」、\w5「GetWindowTitle」、\w5「MailBox」、\w5「Inventory」に対応しているから、\w5気になったらダウンロードしてみてね。'
     }
     else {
         '\u\s[10]\h\s[0]対応しているプラグインだ。\n\n'
@@ -604,6 +607,11 @@ On_Menu_0_plugin_MailBox_toOff
 On_Menu_0_plugin_MailBox_OpenMenu
 {
     '\![raiseplugin,MailBox,OnMenuExec]'
+}
+
+On_Menu_0_plugin_Inventory
+{
+    On_Plugin_Inventory_RecipeMenu_start()
 }
 
 On_Menu_0_plugin_footer
@@ -716,6 +724,16 @@ BalloonTooltip_On_Menu_0_plugin_stamp
 BalloonTooltip_On_Menu_0_plugin_GetWindowTitle
 {
     '作業中のウィンドウに関連したトークをするようになる'
+}
+
+BalloonTooltip_On_Menu_0_plugin_MailBox
+{
+    '佐野たちからメールが届くようになる'
+}
+
+BalloonTooltip_On_Menu_0_plugin_Inventory
+{
+    'Inventoryにある所持品から何かを作成する'
 }
 
 BalloonTooltip_On_Menu_0_impression

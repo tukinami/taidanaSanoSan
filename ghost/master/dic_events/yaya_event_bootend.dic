@@ -483,6 +483,7 @@ OnClose_talk_timeSlot_深夜 : array
 OnGhostLoad
 {
     On_Status.aigraph.recent
+    On_Plugin_Inventory_Item_init
     boot_times++
 }
 
