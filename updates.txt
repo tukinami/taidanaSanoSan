@@ -45,7 +45,7 @@ file,ghost/master/yaya_emerg_dic.txtad3acbe6d14807394717bc1320936228size=797d
 file,ghost/master/yaya_homeurl.txte4adcf6ab17e9d12e64071566847628esize=656date=2012-12-21T00:00:00
 file,ghost/master/yaya_tmpl_util.txtb5ccd17754790ae8af8e928d742cea1csize=8622date=2012-12-21T00:00:00
 file,install.txt0c787d1259f982730e4956717b832eccsize=122date=2012-12-21T00:00:00
-file,readme.txt647a90081f515de2901622f7f6306d7fsize=4972date=2012-12-21T00:00:00
+file,readme.txt7d1e77828436f71662c21df70a85a347size=5043date=2012-12-21T00:00:00
 file,shell/master-s/background.png22f0ae734d9985478368aca900ec8653size=9148date=2012-12-21T00:00:00
 file,shell/master-s/descript.txt0ee08df19aba2c29c02c175a1bba87a5size=894date=2012-12-21T00:00:00
 file,shell/master-s/foreground.pngbafadd686c888b968656bd974d153bf9size=10733date=2012-12-21T00:00:00
