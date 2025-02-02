@@ -21,13 +21,13 @@ file,ghost/master/dic_etc/yaya_plugin.dicf844e514f9ab6a4e4db10a9cdce1b16esize=
 file,ghost/master/dic_etc/yaya_user_birthday.dic202952138fcaa0bf645872ca60c72a93size=7188date=2012-12-21T00:00:00
 file,ghost/master/dic_events/_loading_order.txt50fe996b2fca940dbae7d41a1a674f3asize=438date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_bootend.dic61e7fb6f4a81a07d0113d190500bc466size=19585date=2012-12-21T00:00:00
-file,ghost/master/dic_events/yaya_event_change.dic5d264d8fbd093308ddb21c286664bf7csize=7616date=2012-12-21T00:00:00
+file,ghost/master/dic_events/yaya_event_change.dic7873ced02df5e08f72862c0e83a1c940size=9506date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_communicate.dic2e2870cd038ab3684d113cf97678a0a8size=6118date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_etc.dic6da3b2fd15614c6880e453ef45550dbasize=18647date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_feature.dic170d276cba7490b82d6ee8e8c1a3f1b2size=21518date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_mouse.dic6a1fb4b887a83e820b69ad8eb7730c22size=6669date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_timeChange.dic61bf942cb587d8098f1010ac52748715size=14040date=2012-12-21T00:00:00
-file,ghost/master/dic_events/yaya_event_update.dicbf3cb046bb5cf7b4911fba8076827a19size=15611date=2012-12-21T00:00:00
+file,ghost/master/dic_events/yaya_event_update.dic03e09d387bad3539997f7546f5dfb9b7size=15733date=2012-12-21T00:00:00
 file,ghost/master/explorer2/character_descript.txt5ae2818a2df95789de8789568435d9c7size=587date=2012-12-21T00:00:00
 file,ghost/master/icon.ico19122ac40d6e45add065b4dcc2cace71size=21550date=2012-12-21T00:00:00
 file,ghost/master/stamp.pngdb6568b9b56eec66a691fd166740b3e5size=1831date=2012-12-21T00:00:00
