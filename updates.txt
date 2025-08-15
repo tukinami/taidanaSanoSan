@@ -11,7 +11,7 @@ file,ghost/master/dic_aitalk/yaya_aitalk_default.dic1cddbb252aedbfcd508806c6432
 file,ghost/master/dic_base/_loading_order.txt930511a8cca19c0b28e5661417904a2esize=261date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_function.dic9de3c1eb7b902a8ea5b78e64861b0614size=13589date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_status.dic330cb534d9b643708f22ed70b2e66f8bsize=3615date=2012-12-21T00:00:00
-file,ghost/master/dic_base/yaya_base_string.dicc484484911ac1f6a05b6e60c34d058eesize=5378date=2012-12-21T00:00:00
+file,ghost/master/dic_base/yaya_base_string.dic61f369ddededccde916e86a4d5c2e4f9size=5377date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_variable.dic64d210e9dcfba8421156cec62a5510d0size=2234date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_word.dicf2261f9d38e4caed1a5d657abaa9acb3size=9086date=2012-12-21T00:00:00
 file,ghost/master/dic_etc/_loading_order.txt3be6c379ed97d335336ebb2b91e9a2c5size=208date=2012-12-21T00:00:00
@@ -27,7 +27,7 @@ file,ghost/master/dic_events/yaya_event_etc.dic6da3b2fd15614c6880e453ef45550dba
 file,ghost/master/dic_events/yaya_event_feature.dic170d276cba7490b82d6ee8e8c1a3f1b2size=21518date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_mouse.dic6a1fb4b887a83e820b69ad8eb7730c22size=6669date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_timeChange.dic61bf942cb587d8098f1010ac52748715size=14040date=2012-12-21T00:00:00
-file,ghost/master/dic_events/yaya_event_update.dic2cfae5f9c76b43694f9157fc8093c0a4size=16389date=2012-12-21T00:00:00
+file,ghost/master/dic_events/yaya_event_update.dica08ef9cf232a5aabb71a9d52fa5e4235size=16440date=2012-12-21T00:00:00
 file,ghost/master/explorer2/character_descript.txt5ae2818a2df95789de8789568435d9c7size=587date=2012-12-21T00:00:00
 file,ghost/master/icon.ico19122ac40d6e45add065b4dcc2cace71size=21550date=2012-12-21T00:00:00
 file,ghost/master/stamp.pngdb6568b9b56eec66a691fd166740b3e5size=1831date=2012-12-21T00:00:00
@@ -45,7 +45,7 @@ file,ghost/master/yaya_emerg_dic.txtad3acbe6d14807394717bc1320936228size=797d
 file,ghost/master/yaya_homeurl.txte4adcf6ab17e9d12e64071566847628esize=656date=2012-12-21T00:00:00
 file,ghost/master/yaya_tmpl_util.txtb5ccd17754790ae8af8e928d742cea1csize=8622date=2012-12-21T00:00:00
 file,install.txt0c787d1259f982730e4956717b832eccsize=122date=2012-12-21T00:00:00
-file,readme.txt44d15a16e2eb4971c1b5d7ea5e1ab6c2size=5797date=2012-12-21T00:00:00
+file,readme.txta0d71ea3b7ca056e4f9feb836ad97258size=5796date=2012-12-21T00:00:00
 file,shell/master-s/background.png22f0ae734d9985478368aca900ec8653size=9148date=2012-12-21T00:00:00
 file,shell/master-s/descript.txt0ee08df19aba2c29c02c175a1bba87a5size=894date=2012-12-21T00:00:00
 file,shell/master-s/foreground.pngbafadd686c888b968656bd974d153bf9size=10733date=2012-12-21T00:00:00
