@@ -246,6 +246,7 @@ Talk_default : array
     '\u\s[10]\h\s[0]俺の1日の活動時間は12時間ぐらいかな。\w9\w9\u嘘おっしゃい、\w5嘘を。\w9\w9\h\s[3]\n\n…\w5…\w5実際、\w510時間ぐらいでよくないか？\w9\w9\u\s[16]\n\n減ってる減ってる。'
     '\u\s[10]\h\s[3]猫又って、\w5どうやったらなるんだ？\w9\w9\u\s[11]まず、\w5猫になります。\w9\w9\h\s[6]\n\n俺がなりたいわけではない。'
     '\u\s[10]\h\s[0]おばあちゃんが言っていたんだけどさ。\w9\w9\u(悪い予感)…\w5…\w5何を？\w9\w9\h\s[6]\n\nお前、\w5皆の自由のために悪の組織と戦ってたんだって？\w9\w9\u\s[11]\n\nいや？\w9\w9\h\s[2]\n\nえっ、\w5じゃあ7つの海をまたにかけたりは？\w9\w9\u\n\nいや？\w9\w9\h\s[3]\n\n鳥、\w5犬、\w5イノシシをつれてカニヶ島に…\w5…\w5。\w9\w9\u\n\nいや？\w9\w9\h\s[34]\n\nあれー？\w9\w9\u\s[16]\n\n最後のは何よ…\w5…\w5。'
+    '\u\s[10]\h\s[4]裏切られると悲しいよな…\w5…\w5。\w9\w9\u\s[11]…\w5…\w5何か、\w5あったの？\w9\w9\h\s[3]\n\nまた醤油の注ぎ口を取るのに失敗した。\w9\n取れるって書いてあるのに。\w9\w9\u\s[16]\n\n嗚呼。\w9はぁ、\w5まぁ、\w5うん。\w9頑張って。\w9\w9\h\s[7]\n\n失敗すると取るのが面倒！\w9\w9\u\s[11]\n\n頑張れ！'
 }
 
 // ===============================================================
@@ -611,6 +612,7 @@ Talk_chain : array
 {
     '\h\s[0]\u\s[11]ここでクイズです！\w9\s[10]\n「SSP」とは、\w5一体何の略称でしょう？\w9\w9\h\s[6]姉が何か言ってたな。\w9\s[3]確か…\w5…\w5。\w9\s[0]\n「Super Shark Panching」かな。\w9\w9\u\n\n何だそれは。\e:chain=Talk_chain_ukagakaquiz'
     '\u\s[10]\h\s[3]英語はちょっと苦手かもしれない。\w9\w9\uふーん、\w5ちょっとやってみましょうか。\w9\s[11]\nExcuse me. Could I have a minute of your time?\w9\w9\h\s[2]\n\nえ、\w5ぱ、\w5ぱーどん、\w5みー？\w9\w9\u\s[10]\n\n(Pardon me？\w9は使えるのか)\w9\nCould\w5 I\w5 have\w5 a\w5 minute\w5 of\w5 your\w5 time?\w9\w9\h\n\n…\w5…\w5。\w9\w9\u\n\n…\w5…\w5。\w9\w9\h\s[34]\n\nの、\w5のー！\w9\w9\u\s[11]\n\nNo？！\w9\w9\h\s[-1]\n\nさんきゅーべりまっち！\w9しーゆー！\w9\w9\u\n\nちょ、\w5ちょっと！\w9何処行くの！？\e:chain=Talk_chain_englishStudy'
+    '\u\s[10]\h\s[6]俺がな、\w5ぽりたんを作ろうしてな。\w9\w9\uぎなた読みしないの。\w9\w9\h\s[3]\n\n「気球」だって、\w5ぎなた読みだって聞いたぞ。\w9\w9\u\n\n？\w9\w9\h\s[7]\n\n「バーガー」だって、\w5ぎなた読みだって聞いたぞ！\w9\w9\u\n\n理由になってないでしょ。\e:chain=Talk_chain_ginataPoritan'
 }
 
 Talk_chain_ukagakaquiz
@@ -622,4 +624,9 @@ Talk_chain_ukagakaquiz
 Talk_chain_englishStudy
 {{CHAIN
     '\h\s[0]\u\s[10]何でどこかに行くのよ？\w9\w9\h\s[1]だって…\w5…\w5\w9\w9\u\n\nだって？\w9\w9\h\s[7]\n\n知らない人についてっちゃダメだろ！？\w9\w9\u\s[16]\n\n…\w5…\w5内容が分かっていたようでよろしい。\w9\s[10]\nですが、\w5声をかけられたからといって、\w5知らない人だとは、\w5限りません。\w9\w9\h\s[34]\n\nあっそうかぁ。\e:chain=end'
+}}CHAIN
+
+Talk_chain_ginataPoritan
+{{CHAIN
+    '\h\s[0]\u\s[10]まず、\w5「ぽりたん」\w5 is \w5何？\w9\w9\h\s[3]…\w5…\w5ポリタンクのゆるキャラ？\w9\w9\u\s[16]\n\nいそうな線をつくのはよしなさい。\e:chain=end'
 }}CHAIN
