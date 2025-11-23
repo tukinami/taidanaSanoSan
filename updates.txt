@@ -7,7 +7,7 @@ file,ghost/master/descript.txte4c70aba39406e13e3c6c40fde5fb076size=350date=20
 file,ghost/master/dic_aitalk/_loading_order.txtdf652206c7767c975d193208b16bed3bsize=164date=2012-12-21T00:00:00
 file,ghost/master/dic_aitalk/yaya_aitalk.dicd6ddf557dfe1022bcd7d0f90ac27549asize=2612date=2012-12-21T00:00:00
 file,ghost/master/dic_aitalk/yaya_aitalk_date.dice132d9c338bcbea40ed2eefb41183e4fsize=40649date=2012-12-21T00:00:00
-file,ghost/master/dic_aitalk/yaya_aitalk_default.dic8235254969f5b5b6b2cc54ca5d7b4a00size=92326date=2012-12-21T00:00:00
+file,ghost/master/dic_aitalk/yaya_aitalk_default.dic66669074c672731583827934b2197c3asize=92865date=2012-12-21T00:00:00
 file,ghost/master/dic_base/_loading_order.txt930511a8cca19c0b28e5661417904a2esize=261date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_function.dic9de3c1eb7b902a8ea5b78e64861b0614size=13589date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_status.dic330cb534d9b643708f22ed70b2e66f8bsize=3615date=2012-12-21T00:00:00
@@ -27,7 +27,7 @@ file,ghost/master/dic_events/yaya_event_etc.dic6da3b2fd15614c6880e453ef45550dba
 file,ghost/master/dic_events/yaya_event_feature.dic170d276cba7490b82d6ee8e8c1a3f1b2size=21518date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_mouse.dic6a1fb4b887a83e820b69ad8eb7730c22size=6669date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_timeChange.dic61bf942cb587d8098f1010ac52748715size=14040date=2012-12-21T00:00:00
-file,ghost/master/dic_events/yaya_event_update.dica04f2022c3ccfbfa0cc4ff94524666fbsize=16809date=2012-12-21T00:00:00
+file,ghost/master/dic_events/yaya_event_update.dic9b342ce9e7854a5a05b281b9c6e827a8size=16853date=2012-12-21T00:00:00
 file,ghost/master/explorer2/character_descript.txt5ae2818a2df95789de8789568435d9c7size=587date=2012-12-21T00:00:00
 file,ghost/master/icon.ico19122ac40d6e45add065b4dcc2cace71size=21550date=2012-12-21T00:00:00
 file,ghost/master/stamp.pngdb6568b9b56eec66a691fd166740b3e5size=1831date=2012-12-21T00:00:00
