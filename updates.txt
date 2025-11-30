@@ -21,13 +21,13 @@ file,ghost/master/dic_etc/yaya_plugin.dicf844e514f9ab6a4e4db10a9cdce1b16esize=
 file,ghost/master/dic_etc/yaya_user_birthday.dic202952138fcaa0bf645872ca60c72a93size=7188date=2012-12-21T00:00:00
 file,ghost/master/dic_events/_loading_order.txt50fe996b2fca940dbae7d41a1a674f3asize=438date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_bootend.dic61e7fb6f4a81a07d0113d190500bc466size=19585date=2012-12-21T00:00:00
-file,ghost/master/dic_events/yaya_event_change.dicda5ca8e3440f0e9bf38e10de5ef67cdasize=14774date=2012-12-21T00:00:00
+file,ghost/master/dic_events/yaya_event_change.dic5bc2fbb077cea46b3a6c00410e7090c1size=16122date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_communicate.dic2e2870cd038ab3684d113cf97678a0a8size=6118date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_etc.dic6da3b2fd15614c6880e453ef45550dbasize=18647date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_feature.dic170d276cba7490b82d6ee8e8c1a3f1b2size=21518date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_mouse.dic6a1fb4b887a83e820b69ad8eb7730c22size=6669date=2012-12-21T00:00:00
 file,ghost/master/dic_events/yaya_event_timeChange.dic61bf942cb587d8098f1010ac52748715size=14040date=2012-12-21T00:00:00
-file,ghost/master/dic_events/yaya_event_update.dic9b342ce9e7854a5a05b281b9c6e827a8size=16853date=2012-12-21T00:00:00
+file,ghost/master/dic_events/yaya_event_update.dic2d1e5f426e634a96e94fba66839a6f69size=16969date=2012-12-21T00:00:00
 file,ghost/master/explorer2/character_descript.txt5ae2818a2df95789de8789568435d9c7size=587date=2012-12-21T00:00:00
 file,ghost/master/icon.ico19122ac40d6e45add065b4dcc2cace71size=21550date=2012-12-21T00:00:00
 file,ghost/master/stamp.pngdb6568b9b56eec66a691fd166740b3e5size=1831date=2012-12-21T00:00:00
@@ -45,7 +45,7 @@ file,ghost/master/yaya_emerg_dic.txtad3acbe6d14807394717bc1320936228size=797d
 file,ghost/master/yaya_homeurl.txte4adcf6ab17e9d12e64071566847628esize=656date=2012-12-21T00:00:00
 file,ghost/master/yaya_tmpl_util.txtb5ccd17754790ae8af8e928d742cea1csize=8622date=2012-12-21T00:00:00
 file,install.txt0c787d1259f982730e4956717b832eccsize=122date=2012-12-21T00:00:00
-file,readme.txta0d71ea3b7ca056e4f9feb836ad97258size=5796date=2012-12-21T00:00:00
+file,readme.txtb2b075e5620f431e05cf08dbfd78570csize=5893date=2012-12-21T00:00:00
 file,shell/master-s/background.png22f0ae734d9985478368aca900ec8653size=9148date=2012-12-21T00:00:00
 file,shell/master-s/descript.txt0ee08df19aba2c29c02c175a1bba87a5size=894date=2012-12-21T00:00:00
 file,shell/master-s/foreground.pngbafadd686c888b968656bd974d153bf9size=10733date=2012-12-21T00:00:00
