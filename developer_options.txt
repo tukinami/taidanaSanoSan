@@ -10,6 +10,7 @@ ghost/master/var/,nonar,noupdate
 // tools
 ghost/master/tama.exe,nonar,noupdate
 ghost/master/tama.txt,nonar,noupdate
+ghost/master/tamac.exe,nonar,noupdate
 ghost/master/cmd_shiori_tester.exe,nonar,noupdate
 ghost/master/.memo/,nonar,noupdate
 
