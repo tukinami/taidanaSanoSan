@@ -118,14 +118,30 @@ OnSysResume
 // ===================================================================
 OnBasewareUpdating
 {
-    "\u\s[10]\h\s[6]ベースウェアの更新だ。"
+    temp_record_baseware_version = SHIORI3FW.EscapeAllTags(reference[1])
+
+    "\u\s[10]\h\s[6]"
+    --
+    "\_q@@lベースウェアのバージョン\n"
+    --
+    "更新前: %(temp_record_baseware_version)\n\n\_q"
+    --
+    "ベースウェアの更新だ。"
 }
 
 OnBasewareUpdated
 {
-    _aft = SHIORI3FW.EscapeDangerousTags(reference[1])
+    _aft = SHIORI3FW.EscapeAllTags(reference[1])
 
-    "\u\s[10]\h\s[0]%(_aft)に更新完了。"
+    "\u\s[10]\h\s[0]"
+    --
+    "\_q@@lベースウェアのバージョン\n"
+    --
+    "更新前: %(temp_record_baseware_version)\n"
+    --
+    "更新後: %(_aft)\n\n\_q"
+    --
+    "ベースウェア更新完了。"
 }
 
 // ===================================================================
