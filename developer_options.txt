@@ -26,6 +26,8 @@ shell/master-s/profile/,nonar,noupdate
 
 shell/master-l/,nonar,noupdate
 shell/set-of-coats/,nonar,noupdate
+shell/atohayoroshiku/,nonar,noupdate
+
 
 // balloon
 // --------------------------------------------------
