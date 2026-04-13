@@ -31,6 +31,7 @@
 他の方が作成された「怠惰な佐野さん」の追加シェルです。ありがとうございます。
 
 - [店員イチオシのコートセット](https://cherry.narnaloader.ukagaka.net/ghost.php?ghost=set_of_coats) - netai98 さん
+- [あとはよろしく](https://cherry.narnaloader.ukagaka.net/ghost.php?ghost=atohayoroshiku) - netai98 さん
 
 ## 関連制作物
 
