@@ -4,7 +4,7 @@
 OnShellChanged
 {
     _shell = SHIORI3FW.EscapeDangerousTags(reference[0])
-    "\u\s[10]\h\s[0]%(_shell)になった。\w9\w9"
+    "\u\s[10]\h\s[0]「%(_shell)」になった。\w9\w9"
     --
     case _shell {
     when 'master' {
@@ -19,13 +19,16 @@ OnShellChanged
     when '店員イチオシのコートセット' {
         '\h\s[1]\nに、\w5似合っているかな？\w9\w9\uまぁ、\w5「馬子にも衣装」の言葉もあるし？\w9\w9\h\s[6]\n\n…\w5…\w5「猫にも衣装」。\w9\w9\u\s[16]\n\nどういう返しよ。'
     }
+    when 'あとはよろしく' {
+        '\u\s[10]いや、\w5起きなさいよ。\w9\w9\h\n\n眠いからしょうがない。\w9\w9\u\n\nそんなわけない。'
+    }
     }
 }
 
 OnShellChanging
 {
     _shell = SHIORI3FW.EscapeDangerousTags(reference[0])
-    "\h\s[0]\u\s[11]妖術！\w9変化%(_shell)の術！！\w9\w9"
+    "\h\s[0]\u\s[11]妖術！\w9変化「%(_shell)」の術！！\w9\w9"
     --
     '\h\s[3]そこまで気合入れなくても…\w5…\w5。'
     '\h\s[4]妖術…\w5…\w5なのか？'
@@ -90,6 +93,37 @@ On_DressupChanged_店員イチオシのコートセット_p1_show
         case reference[1] {
         when '葉巻' {
             '\h\s[0]\u\s[11]またたび、\w5美味！\w9\w9\h\s[3]あまり噛むなよ…\w5…\w5。'
+        }
+        }
+    }
+    }
+}
+
+On_DressupChanged_あとはよろしく_p0_show
+{
+    _season = Time_month_toSeason
+
+    case reference[3] {
+    when '寝具' {
+        case reference[1] {
+        when '布団' {
+            '\u\s[10]\h\s[0]お布団はいつでも俺を受け入れてくれる。\w9\n\w9\w9\uいいから起きなさいな。'
+        }
+        when 'こたつ' {
+            if _season == '冬' {
+                '\u\s[10]\h\s[0]冬といったらやっぱりこたつだよな。\w9\w9\uそのまま寝ないようにね。'
+            }
+            else {
+                '\h\s[0]\u\s[11]冬でもないのにこたつ…\w5…\w5？\w9\w9\hいいじゃないか、\w5こたつ。\w9\nこう、\w5狭くて落ち着くだろ。\w9\w9\u\s[16]\n\n…\w5…\w5貴方がいいならいいけれど。'
+            }
+        }
+        when 'タオルケット' {
+            if _season == '冬' {
+                '\h\s[0]\u\s[10]その格好寒くない？\w9\w9\h暖房が効いているので大丈夫。\w9\w9\u\n\n贅沢な話か。'
+            }
+            else {
+                '\u\s[10]\h\s[0]身軽なのもいいよな。\w9\w9\u寝ているのに身軽さとは？'
+            }
         }
         }
     }
