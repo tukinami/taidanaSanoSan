@@ -11,7 +11,7 @@ file,ghost/master/dic_aitalk/yaya_aitalk_default.dic83628b9b30a02a6338348e3ec26
 file,ghost/master/dic_base/_loading_order.txt930511a8cca19c0b28e5661417904a2esize=261date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_function.dic9de3c1eb7b902a8ea5b78e64861b0614size=13589date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_status.dic330cb534d9b643708f22ed70b2e66f8bsize=3615date=2012-12-21T00:00:00
-file,ghost/master/dic_base/yaya_base_string.dic61f369ddededccde916e86a4d5c2e4f9size=5377date=2012-12-21T00:00:00
+file,ghost/master/dic_base/yaya_base_string.dic6f4d7e8ce1a60dab1cf2bd496a4627b9size=5495date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_variable.dic64d210e9dcfba8421156cec62a5510d0size=2234date=2012-12-21T00:00:00
 file,ghost/master/dic_base/yaya_base_word.dicf2261f9d38e4caed1a5d657abaa9acb3size=9086date=2012-12-21T00:00:00
 file,ghost/master/dic_etc/_loading_order.txt3be6c379ed97d335336ebb2b91e9a2c5size=208date=2012-12-21T00:00:00
